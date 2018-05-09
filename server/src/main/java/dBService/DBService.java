@@ -1,5 +1,5 @@
 package dBService;
-
+//ФЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕДОООООООООООООООООООООС
 import dBService.dao.UserDAO;
 import dBService.entities.UserEntity;
 import org.hibernate.Session;
