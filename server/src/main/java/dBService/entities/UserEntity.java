@@ -6,7 +6,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "users")
 public class UserEntity implements Serializable {
-    private static final long serialVersionUID = 4_05_2018L;
+    private static final long serialVersionUID = 9052018;
 
     @Id
     @Column(name = "id", unique = true, updatable = false)
