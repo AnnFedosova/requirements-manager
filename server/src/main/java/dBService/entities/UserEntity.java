@@ -2,6 +2,7 @@ package dBService.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -28,6 +29,18 @@ public class UserEntity implements Serializable {
     @Column(name = "password")
     private String password;
 
+    @OneToMany(mappedBy = "creator")
+    private Set<RequirementEntity> creators;
+
+    @OneToMany(mappedBy = "changer")
+    private Set<RequirementEntity> changers;
+
+    @OneToMany(mappedBy = "user")
+    private Set<UserProjectRoleEntity> projectUsers;
+
+    @OneToMany(mappedBy = "user")
+    private Set<UserSystemRoleEntity> systemUsers;
+
     public UserEntity() {
     }
 
@@ -40,6 +53,7 @@ public class UserEntity implements Serializable {
     }
 
     public UserEntity(UserEntity userEntity) {
+        this.id=userEntity.id;
         this.name = userEntity.name;
         this.surname = userEntity.surname;
         this.middlename = userEntity.middlename;

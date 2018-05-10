@@ -15,6 +15,7 @@ public class UserDAO {
     }
 
     public long addUser(UserEntity user) {
-        return (long) session.save(user);
+        session.save(user);
+        return user.getId();
     }
 }
