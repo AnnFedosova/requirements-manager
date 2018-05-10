@@ -6,12 +6,21 @@ import java.io.Serializable;
 @Entity
 @Table(name = "users")
 public class UserEntity implements Serializable {
-    private static final long serialVersionUID = 9052018;
+    private static final long serialVersionUID = 10052018;
 
     @Id
     @Column(name = "id", unique = true, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "middlename")
+    private String middlename;
 
     @Column(name = "login")
     private String login;
@@ -20,12 +29,33 @@ public class UserEntity implements Serializable {
     private String password;
 
     public UserEntity() {
+    }
 
+    public UserEntity(String name, String surname, String middlename, String login, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.middlename = middlename;
+        this.login = login;
+        this.password = password;
+    }
+
+    public UserEntity(UserEntity userEntity) {
+        this.name = userEntity.name;
+        this.surname = userEntity.surname;
+        this.middlename = userEntity.middlename;
+        this.login = userEntity.login;
+        this.password = userEntity.password;
     }
 
     public long getId() {
         return id;
     }
+
+    public String getName() {return name; }
+
+    public String getSurname() {return surname; }
+
+    public String getMiddlename() {return middlename; }
 
     public String getLogin() {
         return login;
@@ -38,6 +68,12 @@ public class UserEntity implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+
+    public void setName(String name) {this.name = name; }
+
+    public void setSurname(String surname) {this.surname = surname;}
+
+    public void setMiddlename(String middlename) {this.middlename = middlename;}
 
     public void setLogin(String login) {
         this.login = login;
