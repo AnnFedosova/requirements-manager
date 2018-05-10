@@ -6,7 +6,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "user_project_role")
 public class UserProjectRoleEntity implements Serializable {
-    private static final long serialVersionUID = 10052018;
+    private static final long serialVersionUID = 10_05_2018L;
 
     @Id
     @ManyToOne

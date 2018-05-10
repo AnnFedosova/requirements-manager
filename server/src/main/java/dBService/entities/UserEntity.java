@@ -7,7 +7,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class UserEntity implements Serializable {
-    private static final long serialVersionUID = 10052018;
+    private static final long serialVersionUID = 10_05_2018L;
 
     @Id
     @Column(name = "id", unique = true, updatable = false)
