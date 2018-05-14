@@ -1,6 +1,7 @@
 package dBService.dao;
 
 import dBService.entities.UserEntity;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 public class UserDAO {
@@ -18,4 +19,10 @@ public class UserDAO {
         session.save(user);
         return user.getId();
     }
+
+    public long addUser(String login, String password, String firstName, String lastName, String middleName)
+            throws HibernateException {
+        return (long) session.save(new UserEntity(login, password, firstName, lastName, middleName));
+    }
+
 }
