@@ -15,7 +15,7 @@ public class ReleaseDTO {
     public ReleaseDTO(ReleaseEntity releaseEntity) {
         this.id = releaseEntity.getId();
         this.name = releaseEntity.getName();
-        this.discription = releaseEntity.getDiscription();
+        this.discription = releaseEntity.getDescription();
         this.releaseDate = releaseEntity.getReleaseDate();
     }
 

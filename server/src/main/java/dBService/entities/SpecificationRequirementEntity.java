@@ -25,9 +25,9 @@ public class SpecificationRequirementEntity implements Serializable {
         this.requirement = requirement;
     }
 
-    public SpecificationRequirementEntity(SpecificationRequirementEntity specificationRequirementEntety) {
-        this.specification = specificationRequirementEntety.specification;
-        this.requirement = specificationRequirementEntety.requirement;
+    public SpecificationRequirementEntity(SpecificationRequirementEntity specificationRequirementEntity) {
+        this.specification = specificationRequirementEntity.specification;
+        this.requirement = specificationRequirementEntity.requirement;
     }
 
     public SpecificationEntity getSpecification() {

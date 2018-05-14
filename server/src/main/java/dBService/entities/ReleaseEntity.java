@@ -18,8 +18,8 @@ public class ReleaseEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "discription",columnDefinition = "text")
-    private String discription;
+    @Column(name = "description",columnDefinition = "text")
+    private String description;
 
     @Column(name = "releaseDate")
     @Temporal(TemporalType.DATE)
@@ -30,17 +30,17 @@ public class ReleaseEntity implements Serializable {
 
     public ReleaseEntity(){}
 
-    public ReleaseEntity(String name, String discription, Date releaseDate) {
+    public ReleaseEntity(String name, String description, Date releaseDate) {
         this.name = name;
-        this.discription = discription;
+        this.description = description;
         this.releaseDate = releaseDate;
     }
 
-    public ReleaseEntity(ReleaseEntity releaseEntety) {
-        this.id = releaseEntety.id;
-        this.name = releaseEntety.name;
-        this.discription = releaseEntety.discription;
-        this.releaseDate = releaseEntety.releaseDate;
+    public ReleaseEntity(ReleaseEntity releaseEntity) {
+        this.id = releaseEntity.id;
+        this.name = releaseEntity.name;
+        this.description = releaseEntity.description;
+        this.releaseDate = releaseEntity.releaseDate;
     }
 
     public long getId() {
@@ -59,12 +59,12 @@ public class ReleaseEntity implements Serializable {
         this.name = name;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getReleaseDate() {

@@ -12,7 +12,7 @@ public class ProjectDTO {
     public ProjectDTO(ProjectEntity projectEntity) {
         this.id = projectEntity.getId();
         this.name = projectEntity.getName();
-        this.discription = projectEntity.getDiscription();
+        this.discription = projectEntity.getDescription();
     }
 
     public long getId() {

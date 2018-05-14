@@ -14,7 +14,7 @@ public class SpecificationDTO {
     public SpecificationDTO(SpecificationEntity specificationEntity) {
         this.id = specificationEntity.getId();
         this.name = specificationEntity.getName();
-        this.discription = specificationEntity.getDiscription();
+        this.discription = specificationEntity.getDescription();
         this.plannedDate = specificationEntity.getPlannedDate();
     }
 

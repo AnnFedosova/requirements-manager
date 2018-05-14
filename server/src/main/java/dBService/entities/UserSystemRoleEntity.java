@@ -25,9 +25,9 @@ public class UserSystemRoleEntity implements Serializable {
         this.role = role;
     }
 
-    public UserSystemRoleEntity(UserSystemRoleEntity userSystemRoleEntety) {
-        this.user = userSystemRoleEntety.user;
-        this.role = userSystemRoleEntety.role;
+    public UserSystemRoleEntity(UserSystemRoleEntity userSystemRoleEntity) {
+        this.user = userSystemRoleEntity.user;
+        this.role = userSystemRoleEntity.role;
     }
 
     public UserEntity getUser() {

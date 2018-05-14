@@ -31,10 +31,10 @@ public class UserProjectRoleEntity implements Serializable {
         this.role = role;
     }
 
-    public UserProjectRoleEntity(UserProjectRoleEntity userProjectRoleEntety) {
-        this.user = userProjectRoleEntety.user;
-        this.project = userProjectRoleEntety.project;
-        this.role = userProjectRoleEntety.role;
+    public UserProjectRoleEntity(UserProjectRoleEntity userProjectRoleEntity) {
+        this.user = userProjectRoleEntity.user;
+        this.project = userProjectRoleEntity.project;
+        this.role = userProjectRoleEntity.role;
     }
 
     public UserEntity getUser() {

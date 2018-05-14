@@ -26,9 +26,9 @@ public class SystemRoleEntity implements Serializable {
         this.name = name;
     }
 
-    public SystemRoleEntity(SystemRoleEntity systemRoleEntety) {
-        this.id=systemRoleEntety.id;
-        this.name = systemRoleEntety.name;
+    public SystemRoleEntity(SystemRoleEntity systemRoleEntity) {
+        this.id=systemRoleEntity.id;
+        this.name = systemRoleEntity.name;
     }
 
     public long getId() {

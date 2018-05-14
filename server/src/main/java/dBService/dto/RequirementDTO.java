@@ -25,7 +25,7 @@ public class RequirementDTO {
         this.id = requirementEntity.getId();
         this.projectId = requirementEntity.getProject().getId();
         this.name = requirementEntity.getName();
-        this.discription = requirementEntity.getDiscription();
+        this.discription = requirementEntity.getDescription();
         this.priorityId = requirementEntity.getPriority().getId();
         this.typeId = requirementEntity.getType().getId();
         this.positionId = requirementEntity.getPosition().getId();

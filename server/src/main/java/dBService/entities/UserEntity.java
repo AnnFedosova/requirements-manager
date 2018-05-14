@@ -7,21 +7,21 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class UserEntity implements Serializable {
-    private static final long serialVersionUID = 10_05_2018L;
+    private static final long serialVersionUID = 14_05_2018L;
 
     @Id
     @Column(name = "id", unique = true, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "firstName")
+    private String firstName;
 
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "lastName")
+    private String lastName;
 
-    @Column(name = "middlename")
-    private String middlename;
+    @Column(name = "middleName")
+    private String middleName;
 
     @Column(name = "login")
     private String login;
@@ -44,19 +44,19 @@ public class UserEntity implements Serializable {
     public UserEntity() {
     }
 
-    public UserEntity(String name, String surname, String middlename, String login, String password) {
-        this.name = name;
-        this.surname = surname;
-        this.middlename = middlename;
+    public UserEntity(String firstName, String lastName, String middleName, String login, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
         this.login = login;
         this.password = password;
     }
 
     public UserEntity(UserEntity userEntity) {
-        this.id=userEntity.id;
-        this.name = userEntity.name;
-        this.surname = userEntity.surname;
-        this.middlename = userEntity.middlename;
+        this.id = userEntity.id;
+        this.firstName = userEntity.firstName;
+        this.lastName = userEntity.lastName;
+        this.middleName = userEntity.middleName;
         this.login = userEntity.login;
         this.password = userEntity.password;
     }
@@ -65,11 +65,11 @@ public class UserEntity implements Serializable {
         return id;
     }
 
-    public String getName() {return name; }
+    public String getFirstName() {return firstName; }
 
-    public String getSurname() {return surname; }
+    public String getLastName() {return lastName; }
 
-    public String getMiddlename() {return middlename; }
+    public String getMiddleName() {return middleName; }
 
     public String getLogin() {
         return login;
@@ -83,11 +83,11 @@ public class UserEntity implements Serializable {
         this.id = id;
     }
 
-    public void setName(String name) {this.name = name; }
+    public void setFirstName(String firstName) {this.firstName = firstName; }
 
-    public void setSurname(String surname) {this.surname = surname;}
+    public void setLastName(String lastName) {this.lastName = lastName;}
 
-    public void setMiddlename(String middlename) {this.middlename = middlename;}
+    public void setMiddleName(String middleName) {this.middleName = middleName;}
 
     public void setLogin(String login) {
         this.login = login;

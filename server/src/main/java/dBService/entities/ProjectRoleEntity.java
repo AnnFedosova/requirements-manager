@@ -28,9 +28,9 @@ public class ProjectRoleEntity implements Serializable {
         this.name = name;
     }
 
-    public ProjectRoleEntity(ProjectRoleEntity projectRoleEntety) {
-        this.id=projectRoleEntety.id;
-        this.name = projectRoleEntety.name;
+    public ProjectRoleEntity(ProjectRoleEntity projectRoleEntity) {
+        this.id=projectRoleEntity.id;
+        this.name = projectRoleEntity.name;
     }
 
     public long getId() {

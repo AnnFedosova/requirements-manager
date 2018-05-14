@@ -10,7 +10,7 @@ public class ReleaseRequirementEntity implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "relese_id")
+    @JoinColumn(name = "release_id")
     private ReleaseEntity release;
 
     @Id

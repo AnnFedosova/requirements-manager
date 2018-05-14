@@ -26,9 +26,9 @@ public class RequirementPriorityEntity implements Serializable {
         this.name = name;
     }
 
-    public RequirementPriorityEntity(RequirementPriorityEntity priorityEntety) {
-        this.id=priorityEntety.id;
-        this.name = priorityEntety.name;
+    public RequirementPriorityEntity(RequirementPriorityEntity priorityEntity) {
+        this.id=priorityEntity.id;
+        this.name = priorityEntity.name;
     }
 
     public long getId() {

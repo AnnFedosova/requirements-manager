@@ -23,8 +23,8 @@ public class RequirementEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "discription",columnDefinition = "text")
-    private String discription;
+    @Column(name = "description",columnDefinition = "text")
+    private String description;
 
     @Id
     @ManyToOne
@@ -75,10 +75,10 @@ public class RequirementEntity implements Serializable {
 
     public RequirementEntity(){}
 
-    public RequirementEntity(ProjectEntity project, String name, String discription, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementPositionEntity position, Date creationDate, UserEntity creator, Date modifiedDate, UserEntity changer, RequirementEntity lastVersion, boolean relevance) {
+    public RequirementEntity(ProjectEntity project, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementPositionEntity position, Date creationDate, UserEntity creator, Date modifiedDate, UserEntity changer, RequirementEntity lastVersion, boolean relevance) {
         this.project = project;
         this.name = name;
-        this.discription = discription;
+        this.description = description;
         this.priority = priority;
         this.type = type;
         this.position = position;
@@ -94,7 +94,7 @@ public class RequirementEntity implements Serializable {
         this.id = requirementEntity.id;
         this.project = requirementEntity.project;
         this.name = requirementEntity.name;
-        this.discription = requirementEntity.discription;
+        this.description = requirementEntity.description;
         this.priority = requirementEntity.priority;
         this.type = requirementEntity.type;
         this.position = requirementEntity.position;
@@ -130,12 +130,12 @@ public class RequirementEntity implements Serializable {
         this.name = name;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public RequirementPriorityEntity getPriority() {

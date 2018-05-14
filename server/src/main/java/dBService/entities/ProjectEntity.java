@@ -17,8 +17,8 @@ public class ProjectEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "discription",columnDefinition = "text")
-    private String discription;
+    @Column(name = "description",columnDefinition = "text")
+    private String description;
 
     @OneToMany(mappedBy = "project")
     private Set<UserProjectRoleEntity> projects;
@@ -29,26 +29,26 @@ public class ProjectEntity implements Serializable {
     public ProjectEntity(){
     }
 
-    public ProjectEntity(String name, String discription) {
+    public ProjectEntity(String name, String description) {
         this.name = name;
-        this.discription = discription;
+        this.description = description;
     }
 
-    public ProjectEntity(ProjectEntity projectEntety) {
-        this.id=projectEntety.id;
-        this.name = projectEntety.name;
-        this.discription = projectEntety.discription;
+    public ProjectEntity(ProjectEntity projectEntity) {
+        this.id=projectEntity.id;
+        this.name = projectEntity.name;
+        this.description = projectEntity.description;
     }
 
     public long getId() {return id;}
 
     public String getName() {return name;}
 
-    public String getDiscription() {return discription;}
+    public String getDescription() {return description;}
 
     public void setId(long id) {this.id = id;}
 
     public void setName(String name) {this.name = name;}
 
-    public void setDiscription(String discription) {this.discription = discription;}
+    public void setDescription(String description) {this.description = description;}
 }

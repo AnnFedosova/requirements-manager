@@ -26,9 +26,9 @@ public class RequirementTypeEntity implements Serializable {
         this.name = name;
     }
 
-    public RequirementTypeEntity(RequirementTypeEntity requirementTypeEntety) {
-        this.id = requirementTypeEntety.id;
-        this.name = requirementTypeEntety.name;
+    public RequirementTypeEntity(RequirementTypeEntity requirementTypeEntity) {
+        this.id = requirementTypeEntity.id;
+        this.name = requirementTypeEntity.name;
     }
 
     public long getId() {

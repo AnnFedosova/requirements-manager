@@ -5,27 +5,27 @@ import dBService.entities.UserEntity;
 public class UserDTO {
 
     private long id;
-    private String name;
-    private String surname;
-    private String middlename;
+    private String firstName;
+    private String lastName;
+    private String middleName;
     private String login;
     private String password;
 
     public UserDTO(){}
 
-    public UserDTO(String name, String surname, String middlename, String login, String password) {
-        this.name = name;
-        this.surname = surname;
-        this.middlename = middlename;
+    public UserDTO(String firstName, String lastName, String middleName, String login, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
         this.login = login;
         this.password = password;
     }
 
     public UserDTO(UserEntity userEntity) {
         this.id = userEntity.getId();
-        this.name = userEntity.getName();
-        this.surname = userEntity.getSurname();
-        this.middlename = userEntity.getMiddlename();
+        this.firstName = userEntity.getFirstName();
+        this.lastName = userEntity.getLastName();
+        this.middleName = userEntity.getMiddleName();
         this.login = userEntity.getLogin();
         this.password = userEntity.getPassword();
     }
@@ -38,28 +38,28 @@ public class UserDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getMiddlename() {
-        return middlename;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public void setMiddlename(String middlename) {
-        this.middlename = middlename;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public String getLogin() {

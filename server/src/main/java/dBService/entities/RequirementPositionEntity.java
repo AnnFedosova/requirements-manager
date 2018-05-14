@@ -26,9 +26,9 @@ public class RequirementPositionEntity implements Serializable {
         this.name = name;
     }
 
-    public RequirementPositionEntity(RequirementPositionEntity requirementPositionEntety) {
-        this.id = requirementPositionEntety.id;
-        this.name = requirementPositionEntety.name;
+    public RequirementPositionEntity(RequirementPositionEntity requirementPositionEntity) {
+        this.id = requirementPositionEntity.id;
+        this.name = requirementPositionEntity.name;
     }
 
     public long getId() {

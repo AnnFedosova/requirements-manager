@@ -18,8 +18,8 @@ public class SpecificationEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "discription")
-    private String discription;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "planned_date")
     @Temporal(TemporalType.DATE)
@@ -30,16 +30,16 @@ public class SpecificationEntity implements Serializable {
 
     public SpecificationEntity(){}
 
-    public SpecificationEntity(String name, String discription, Date plannedDate) {
+    public SpecificationEntity(String name, String description, Date plannedDate) {
         this.name = name;
-        this.discription = discription;
+        this.description = description;
         this.plannedDate = plannedDate;
     }
 
     public SpecificationEntity(SpecificationEntity specificationEntety) {
         this.id = specificationEntety.id;
         this.name = specificationEntety.name;
-        this.discription = specificationEntety.discription;
+        this.description = specificationEntety.description;
         this.plannedDate = specificationEntety.plannedDate;
     }
 
@@ -59,12 +59,12 @@ public class SpecificationEntity implements Serializable {
         this.name = name;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getPlannedDate() {
