@@ -13,11 +13,9 @@
         <!-- Postgres database connection settings -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
 
-
-        <!-- TODO: UPDATE THIS -->
         <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
-        <property name="connection.username">leo</property>
-        <property name="connection.password">leo</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">admin</property>
 
 
         <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
