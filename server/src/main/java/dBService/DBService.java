@@ -35,10 +35,12 @@ public class DBService {
     private Configuration getConfiguration() {
         Configuration configuration = new Configuration();
         configuration.configure("hibernate.cfg.xml");
+        addTables(configuration);
         return  configuration;
     }
 
     private void addTables(Configuration configuration) {
+
         configuration.addAnnotatedClass(UserEntity.class);
     }
 
