@@ -29,7 +29,7 @@
         <property name="hibernate.c3p0.idle_test_period">3000</property>
 
 
-        <!--TODO: добавить классы с @onetomany и @manytoone-->
+        <!--TODO: добавить классы с @onetomany и @manytoone -->
         <!--Mapping-->
 
     </session-factory>
