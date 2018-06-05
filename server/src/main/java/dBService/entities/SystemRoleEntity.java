@@ -17,7 +17,7 @@ public class SystemRoleEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "system_role")
+    @OneToMany(mappedBy = "role")
     private Set<UserSystemRoleEntity> systemRoles;
 
     public SystemRoleEntity(){}

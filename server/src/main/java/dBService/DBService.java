@@ -1,7 +1,7 @@
 package dBService;
 
 import dBService.dao.UserDAO;
-import dBService.entities.UserEntity;
+import dBService.entities.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -40,8 +40,20 @@ public class DBService {
     }
 
     private void addTables(Configuration configuration) {
-
+        configuration.addAnnotatedClass(ProjectEntity.class);
+        configuration.addAnnotatedClass(ProjectRoleEntity.class);
+        configuration.addAnnotatedClass(ReleaseEntity.class);
+        configuration.addAnnotatedClass(ReleaseRequirementEntity.class);
+        configuration.addAnnotatedClass(RequirementEntity.class);
+        configuration.addAnnotatedClass(RequirementPositionEntity.class);
+        configuration.addAnnotatedClass(RequirementPriorityEntity.class);
+        configuration.addAnnotatedClass(RequirementTypeEntity.class);
+        configuration.addAnnotatedClass(SpecificationEntity.class);
+        configuration.addAnnotatedClass(SpecificationRequirementEntity.class);
+        configuration.addAnnotatedClass(SystemRoleEntity.class);
         configuration.addAnnotatedClass(UserEntity.class);
+        configuration.addAnnotatedClass(UserProjectRoleEntity.class);
+        configuration.addAnnotatedClass(UserSystemRoleEntity.class);
     }
 
     private static SessionFactory createSessionFactory(Configuration configuration) {

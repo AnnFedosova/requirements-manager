@@ -15,7 +15,6 @@ public class RequirementEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "project_id")
     private ProjectEntity project;
@@ -26,17 +25,14 @@ public class RequirementEntity implements Serializable {
     @Column(name = "description",columnDefinition = "text")
     private String description;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "requirement_priority_id")
     private RequirementPriorityEntity priority;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "requirement_type_id")
     private RequirementTypeEntity type;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "requirement_position_id")
     private RequirementPositionEntity position;
@@ -45,7 +41,6 @@ public class RequirementEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "creator_id")
     private UserEntity creator;
@@ -54,12 +49,10 @@ public class RequirementEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date modifiedDate;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "changer_id")
     private UserEntity changer;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "last_version_id")
     private RequirementEntity lastVersion;

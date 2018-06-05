@@ -18,7 +18,7 @@ public class ProjectRoleEntity implements Serializable {
     private String name;
 
 
-    @OneToMany(mappedBy = "project_role")
+    @OneToMany(mappedBy = "role")
     private Set<UserProjectRoleEntity> projectRoles;
 
     public ProjectRoleEntity(){

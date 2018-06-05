@@ -31,6 +31,21 @@
 
         <!--TODO: добавить классы с @onetomany и @manytoone связи-->
         <!--Mapping-->
+        <mapping class="dBService.entities.UserEntity"/>
+        <mapping class="dBService.entities.ProjectEntity"/>
+        <mapping class="dBService.entities.ProjectRoleEntity"/>
+        <mapping class="dBService.entities.ProjectEntity"/>
+        <mapping class="dBService.entities.ReleaseEntity"/>
+        <mapping class="dBService.entities.ReleaseRequirementEntity"/>
+        <mapping class="dBService.entities.RequirementEntity"/>
+        <mapping class="dBService.entities.RequirementPositionEntity"/>
+        <mapping class="dBService.entities.RequirementPriorityEntity"/>
+        <mapping class="dBService.entities.RequirementTypeEntity"/>
+        <mapping class="dBService.entities.SpecificationEntity"/>
+        <mapping class="dBService.entities.SpecificationRequirementEntity"/>
+        <mapping class="dBService.entities.SystemRoleEntity"/>
+        <mapping class="dBService.entities.UserProjectRoleEntity"/>
+        <mapping class="dBService.entities.UserSystemRoleEntity"/>
 
     </session-factory>
 </hibernate-configuration>
