@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.jboss.crypto.CryptoUtil;
 
 
 public class DBService {
@@ -26,6 +27,7 @@ public class DBService {
             synchronized (DBService.class) {
                 if (instance == null) {
                     instance = new DBService();
+                    fillDB(instance);
                 }
             }
         }
@@ -63,6 +65,13 @@ public class DBService {
         return configuration.buildSessionFactory(serviceRegistry);
     }
 
+    private static void fillDB(DBService dbService) {
+        try {
+            dbService.addUser("admin", "admin", "admin", "admin", "admin");
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Work with DAOs
 
@@ -94,9 +103,17 @@ public class DBService {
             //UserRoleDAO userRoleDAO = new UserRoleDAO(session);
 
 
-            UserEntity user = new UserEntity(login, password
-                    /*CryptoUtil.createPasswordHash("MD5", CryptoUtil.BASE64_ENCODING, null, null, password)*/,
-                    firstName, lastName, middleName);
+            UserEntity user = new UserEntity(
+                    firstName,
+                    lastName,
+                    middleName,
+                    login,
+                    CryptoUtil.createPasswordHash(
+                            "MD5",
+                            CryptoUtil.BASE64_ENCODING,
+                            null,
+                            null,
+                            password));
 
             long userId = userDAO.addUser(user);
            // RoleEntity role = roleDAO.get(roleName);

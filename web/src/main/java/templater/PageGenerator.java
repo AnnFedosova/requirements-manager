@@ -17,7 +17,7 @@ public class PageGenerator {
     private static PageGenerator pageGenerator;
     private final Configuration cfg;
 
-    public static PageGenerator instance() {
+    public static PageGenerator getInstance() {
         if (pageGenerator == null)
             pageGenerator = new PageGenerator();
         return pageGenerator;
