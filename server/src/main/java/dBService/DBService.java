@@ -1,6 +1,8 @@
 package dBService;
 
+import dBService.dao.SystemRoleDAO;
 import dBService.dao.UserDAO;
+import dBService.dao.UserSystemRoleDAO;
 import dBService.entities.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -67,7 +69,9 @@ public class DBService {
 
     private static void fillDB(DBService dbService) {
         try {
-            dbService.addUser("admin", "admin", "admin", "admin", "admin");
+            dbService.addSystemRole("admin");
+            dbService.addSystemRole("user");
+            dbService.addAdmin("admin", "admin", "admin", "admin", "admin");
         } catch (DBException e) {
             e.printStackTrace();
         }
@@ -75,7 +79,6 @@ public class DBService {
 
     // Work with DAOs
 
-    // Users
 
     public UserEntity getUser(long id) {
         Session session = sessionFactory.openSession();
@@ -83,6 +86,16 @@ public class DBService {
         UserEntity user = userDAO.get(id);
         session.close();
         return user;
+    }
+
+    public long addSystemRole(String roleName) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        SystemRoleDAO systemRoleDAO = new SystemRoleDAO(session);
+        long id = systemRoleDAO.addSystemRole(roleName);
+        transaction.commit();
+        session.close();
+        return id;
     }
 
     public long addUser(String login, String password, String firstName, String lastName, String middleName) throws DBException {
@@ -99,9 +112,8 @@ public class DBService {
             Transaction transaction = session.beginTransaction();
 
             UserDAO userDAO = new UserDAO(session);
-            //RoleDAO roleDAO = new RoleDAO(session);
-            //UserRoleDAO userRoleDAO = new UserRoleDAO(session);
-
+            SystemRoleDAO systemRoleDAO = new SystemRoleDAO(session);
+            UserSystemRoleDAO userSystemRoleDAO = new UserSystemRoleDAO(session);
 
             UserEntity user = new UserEntity(
                     firstName,
@@ -116,8 +128,8 @@ public class DBService {
                             password));
 
             long userId = userDAO.addUser(user);
-           // RoleEntity role = roleDAO.get(roleName);
-            //userRoleDAO.addUserRole(user, role);
+            SystemRoleEntity role = systemRoleDAO.get(roleName);
+            userSystemRoleDAO.addUserSystemRole(user, role);
             transaction.commit();
             session.close();
             return userId;

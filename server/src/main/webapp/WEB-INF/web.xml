@@ -8,7 +8,6 @@
     <display-name>RequirementsManager</display-name>
 
 
-
     <listener>
         <listener-class>
             org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
