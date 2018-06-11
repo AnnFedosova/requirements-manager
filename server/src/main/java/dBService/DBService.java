@@ -13,6 +13,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.jboss.crypto.CryptoUtil;
 
+import java.util.List;
+
 
 public class DBService {
     private static volatile DBService instance;
@@ -138,5 +140,19 @@ public class DBService {
             throw new DBException(e);
         }
     }
+    public boolean isAdmin(String userLogin) {
+        Session session = sessionFactory.openSession();
 
+        UserSystemRoleDAO userSystemRoleDAO = new UserSystemRoleDAO(session);
+        long adminRoleId = new SystemRoleDAO(session).get("admin").getId();
+        List<UserSystemRoleEntity> roles = userSystemRoleDAO.getRolesByUser(userLogin);
+        for (UserSystemRoleEntity role: roles) {
+            if (role.getRole().getId() == adminRoleId) {
+                session.close();
+                return true;
+            }
+        }
+        session.close();
+        return false;
+    }
 }

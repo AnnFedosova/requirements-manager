@@ -18,6 +18,12 @@ public class UserService {
         return new UserDTO(dbService.getUser(id));
     }
 
+    @GET
+    @Path("isAdmin/{userLogin}")
+    public boolean isAdmin(@PathParam("userLogin") String userLogin) {
+        return dbService.isAdmin(userLogin);
+    }
+
     @POST
     @Path("addUser")
     public Response addUser(UserDTO user) {
