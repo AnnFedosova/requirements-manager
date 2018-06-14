@@ -255,7 +255,7 @@ public class DBService {
     }
 
     //////////////////////////////
-    ///  RequirementPosition  ////
+    ///  RequirementState  ////
     //////////////////////////////
 
     public long addRequirementState(String stateName){
@@ -285,6 +285,48 @@ public class DBService {
     //////////////////////////////
     //////     project     ///////
     //////////////////////////////
+
+    public ProjectEntity getProject(long id) {
+        Session session = sessionFactory.openSession();
+        ProjectDAO projectDAO = new ProjectDAO(session);
+        ProjectEntity project =  projectDAO.get(id);
+        session.close();
+        return project;
+    }
+
+    public void updateProject(ProjectEntity project) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        ProjectDAO projectDAO = new ProjectDAO(session);
+        projectDAO.update(project);
+
+        transaction.commit();
+        session.close();
+    }
+
+    public List<ProjectEntity>  getProjectsList() {
+        Session session = sessionFactory.openSession();
+        ProjectDAO projectDAO = new ProjectDAO(session);
+        List<ProjectEntity> projects = projectDAO.selectAll();
+        session.close();
+        return projects;
+    }
+
+    public long addProject(String name, String description) throws DBException {
+        try {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            ProjectDAO projectDAO = new ProjectDAO(session);
+            long projectId = projectDAO.addProject(name, description);
+            transaction.commit();
+            session.close();
+            return projectId;
+        }
+        catch (HibernateException e) {
+            throw new DBException(e);
+        }
+    }
 
     public List<UserProjectRoleEntity> getUserProjectRoleList(long projectId) {
         Session session = sessionFactory.openSession();

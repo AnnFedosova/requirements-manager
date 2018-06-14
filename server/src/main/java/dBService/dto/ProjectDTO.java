@@ -5,14 +5,14 @@ import dBService.entities.ProjectEntity;
 public class ProjectDTO {
     private long id;
     private String name;
-    private String discription;
+    private String description;
 
     public ProjectDTO(){}
 
     public ProjectDTO(ProjectEntity projectEntity) {
         this.id = projectEntity.getId();
         this.name = projectEntity.getName();
-        this.discription = projectEntity.getDescription();
+        this.description = projectEntity.getDescription();
     }
 
     public long getId() {
@@ -31,11 +31,11 @@ public class ProjectDTO {
         this.name = name;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
