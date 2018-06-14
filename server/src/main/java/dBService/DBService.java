@@ -72,8 +72,34 @@ public class DBService {
 
     private static void fillDB(DBService dbService) {
         try {
+            //заполнение таблицы ProjectRole
+            dbService.addProjectRole("Руководитель проекта");
+            dbService.addProjectRole("Аналитик");
+            dbService.addProjectRole("Разработчик");
+            dbService.addProjectRole("Тестировщик");
+
+            //заполнение таблицы RequirementPriority
+            dbService.addRequirementPriority("Низкий");
+            dbService.addRequirementPriority("Средний");
+            dbService.addRequirementPriority("Высокий");
+
+            //Заполнение таблицы RequirementState
+            dbService.addRequirementState("Новое");
+            dbService.addRequirementState("Уточнено");
+            dbService.addRequirementState("Разработано");
+            dbService.addRequirementState("Протестировано");
+            dbService.addRequirementState("Вошло в релиз");
+
+            //Заполнение таблицы RequirementType
+            dbService.addRequirementType("Бизнес-требование");
+            dbService.addRequirementType("Требование пользователей");
+            dbService.addRequirementType("Функциональное требование");
+            dbService.addRequirementType("Нефункциональное требование");
+
+            //Заполнение таблицы SystemRole
             dbService.addSystemRole("admin");
             dbService.addSystemRole("user");
+
             dbService.addAdmin("admin", "admin", "admin", "admin", "admin");
         } catch (DBException e) {
             e.printStackTrace();
