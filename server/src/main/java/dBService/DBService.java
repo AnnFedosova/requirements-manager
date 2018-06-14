@@ -100,7 +100,11 @@ public class DBService {
             dbService.addSystemRole("admin");
             dbService.addSystemRole("user");
 
+            //Заполнение тестовыми данными для остальной системы
+
             dbService.addAdmin("admin", "admin", "admin", "admin", "admin");
+
+
         } catch (DBException e) {
             e.printStackTrace();
         }
