@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-
 public class DBService {
     private static volatile DBService instance;
     private final SessionFactory sessionFactory;
