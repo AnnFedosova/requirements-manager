@@ -1,16 +1,16 @@
 package dBService.dto;
 
-import dBService.entities.RequirementPriorityEntity;
+import dBService.entities.RequirementStateEntity;
 
-public class PriorityDTO {
+public class RequirementStateDTO {
     private long id;
     private String name;
 
-    public PriorityDTO(){}
+    public RequirementStateDTO(){}
 
-    public PriorityDTO(RequirementPriorityEntity requirementPriorityEntity) {
-        this.id = requirementPriorityEntity.getId();
-        this.name = requirementPriorityEntity.getName();
+    public RequirementStateDTO(RequirementStateEntity requirementStateEntity) {
+        this.id = requirementStateEntity.getId();
+        this.name = requirementStateEntity.getName();
     }
 
     public long getId() {

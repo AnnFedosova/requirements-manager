@@ -34,8 +34,8 @@ public class RequirementEntity implements Serializable {
     private RequirementTypeEntity type;
 
     @ManyToOne
-    @JoinColumn(name = "requirement_position_id")
-    private RequirementPositionEntity position;
+    @JoinColumn(name = "requirement_state_id")
+    private RequirementStateEntity state;
 
     @Column(name = "creation_date")
     @Temporal(TemporalType.DATE)
@@ -68,13 +68,13 @@ public class RequirementEntity implements Serializable {
 
     public RequirementEntity(){}
 
-    public RequirementEntity(ProjectEntity project, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementPositionEntity position, Date creationDate, UserEntity creator, Date modifiedDate, UserEntity changer, RequirementEntity lastVersion, boolean relevance) {
+    public RequirementEntity(ProjectEntity project, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementStateEntity state, Date creationDate, UserEntity creator, Date modifiedDate, UserEntity changer, RequirementEntity lastVersion, boolean relevance) {
         this.project = project;
         this.name = name;
         this.description = description;
         this.priority = priority;
         this.type = type;
-        this.position = position;
+        this.state = state;
         this.creationDate = creationDate;
         this.creator = creator;
         this.modifiedDate = modifiedDate;
@@ -90,7 +90,7 @@ public class RequirementEntity implements Serializable {
         this.description = requirementEntity.description;
         this.priority = requirementEntity.priority;
         this.type = requirementEntity.type;
-        this.position = requirementEntity.position;
+        this.state = requirementEntity.state;
         this.creationDate = requirementEntity.creationDate;
         this.creator = requirementEntity.creator;
         this.modifiedDate = requirementEntity.modifiedDate;
@@ -147,12 +147,12 @@ public class RequirementEntity implements Serializable {
         this.type = type;
     }
 
-    public RequirementPositionEntity getPosition() {
-        return position;
+    public RequirementStateEntity getState() {
+        return state;
     }
 
-    public void setPosition(RequirementPositionEntity position) {
-        this.position = position;
+    public void setState(RequirementStateEntity state) {
+        this.state = state;
     }
 
     public Date getCreationDate() {

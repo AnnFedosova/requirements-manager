@@ -8,10 +8,10 @@ public class RequirementDTO {
     private long id;
     private long projectId;
     private String name;
-    private String discription;
+    private String description;
     private long priorityId;
     private long typeId;
-    private long positionId;
+    private long stateId;
     private Date creationDate;
     private long creatorId;
     private Date modifiedDate;
@@ -25,10 +25,10 @@ public class RequirementDTO {
         this.id = requirementEntity.getId();
         this.projectId = requirementEntity.getProject().getId();
         this.name = requirementEntity.getName();
-        this.discription = requirementEntity.getDescription();
+        this.description = requirementEntity.getDescription();
         this.priorityId = requirementEntity.getPriority().getId();
         this.typeId = requirementEntity.getType().getId();
-        this.positionId = requirementEntity.getPosition().getId();
+        this.stateId = requirementEntity.getState().getId();
         this.creationDate = requirementEntity.getCreationDate();
         this.creatorId = requirementEntity.getCreator().getId();
         this.modifiedDate = requirementEntity.getModifiedDate();
@@ -61,12 +61,12 @@ public class RequirementDTO {
         this.name = name;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public long getPriorityId() {
@@ -85,12 +85,12 @@ public class RequirementDTO {
         this.typeId = typeId;
     }
 
-    public long getPositionId() {
-        return positionId;
+    public long getStateId() {
+        return stateId;
     }
 
-    public void setPositionId(long positionId) {
-        this.positionId = positionId;
+    public void setStateId(long stateId) {
+        this.stateId = stateId;
     }
 
     public Date getCreationDate() {

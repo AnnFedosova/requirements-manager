@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "requirement_positions")
-public class RequirementPositionEntity implements Serializable {
+@Table(name = "requirement_state")
+public class RequirementStateEntity implements Serializable {
     private static final long serialVersionUID = 10_05_2018L;
 
     @Id
@@ -17,18 +17,18 @@ public class RequirementPositionEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "position")
-    private Set<RequirementEntity> positionSet;
+    @OneToMany(mappedBy = "state")
+    private Set<RequirementEntity> stateSet;
 
-    public RequirementPositionEntity(){}
+    public RequirementStateEntity(){}
 
-    public RequirementPositionEntity(String name) {
+    public RequirementStateEntity(String name) {
         this.name = name;
     }
 
-    public RequirementPositionEntity(RequirementPositionEntity requirementPositionEntity) {
-        this.id = requirementPositionEntity.id;
-        this.name = requirementPositionEntity.name;
+    public RequirementStateEntity(RequirementStateEntity requirementStateEntity) {
+        this.id = requirementStateEntity.id;
+        this.name = requirementStateEntity.name;
     }
 
     public long getId() {

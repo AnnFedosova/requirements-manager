@@ -7,7 +7,7 @@ import java.util.Date;
 public class ReleaseDTO {
     private long id;
     private String name;
-    private String discription;
+    private String description;
     private Date releaseDate;
 
     public ReleaseDTO(){}
@@ -15,7 +15,7 @@ public class ReleaseDTO {
     public ReleaseDTO(ReleaseEntity releaseEntity) {
         this.id = releaseEntity.getId();
         this.name = releaseEntity.getName();
-        this.discription = releaseEntity.getDescription();
+        this.description = releaseEntity.getDescription();
         this.releaseDate = releaseEntity.getReleaseDate();
     }
 
@@ -35,12 +35,12 @@ public class ReleaseDTO {
         this.name = name;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getReleaseDate() {

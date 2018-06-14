@@ -6,7 +6,7 @@ import java.util.Date;
 public class SpecificationDTO {
     private long id;
     private String name;
-    private String discription;
+    private String description;
     private Date plannedDate;
 
     public SpecificationDTO(){}
@@ -14,7 +14,7 @@ public class SpecificationDTO {
     public SpecificationDTO(SpecificationEntity specificationEntity) {
         this.id = specificationEntity.getId();
         this.name = specificationEntity.getName();
-        this.discription = specificationEntity.getDescription();
+        this.description = specificationEntity.getDescription();
         this.plannedDate = specificationEntity.getPlannedDate();
     }
 
@@ -34,12 +34,12 @@ public class SpecificationDTO {
         this.name = name;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getPlannedDate() {

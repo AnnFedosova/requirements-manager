@@ -38,7 +38,7 @@
         <mapping class="dBService.entities.ReleaseEntity"/>
         <mapping class="dBService.entities.ReleaseRequirementEntity"/>
         <mapping class="dBService.entities.RequirementEntity"/>
-        <mapping class="dBService.entities.RequirementPositionEntity"/>
+        <mapping class="dBService.entities.RequirementStateEntity"/>
         <mapping class="dBService.entities.RequirementPriorityEntity"/>
         <mapping class="dBService.entities.RequirementTypeEntity"/>
         <mapping class="dBService.entities.SpecificationEntity"/>

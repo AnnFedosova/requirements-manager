@@ -2,13 +2,13 @@ package dBService.dto;
 
 import dBService.entities.RequirementTypeEntity;
 
-public class TypeDTO {
+public class RequirementTypeDTO {
     private long id;
     private String name;
 
-    public TypeDTO(){}
+    public RequirementTypeDTO(){}
 
-    public TypeDTO(RequirementTypeEntity requirementTypeEntity) {
+    public RequirementTypeDTO(RequirementTypeEntity requirementTypeEntity) {
         this.id = requirementTypeEntity.getId();
         this.name = requirementTypeEntity.getName();
     }
