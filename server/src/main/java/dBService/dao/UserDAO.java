@@ -9,6 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 public class UserDAO {
     private final Session session;
@@ -24,7 +25,6 @@ public class UserDAO {
     public UserEntity get(String login) throws HibernateException {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<UserEntity> criteria = builder.createQuery(UserEntity.class);
-
         Root<UserEntity> root = criteria.from(UserEntity.class);
         ParameterExpression<String> parameter = builder.parameter(String.class);
         criteria.select(root).where(builder.equal(root.get("login"), parameter));
@@ -44,4 +44,12 @@ public class UserDAO {
         return (long) session.save(new UserEntity(login, password, firstName, lastName, middleName));
     }
 
+    public List<UserEntity> selectAll() {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> criteria = builder.createQuery(UserEntity.class);
+        Root<UserEntity> root = criteria.from(UserEntity.class);
+        criteria.select(root);
+        Query<UserEntity> query = session.createQuery(criteria);
+        return query.getResultList();
+    }
 }

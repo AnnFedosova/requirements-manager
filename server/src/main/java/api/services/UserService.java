@@ -3,9 +3,12 @@ package api.services;
 import dBService.DBException;
 import dBService.DBService;
 import dBService.dto.UserDTO;
+import dBService.entities.UserEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.LinkedList;
+import java.util.List;
 
 @Path("/api/users")
 @Produces({"application/json"})
@@ -22,6 +25,34 @@ public class UserService {
     @Path("isAdmin/{userLogin}")
     public boolean isAdmin(@PathParam("userLogin") String userLogin) {
         return dbService.isAdmin(userLogin);
+    }
+
+    @GET
+    @Path("getUserByLogin/{userLogin}")
+    public UserDTO getUserByLogin (@PathParam("userLogin") String userLogin){
+        return new UserDTO (dbService.getUser(userLogin));
+    }
+
+    @GET
+    @Path("getAllUsers")
+    public List<UserDTO> gerAllUsers(){
+        List<UserEntity> userEntities = dbService.getAllUsers();
+        List<UserDTO> users = new LinkedList<>();
+        for (UserEntity userEntity : userEntities) {
+            users.add(new UserDTO(userEntity));
+        }
+        return users;
+    }
+
+    @GET
+    @Path("getUsersByProjectId/{projectId}")
+    public List<UserDTO> getUsersByRequestId(@PathParam("projectId") long id) {
+        List<UserEntity> userEntities = dbService.getUsersByProjectId(id);
+        List<UserDTO> users = new LinkedList<>();
+        for (UserEntity userEntity : userEntities) {
+            users.add(new UserDTO(userEntity));
+        }
+        return users;
     }
 
     @POST

@@ -2,6 +2,7 @@ package dBService;
 
 import dBService.dao.SystemRoleDAO;
 import dBService.dao.UserDAO;
+import dBService.dao.UserProjectRoleDAO;
 import dBService.dao.UserSystemRoleDAO;
 import dBService.entities.*;
 import org.hibernate.HibernateException;
@@ -13,7 +14,10 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.jboss.crypto.CryptoUtil;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 public class DBService {
@@ -81,6 +85,7 @@ public class DBService {
 
     // Work with DAOs
 
+    //Users
 
     public UserEntity getUser(long id) {
         Session session = sessionFactory.openSession();
@@ -89,6 +94,38 @@ public class DBService {
         session.close();
         return user;
     }
+
+    public UserEntity getUser(String login) {
+        Session session = sessionFactory.openSession();
+        UserDAO userDAO = new UserDAO(session);
+        UserEntity user = userDAO.get(login);
+        session.close();
+        return user;
+    }
+
+    public List<UserEntity> getAllUsers() {
+        Session session = sessionFactory.openSession();
+        UserDAO userDAO = new UserDAO(session);
+        List<UserEntity> users = userDAO.selectAll();
+        session.close();
+        return users;
+    }
+
+    public List<UserEntity> getUsersByProjectId(long projectId) {
+        Session session = sessionFactory.openSession();
+
+        Set<UserEntity> users = new TreeSet<>();
+
+        List<UserProjectRoleEntity> projectPositions = getProjectPositionsList(projectId);
+        for(UserProjectRoleEntity projectPosition : projectPositions) {
+            users.add(projectPosition.getUser());
+        }
+
+        session.close();
+
+        return new ArrayList<>(users);
+    }
+
 
     public long addSystemRole(String roleName) {
         Session session = sessionFactory.openSession();
@@ -154,5 +191,17 @@ public class DBService {
         }
         session.close();
         return false;
+    }
+
+    //project
+
+    public List<UserProjectRoleEntity> getProjectPositionsList(long projectId) {
+        Session session = sessionFactory.openSession();
+
+        UserProjectRoleDAO userProjectRoleDAO = new UserProjectRoleDAO(session);
+        List <UserProjectRoleEntity> list = userProjectRoleDAO.getByProjectId(projectId);
+
+        session.close();
+        return list;
     }
 }
