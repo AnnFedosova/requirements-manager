@@ -15,7 +15,7 @@
 
         <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
         <property name="connection.username">postgres</property>
-        <property name="connection.password">admin</property>
+        <property name="connection.password">q123</property>
 
 
         <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
