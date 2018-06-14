@@ -23,4 +23,8 @@ public class RequirementPriorityDAO {
         session.save(requirementPriority);
         return requirementPriority.getId();
     }
+    public long addRequirementPriority(String name) {
+        return (long) session.save(new RequirementPriorityEntity(name));
+    }
+
 }

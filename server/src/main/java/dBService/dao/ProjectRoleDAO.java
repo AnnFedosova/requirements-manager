@@ -32,7 +32,8 @@ public class ProjectRoleDAO {
         return query.uniqueResult();
     }
 
-    public long addRole(String roleName) throws HibernateException {
+    public long addProjectRole(String roleName) throws HibernateException {
         return (long) session.save(new ProjectRoleEntity(roleName));
     }
+
 }

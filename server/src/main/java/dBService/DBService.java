@@ -1,9 +1,6 @@
 package dBService;
 
-import dBService.dao.SystemRoleDAO;
-import dBService.dao.UserDAO;
-import dBService.dao.UserProjectRoleDAO;
-import dBService.dao.UserSystemRoleDAO;
+import dBService.dao.*;
 import dBService.entities.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -18,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
 
 public class DBService {
     private static volatile DBService instance;
@@ -84,7 +82,9 @@ public class DBService {
 
     // Work with DAOs
 
-    //Users
+    //////////////////////////////
+    /////////    Users    ////////
+    //////////////////////////////
 
     public UserEntity getUser(long id) {
         Session session = sessionFactory.openSession();
@@ -115,7 +115,7 @@ public class DBService {
 
         Set<UserEntity> users = new TreeSet<>();
 
-        List<UserProjectRoleEntity> projectPositions = getProjectPositionsList(projectId);
+        List<UserProjectRoleEntity> projectPositions = getUserProjectRoleList(projectId);
         for(UserProjectRoleEntity projectPosition : projectPositions) {
             users.add(projectPosition.getUser());
         }
@@ -125,23 +125,8 @@ public class DBService {
         return new ArrayList<>(users);
     }
 
-
-    public long addSystemRole(String roleName) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        SystemRoleDAO systemRoleDAO = new SystemRoleDAO(session);
-        long id = systemRoleDAO.addSystemRole(roleName);
-        transaction.commit();
-        session.close();
-        return id;
-    }
-
     public long addUser(String login, String password, String firstName, String lastName, String middleName) throws DBException {
         return addPerson(login, password, firstName, lastName, middleName, "user");
-    }
-
-    public long addAdmin(String login, String password, String firstName, String lastName, String middleName) throws DBException {
-        return addPerson(login, password, firstName, lastName, middleName, "admin");
     }
 
     private long addPerson(String login, String password, String firstName, String lastName, String middleName, String roleName) throws DBException {
@@ -177,6 +162,24 @@ public class DBService {
         }
     }
 
+    /////////////////////////////////////
+    ////////       SystemRole   /////////
+    /////////////////////////////////////
+
+    public long addSystemRole(String roleName) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        SystemRoleDAO systemRoleDAO = new SystemRoleDAO(session);
+        long id = systemRoleDAO.addSystemRole(roleName);
+        transaction.commit();
+        session.close();
+        return id;
+    }
+
+    public long addAdmin(String login, String password, String firstName, String lastName, String middleName) throws DBException {
+        return addPerson(login, password, firstName, lastName, middleName, "admin");
+    }
+
     public boolean isAdmin(String userLogin) {
         Session session = sessionFactory.openSession();
 
@@ -193,9 +196,67 @@ public class DBService {
         return false;
     }
 
-    //project
+    /////////////////////////////
+    ////   ProjectRole    ///////
+    /////////////////////////////
 
-    public List<UserProjectRoleEntity> getProjectPositionsList(long projectId) {
+    public long addProjectRole(String roleName){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        ProjectRoleDAO projectRoleDAO = new ProjectRoleDAO(session);
+        long id = projectRoleDAO.addProjectRole(roleName);
+        transaction.commit();
+        session.close();
+        return id;
+    }
+
+    //////////////////////////////
+    ///  RequirementPriority  ////
+    //////////////////////////////
+
+    public long addRequirementPriority(String priorityName){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        RequirementPriorityDAO requirementPriorityDAO = new RequirementPriorityDAO(session);
+        long id = requirementPriorityDAO.addRequirementPriority(priorityName);
+        transaction.commit();
+        session.close();
+        return id;
+    }
+
+    //////////////////////////////
+    ///  RequirementPosition  ////
+    //////////////////////////////
+
+    public long addRequirementState(String stateName){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        RequirementStateDAO requirementStateDAO = new RequirementStateDAO(session);
+        long id = requirementStateDAO.addRequirementState(stateName);
+        transaction.commit();
+        session.close();
+        return id;
+    }
+
+    //////////////////////////////
+    ////  RequirementType   //////
+    //////////////////////////////
+
+    public long addRequirementType(String typeName){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        RequirementTypeDAO requirementTypeDAO = new RequirementTypeDAO(session);
+        long id = requirementTypeDAO.addRequirementType(typeName);
+        transaction.commit();
+        session.close();
+        return id;
+    }
+
+    //////////////////////////////
+    //////     project     ///////
+    //////////////////////////////
+
+    public List<UserProjectRoleEntity> getUserProjectRoleList(long projectId) {
         Session session = sessionFactory.openSession();
 
         UserProjectRoleDAO userProjectRoleDAO = new UserProjectRoleDAO(session);

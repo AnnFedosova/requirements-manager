@@ -19,8 +19,12 @@ public class RequirementStateDAO {
         session.update(requirementState);
     }
 
-    public long addProject(RequirementStateEntity requirementState) {
+    public long addRequirementState(RequirementStateEntity requirementState) {
         session.save(requirementState);
         return requirementState.getId();
+    }
+
+    public long addRequirementState(String name) {
+        return (long) session.save(new RequirementStateEntity(name));
     }
 }

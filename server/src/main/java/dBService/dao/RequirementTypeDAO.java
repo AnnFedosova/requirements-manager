@@ -23,4 +23,8 @@ public class RequirementTypeDAO {
         session.save(requirementType);
         return requirementType.getId();
     }
+
+    public long addRequirementType(String name) {
+        return (long) session.save(new RequirementTypeEntity(name));
+    }
 }
