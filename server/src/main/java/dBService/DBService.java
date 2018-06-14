@@ -366,7 +366,7 @@ public class DBService {
     }
 
     //////////////////////////////
-    //////     project     ///////
+    //////     Project     ///////
     //////////////////////////////
 
     public ProjectEntity getProject(long id) {
