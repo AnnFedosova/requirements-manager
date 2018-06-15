@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(name = "SignUp", urlPatterns = "/signup")
-//@ServletSecurity(@HttpConstraint(rolesAllowed = {"admin"}))
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"admin"}))
 public class SignUpServlet extends HttpServlet {
 
     public SignUpServlet() {
@@ -24,6 +24,8 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("doGet");
+
         response.setContentType("text/html;charset=utf-8");
         Map<String, Object> pageVariables = null;
         try {
@@ -38,6 +40,8 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("dopost");
+
         response.setContentType("text/html;charset=utf-8");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
