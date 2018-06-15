@@ -21,9 +21,9 @@ public class UserProjectRoleDAO {
         this.session = session;
     }
 
-    public UserProjectRoleEntity get(long id)  throws HibernateException {
+    /*public UserProjectRoleEntity get(long id)  throws HibernateException {      ////какая-то дичь
         return session.get(UserProjectRoleEntity.class, id);
-    }
+    }*/
 
     public List<UserProjectRoleEntity> getByUser(UserEntity user)  throws HibernateException {
         CriteriaBuilder builder = session.getCriteriaBuilder();

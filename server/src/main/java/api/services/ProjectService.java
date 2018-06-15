@@ -3,6 +3,7 @@ package api.services;
 import dBService.DBException;
 import dBService.DBService;
 import dBService.dto.ProjectDTO;
+import dBService.dto.UserProjectRoleDTO;
 import dBService.entities.ProjectEntity;
 
 import javax.ws.rs.*;
@@ -57,5 +58,11 @@ public class ProjectService {
         dbService.updateProject(projectEntity);
         String result = "Project updated with id = " + project.getId();
         return Response.ok().entity(result).build();
+    }
+
+    @POST
+    @Path("addUserToProject")
+    public void addUserToProject(UserProjectRoleDTO userProjectRoleDTO){
+            dbService.addUserToProject(userProjectRoleDTO.getUserId(), userProjectRoleDTO.getProjectId(),userProjectRoleDTO.getProjectRoleId());
     }
 }

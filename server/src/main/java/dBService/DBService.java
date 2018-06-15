@@ -435,6 +435,20 @@ public class DBService {
         return list;
     }
 
+    public void addUserToProject(long userId, long projectId, long projectRoleId){
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            UserProjectRoleDAO userProjectRoleDAO = new UserProjectRoleDAO(session);
+
+            UserDAO userDAO = new UserDAO(session);
+            ProjectDAO projectDAO = new ProjectDAO(session);
+            ProjectRoleDAO projectRoleDAO = new ProjectRoleDAO(session);
+
+            userProjectRoleDAO.addUserProjectRole(userDAO.get(userId),projectDAO.get(projectId),projectRoleDAO.get(projectRoleId));
+            transaction.commit();
+            session.close();
+    }
+
     ////////////////////////////
     ///////   Releases   ///////
     ////////////////////////////
@@ -447,6 +461,29 @@ public class DBService {
         return releaseEntity;
     }
 
+    public List<ReleaseEntity>  getAllReleases() {
+        Session session = sessionFactory.openSession();
+        ReleaseDAO releaseDAO = new ReleaseDAO(session);
+        List<ReleaseEntity> releaseEntities = releaseDAO.selectAll();
+        session.close();
+        return releaseEntities;
+    }
+
+    public long addRelease(String name, String description, Date releaseDate) throws DBException {
+        try {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            ReleaseDAO releaseDAO = new ReleaseDAO(session);
+            long releaseId = releaseDAO.addRelease(name, description, releaseDate);
+            transaction.commit();
+            session.close();
+            return releaseId;
+        }
+        catch (HibernateException e) {
+            throw new DBException(e);
+        }
+    }
+
     ////////////////////////////
     /////  Specification   /////
     ////////////////////////////
@@ -457,5 +494,28 @@ public class DBService {
         SpecificationEntity specificationEntity =  specificationDAO.get(id);
         session.close();
         return specificationEntity;
+    }
+
+    public List<SpecificationEntity>  getAllSpecifications() {
+        Session session = sessionFactory.openSession();
+        SpecificationDAO specificationDAO = new SpecificationDAO(session);
+        List<SpecificationEntity> specificationEntities = specificationDAO.selectAll();
+        session.close();
+        return specificationEntities;
+    }
+
+    public long addSpecification(String name, String description, Date plannedDate) throws DBException {
+        try {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            SpecificationDAO specificationDAO = new SpecificationDAO(session);
+            long specificationId = specificationDAO.addSpecification(name, description, plannedDate);
+            transaction.commit();
+            session.close();
+            return specificationId;
+        }
+        catch (HibernateException e) {
+            throw new DBException(e);
+        }
     }
 }

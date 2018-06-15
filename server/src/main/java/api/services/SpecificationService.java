@@ -3,6 +3,7 @@ package api.services;
 import dBService.DBException;
 import dBService.DBService;
 import dBService.dto.SpecificationDTO;
+import dBService.entities.SpecificationEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -20,5 +21,30 @@ public class SpecificationService {
     @Path("getSpecification/{specificationId}")
     public SpecificationDTO getSpecification(@PathParam("specificationId") long id) {
         return new SpecificationDTO(dbService.getSpecification(id));
+    }
+
+    @GET
+    @Path("getAllSpecifications")
+    public List<SpecificationDTO> gerAllUsers() {
+        List<SpecificationEntity> releaseEntities = dbService.getAllSpecifications();
+        List<SpecificationDTO> specificationDTOS = new LinkedList<>();
+        for (SpecificationEntity specificationEntity : releaseEntities) {
+            specificationDTOS.add(new SpecificationDTO(specificationEntity));
+        }
+        return specificationDTOS;
+    }
+
+    @POST
+    @Path("addSpecification")
+    public Response addUSpecification(SpecificationDTO specificationDTO) {
+        try {
+            long specificationId = dbService.addSpecification(specificationDTO.getName(), specificationDTO.getDescription(), specificationDTO.getPlannedDate());
+            String result = "Specification added with id = " + specificationId;
+            return Response.ok().entity(result).build();
+        } catch (DBException e) {
+            e.printStackTrace();
+            String result = "Error :(";
+            return Response.serverError().entity(result).build();
+        }
     }
 }
