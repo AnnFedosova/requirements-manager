@@ -11,10 +11,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.jboss.crypto.CryptoUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 
 public class DBService {
@@ -227,6 +224,68 @@ public class DBService {
     }
 
     /////////////////////////////
+    //////    Requirement   /////
+    /////////////////////////////
+
+    public long addRequirement(long projectId, String name, String description, long priorityId,
+                               long typeId, long creatorId) throws DBException {
+        try {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+
+            RequirementDAO requirementDAO = new RequirementDAO(session);
+            UserDAO userDAO = new UserDAO(session);
+            RequirementPriorityDAO requirementPriorityDAO = new RequirementPriorityDAO(session);
+            RequirementStateDAO requirementStateDAO = new RequirementStateDAO(session);
+            ProjectDAO projectDAO = new ProjectDAO(session);
+            RequirementTypeDAO requirementTypeDAO = new RequirementTypeDAO(session);
+
+            ProjectEntity project = projectDAO.get(projectId);
+            UserEntity creator = userDAO.get(creatorId);
+
+            RequirementStateEntity state = requirementStateDAO.get("New");
+            RequirementPriorityEntity priority = requirementPriorityDAO.get(priorityId);
+            RequirementTypeEntity type = requirementTypeDAO.get(typeId);
+
+            RequirementEntity requirementEntity = new RequirementEntity(project, name, description,
+                    priority, type, state, new Date(), creator, true);
+            long requirementId = requirementDAO.addRequirement(requirementEntity);
+
+            transaction.commit();
+            session.close();
+            return requirementId;
+        }
+        catch (HibernateException e) {
+            throw new DBException(e);
+        }
+    }
+
+
+    public RequirementEntity getRequirement(long id) {
+        Session session = sessionFactory.openSession();
+        RequirementDAO requirementDAO = new RequirementDAO(session);
+        RequirementEntity request = requirementDAO.get(id);
+        session.close();
+        return request;
+    }
+
+    public List<RequirementEntity> getRequirementsByProject(long projectId) {
+        Session session = sessionFactory.openSession();
+        RequirementDAO requirementDAO = new RequirementDAO(session);
+        List <RequirementEntity> list = requirementDAO.getRequirementsByProjectId(projectId);
+        session.close();
+        return list;
+    }
+
+    public List<RequirementEntity> getAllRequirements() {
+        Session session = sessionFactory.openSession();
+        RequirementDAO requirementDAO = new RequirementDAO(session);
+        List<RequirementEntity> requirements = requirementDAO.selectAll();
+        session.close();
+        return requirements;
+    }
+
+    /////////////////////////////
     ////   ProjectRole    ///////
     /////////////////////////////
 
@@ -244,6 +303,14 @@ public class DBService {
     ///  RequirementPriority  ////
     //////////////////////////////
 
+    public RequirementPriorityEntity getRequirementPriority(long id){
+        Session session = sessionFactory.openSession();
+        RequirementPriorityDAO requirementPriorityDAO = new RequirementPriorityDAO(session);
+        RequirementPriorityEntity requirementPriorityEntity =  requirementPriorityDAO.get(id);
+        session.close();
+        return requirementPriorityEntity;
+    }
+
     public long addRequirementPriority(String priorityName){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -258,6 +325,14 @@ public class DBService {
     ///  RequirementState  ////
     //////////////////////////////
 
+    public RequirementStateEntity getRequirementstate(long id){
+        Session session = sessionFactory.openSession();
+        RequirementStateDAO requirementStateDAO = new RequirementStateDAO(session);
+        RequirementStateEntity requirementStateEntity =  requirementStateDAO.get(id);
+        session.close();
+        return requirementStateEntity;
+    }
+
     public long addRequirementState(String stateName){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -271,6 +346,14 @@ public class DBService {
     //////////////////////////////
     ////  RequirementType   //////
     //////////////////////////////
+
+    public RequirementTypeEntity getRequirementType(long id){
+        Session session = sessionFactory.openSession();
+        RequirementTypeDAO requirementTypeDAO = new RequirementTypeDAO(session);
+        RequirementTypeEntity requirementTypeEntity =  requirementTypeDAO.get(id);
+        session.close();
+        return requirementTypeEntity;
+    }
 
     public long addRequirementType(String typeName){
         Session session = sessionFactory.openSession();

@@ -6,12 +6,14 @@ import dBService.dto.UserDTO;
 import dBService.entities.UserEntity;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.LinkedList;
 import java.util.List;
 
 @Path("/api/users")
-@Produces({"application/json"})
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class UserService {
     private DBService dbService = DBService.getInstance();
 

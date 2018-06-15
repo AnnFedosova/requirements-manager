@@ -82,6 +82,17 @@ public class RequirementEntity implements Serializable {
         this.lastVersion = lastVersion;
         this.relevance = relevance;
     }
+    public RequirementEntity(ProjectEntity project, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementStateEntity state, Date creationDate, UserEntity creator, boolean relevance) {
+        this.project = project;
+        this.name = name;
+        this.description = description;
+        this.priority = priority;
+        this.type = type;
+        this.state = state;
+        this.creationDate = creationDate;
+        this.creator = creator;
+        this.relevance = relevance;
+    }
 
     public RequirementEntity(RequirementEntity requirementEntity) {
         this.id = requirementEntity.id;
