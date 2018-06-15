@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(name = "User", urlPatterns = "/user")
-@ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
+//@ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
 public class UserServlet extends HttpServlet{
 
     public UserServlet() {
