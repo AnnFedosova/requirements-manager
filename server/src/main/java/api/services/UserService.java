@@ -71,4 +71,16 @@ public class UserService {
         }
     }
 
+    /*@POST
+    @Path("addRoleToUser")
+    public Response addRoleToUser(UserProjectRoleDTO userProjectRoleDTO){
+        try{
+
+        }
+        catch (DBException e){
+            e.printStackTrace();
+            String result = "Error :(";
+            return Response.serverError().entity(result).build();
+        }
+    }*/
 }

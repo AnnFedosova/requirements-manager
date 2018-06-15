@@ -228,7 +228,7 @@ public class DBService {
     /////////////////////////////
 
     public long addRequirement(long projectId, String name, String description, long priorityId,
-                               long typeId, long creatorId) throws DBException {
+                               long typeId, long creatorId, long lastVersionId) throws DBException {
         try {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
@@ -242,13 +242,16 @@ public class DBService {
 
             ProjectEntity project = projectDAO.get(projectId);
             UserEntity creator = userDAO.get(creatorId);
-
-            RequirementStateEntity state = requirementStateDAO.get("New");
-            RequirementPriorityEntity priority = requirementPriorityDAO.get(priorityId);
             RequirementTypeEntity type = requirementTypeDAO.get(typeId);
-
+            RequirementPriorityEntity priority = requirementPriorityDAO.get(priorityId);
+            RequirementStateEntity state = requirementStateDAO.get("New");
+            RequirementEntity lastVersion=null;
+            if(lastVersionId!=0){
+                lastVersion = requirementDAO.get(lastVersionId);
+            }
             RequirementEntity requirementEntity = new RequirementEntity(project, name, description,
-                    priority, type, state, new Date(), creator, true);
+                        priority, type, state, new Date(), creator, null ,true);
+
             long requirementId = requirementDAO.addRequirement(requirementEntity);
 
             transaction.commit();
@@ -283,6 +286,17 @@ public class DBService {
         List<RequirementEntity> requirements = requirementDAO.selectAll();
         session.close();
         return requirements;
+    }
+
+    public void updateRequirement(RequirementEntity requirementEntity) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        RequirementDAO requirementDAO = new RequirementDAO(session);
+        requirementDAO.update(requirementEntity);
+
+        transaction.commit();
+        session.close();
     }
 
     /////////////////////////////
@@ -325,7 +339,7 @@ public class DBService {
     ///  RequirementState  ////
     //////////////////////////////
 
-    public RequirementStateEntity getRequirementstate(long id){
+    public RequirementStateEntity getRequirementState(long id){
         Session session = sessionFactory.openSession();
         RequirementStateDAO requirementStateDAO = new RequirementStateDAO(session);
         RequirementStateEntity requirementStateEntity =  requirementStateDAO.get(id);
@@ -419,5 +433,29 @@ public class DBService {
 
         session.close();
         return list;
+    }
+
+    ////////////////////////////
+    ///////   Releases   ///////
+    ////////////////////////////
+
+    public ReleaseEntity getRelease(long id) {
+        Session session = sessionFactory.openSession();
+        ReleaseDAO releaseDAO = new ReleaseDAO(session);
+        ReleaseEntity releaseEntity = releaseDAO.get(id);
+        session.close();
+        return releaseEntity;
+    }
+
+    ////////////////////////////
+    /////  Specification   /////
+    ////////////////////////////
+
+    public SpecificationEntity getSpecification(long id) {
+        Session session = sessionFactory.openSession();
+        SpecificationDAO specificationDAO = new SpecificationDAO(session);
+        SpecificationEntity specificationEntity =  specificationDAO.get(id);
+        session.close();
+        return specificationEntity;
     }
 }

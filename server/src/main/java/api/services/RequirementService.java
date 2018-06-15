@@ -45,6 +45,12 @@ public class RequirementService {
     }
 
     @GET
+    @Path("getLastVersion/{requirementId}")
+    public RequirementDTO getLastVersion(@PathParam("requirementId") long requirementId) {
+        return new RequirementDTO(dbService.getRequirement(requirementId).getLastVersion());
+    }
+
+    @GET
     @Path("getRequirementsByProject/{projectId}")
     public List<RequirementDTO> getRequestsList(@PathParam("projectId") long projectId) {
         List<RequirementDTO> requirementsDTO = new LinkedList<>();
@@ -71,8 +77,8 @@ public class RequirementService {
     public Response addRequirement(RequirementDTO requirementDTO) {
         try {
             long requirementId = dbService.addRequirement(requirementDTO.getProjectId(),requirementDTO.getName(),
-                    requirementDTO.getDescription(), requirementDTO.getPriorityId(),
-                    requirementDTO.getTypeId(),requirementDTO.getCreatorId());
+                    requirementDTO.getDescription(), requirementDTO.getPriorityId(),requirementDTO.getTypeId(),
+                    requirementDTO.getCreatorId(), 0);
             String result = "Requirement added with id = " + requirementId;
             return Response.ok().entity(result).build();
         } catch (DBException e) {
@@ -80,5 +86,35 @@ public class RequirementService {
             String result = "Error :(";
             return Response.serverError().entity(result).build();
         }
+    }
+
+    @POST
+    @Path("addVersion")
+    public Response addVersion(RequirementDTO requirementDTO) {
+        try {
+            long requirementId = dbService.addRequirement(requirementDTO.getProjectId(),requirementDTO.getName(),
+                    requirementDTO.getDescription(), requirementDTO.getPriorityId(),requirementDTO.getTypeId(),
+                    requirementDTO.getCreatorId(), requirementDTO.getLastVersionId());
+            String result = "Requirement added with id = " + requirementId;
+            return Response.ok().entity(result).build();
+        } catch (DBException e) {
+            e.printStackTrace();
+            String result = "Error :(";
+            return Response.serverError().entity(result).build();
+        }
+    }
+
+    @POST
+    @Path("updateRequirement")
+    public Response updateRequirement(RequirementDTO requirementDTO) {
+        RequirementEntity requirementEntity = dbService.getRequirement(requirementDTO.getId());
+        requirementEntity.setChanger(dbService.getUser(requirementDTO.getChangerId()));
+        requirementEntity.setPriority(dbService.getRequirementPriority(requirementDTO.getPriorityId()));
+        requirementEntity.setState(dbService.getRequirementState(requirementDTO.getStateId()));
+
+        dbService.updateRequirement(requirementEntity);
+
+        String result = "Request updated with id = " + requirementDTO.getId();
+        return Response.ok().entity(result).build();
     }
 }

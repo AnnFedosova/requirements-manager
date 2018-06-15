@@ -82,7 +82,7 @@ public class RequirementEntity implements Serializable {
         this.lastVersion = lastVersion;
         this.relevance = relevance;
     }
-    public RequirementEntity(ProjectEntity project, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementStateEntity state, Date creationDate, UserEntity creator, boolean relevance) {
+    public RequirementEntity(ProjectEntity project, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementStateEntity state, Date creationDate, UserEntity creator, RequirementEntity lastVersion, boolean relevance) {
         this.project = project;
         this.name = name;
         this.description = description;
@@ -91,6 +91,7 @@ public class RequirementEntity implements Serializable {
         this.state = state;
         this.creationDate = creationDate;
         this.creator = creator;
+        this.lastVersion=lastVersion;
         this.relevance = relevance;
     }
 
