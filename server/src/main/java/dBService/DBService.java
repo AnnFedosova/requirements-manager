@@ -139,16 +139,12 @@ public class DBService {
 
     public List<UserEntity> getUsersByProjectId(long projectId) {
         Session session = sessionFactory.openSession();
-
         Set<UserEntity> users = new TreeSet<>();
-
-        List<UserProjectRoleEntity> projectPositions = getUserProjectRoleList(projectId);
-        for(UserProjectRoleEntity projectPosition : projectPositions) {
-            users.add(projectPosition.getUser());
+        List<UserProjectRoleEntity> userProjectRoleList = getUserProjectRoleList(projectId);
+        for(UserProjectRoleEntity userProjectRoleEntity : userProjectRoleList) {
+            users.add(userProjectRoleEntity.getUser());
         }
-
         session.close();
-
         return new ArrayList<>(users);
     }
 
@@ -276,6 +272,44 @@ public class DBService {
         Session session = sessionFactory.openSession();
         RequirementDAO requirementDAO = new RequirementDAO(session);
         List <RequirementEntity> list = requirementDAO.getRequirementsByProjectId(projectId);
+        session.close();
+        return list;
+    }
+
+    public List<RequirementEntity> getRequirementsBySpecification(long specificationId) {
+        Session session = sessionFactory.openSession();
+        Set<RequirementEntity> requirementEntities = new TreeSet<>();
+        List<SpecificationRequirementEntity> specificationRequirementEntities = getSpecificationRequirementsList(specificationId);
+        for(SpecificationRequirementEntity specificationRequirementEntity : specificationRequirementEntities) {
+            requirementEntities.add(specificationRequirementEntity.getRequirement());
+        }
+        session.close();
+        return new ArrayList<>(requirementEntities);
+    }
+
+    public List<SpecificationRequirementEntity> getSpecificationRequirementsList(long specificationId) {
+        Session session = sessionFactory.openSession();
+        SpecificationRequirementDAO specificationRequirementDAO = new SpecificationRequirementDAO(session);
+        List <SpecificationRequirementEntity> list = specificationRequirementDAO.getBySpecificationId(specificationId);
+        session.close();
+        return list;
+    }
+
+    public List<RequirementEntity> getRequirementsByRelease(long releaseId) {
+        Session session = sessionFactory.openSession();
+        Set<RequirementEntity> requirementEntities = new TreeSet<>();
+        List<ReleaseRequirementEntity> releaseRequirementEntities = getReleaseRequirementsList(releaseId);
+        for(ReleaseRequirementEntity releaseRequirementEntity : releaseRequirementEntities) {
+            requirementEntities.add(releaseRequirementEntity.getRequirement());
+        }
+        session.close();
+        return new ArrayList<>(requirementEntities);
+    }
+
+    public List<ReleaseRequirementEntity> getReleaseRequirementsList(long releaseId) {
+        Session session = sessionFactory.openSession();
+        ReleaseRequirementDAO releaseRequirementDAO = new ReleaseRequirementDAO(session);
+        List <ReleaseRequirementEntity> list = releaseRequirementDAO.getByReleaseId(releaseId);
         session.close();
         return list;
     }
@@ -517,5 +551,31 @@ public class DBService {
         catch (HibernateException e) {
             throw new DBException(e);
         }
+    }
+
+    public void addRequirementToSpecification(long specificationId, long requirementId){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        SpecificationRequirementDAO specificationRequirementDAO= new SpecificationRequirementDAO(session);
+
+        SpecificationDAO specificationDAO = new SpecificationDAO(session);
+        RequirementDAO requirementDAO = new RequirementDAO(session);
+
+        specificationRequirementDAO.addSpecificationRequirement(specificationDAO.get(specificationId),requirementDAO.get(requirementId));
+        transaction.commit();
+        session.close();
+    }
+
+    public void addRequirementToRelease(long releaseId, long requirementId){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        ReleaseRequirementDAO releaseRequirementDAO= new ReleaseRequirementDAO(session);
+
+        ReleaseDAO releaseDAO = new ReleaseDAO(session);
+        RequirementDAO requirementDAO = new RequirementDAO(session);
+
+        releaseRequirementDAO.addReleaseRequirement(releaseDAO.get(releaseId),requirementDAO.get(requirementId));
+        transaction.commit();
+        session.close();
     }
 }

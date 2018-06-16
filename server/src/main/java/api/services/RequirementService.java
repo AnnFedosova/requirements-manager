@@ -52,9 +52,31 @@ public class RequirementService {
 
     @GET
     @Path("getRequirementsByProject/{projectId}")
-    public List<RequirementDTO> getRequestsList(@PathParam("projectId") long projectId) {
+    public List<RequirementDTO> getRequirementsByProject(@PathParam("projectId") long projectId) {
         List<RequirementDTO> requirementsDTO = new LinkedList<>();
         List<RequirementEntity> requirementEntities = dbService.getRequirementsByProject(projectId);
+        for (RequirementEntity requirementEntity : requirementEntities) {
+            requirementsDTO.add(new RequirementDTO(requirementEntity));
+        }
+        return requirementsDTO;
+    }
+
+    @GET
+    @Path("getRequirementsBySpecification/{specificationId}")
+    public List<RequirementDTO> getRequirementsBySpecification(@PathParam("specificationId") long specificationId) {
+        List<RequirementDTO> requirementsDTO = new LinkedList<>();
+        List<RequirementEntity> requirementEntities = dbService.getRequirementsBySpecification(specificationId);
+        for (RequirementEntity requirementEntity : requirementEntities) {
+            requirementsDTO.add(new RequirementDTO(requirementEntity));
+        }
+        return requirementsDTO;
+    }
+
+    @GET
+    @Path("getRequirementsByProject/{releaseId}")
+    public List<RequirementDTO> getRequirementsByRelease(@PathParam("releaseId") long releaseId) {
+        List<RequirementDTO> requirementsDTO = new LinkedList<>();
+        List<RequirementEntity> requirementEntities = dbService.getRequirementsByRelease(releaseId);
         for (RequirementEntity requirementEntity : requirementEntities) {
             requirementsDTO.add(new RequirementDTO(requirementEntity));
         }

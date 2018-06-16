@@ -3,6 +3,7 @@ package api.services;
 import dBService.DBException;
 import dBService.DBService;
 import dBService.dto.SpecificationDTO;
+import dBService.dto.SpecificationRequirementDTO;
 import dBService.entities.SpecificationEntity;
 
 import javax.ws.rs.*;
@@ -46,5 +47,13 @@ public class SpecificationService {
             String result = "Error :(";
             return Response.serverError().entity(result).build();
         }
+    }
+
+    @POST
+    @Path("addReqToSpec")
+    public Response addRequirementToSpecification(SpecificationRequirementDTO specificationRequirementDTO) {
+            dbService.addRequirementToSpecification(specificationRequirementDTO.getSpecificationId(),specificationRequirementDTO.getRequirementId());
+            String result = "Requirement added";
+            return Response.ok().entity(result).build();
     }
 }

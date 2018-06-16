@@ -3,6 +3,7 @@ package api.services;
 import dBService.DBException;
 import dBService.DBService;
 import dBService.dto.ReleaseDTO;
+import dBService.dto.ReleaseRequirementDTO;
 import dBService.entities.ReleaseEntity;
 
 import javax.ws.rs.*;
@@ -46,5 +47,13 @@ public class ReleaseService {
             String result = "Error :(";
             return Response.serverError().entity(result).build();
         }
+    }
+
+    @POST
+    @Path("addRequirementToRelease")
+    public Response addRequirementToRelease(ReleaseRequirementDTO releaseRequirementDTO) {
+        dbService.addRequirementToRelease(releaseRequirementDTO.getReleaseId(),releaseRequirementDTO.getRequirementId());
+        String result = "Requirement added";
+        return Response.ok().entity(result).build();
     }
 }
