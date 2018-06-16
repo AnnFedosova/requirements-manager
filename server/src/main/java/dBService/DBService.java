@@ -101,6 +101,35 @@ public class DBService {
 
             dbService.addAdmin("admin", "admin", "admin", "admin", "admin");
 
+            dbService.addProject("project1", "test1");
+            dbService.addProject("project2", "test2");
+
+            dbService.addRelease("release1", "test1",new Date());
+            dbService.addRelease("release2", "test2",new Date());
+
+            dbService.addSpecification("specification1","test1",new Date());
+            dbService.addSpecification("specification2","test2",new Date());
+
+            dbService.addUser("user1","123","Sergey","Kuznetcov","Andreevich");
+            dbService.addUser("user2","321","Anna","Fedosova","Mihailovna");
+            dbService.addUser("user3","12","Boris","Lebedev","Ivanov");
+            dbService.addUser("user4","21","Ivan","Lenin"," Borisovich");
+
+            dbService.addUserToProject(1,1,1);
+            dbService.addUserToProject(2,1,4);
+            dbService.addUserToProject(3,2,1);
+            dbService.addUserToProject(4,2,2);
+
+            dbService.addRequirement(1,"requirement1","asdf",1,1,1,0);
+            dbService.addRequirement(1,"requirement2","dfedf new",3,1,2,1);
+            dbService.addRequirement(2,"requirement3","hjg",2,2,4,0);
+
+            dbService.addRequirementToSpecification(1,1);
+            dbService.addRequirementToSpecification(2,2);
+            dbService.addRequirementToSpecification(2,3);
+
+            dbService.addRequirementToRelease(1,2);
+            dbService.addRequirementToRelease(2,3);
 
         } catch (DBException e) {
             e.printStackTrace();
