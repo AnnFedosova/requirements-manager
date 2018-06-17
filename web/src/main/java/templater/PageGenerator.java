@@ -3,6 +3,7 @@ package templater;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import freemarker.template.Version;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +41,7 @@ public class PageGenerator {
     }
 
     private PageGenerator() {
-        cfg = new Configuration();
+        cfg = new Configuration(new Version(2, 3, 28));
         cfg.setClassForTemplateLoading(this.getClass(), "/");
     }
 }
