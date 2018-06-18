@@ -3,8 +3,10 @@ package api.services;
 import dBService.DBException;
 import dBService.DBService;
 import dBService.dto.ProjectDTO;
+import dBService.dto.UserDTO;
 import dBService.dto.UserProjectRoleDTO;
 import dBService.entities.ProjectEntity;
+import dBService.entities.UserEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -64,5 +66,16 @@ public class ProjectService {
     @Path("addUserToProject")
     public void addUserToProject(UserProjectRoleDTO userProjectRoleDTO){
             dbService.addUserToProject(userProjectRoleDTO.getUserId(), userProjectRoleDTO.getProjectId(),userProjectRoleDTO.getProjectRoleId());
+    }
+
+    @GET
+    @Path("getUsersByProjectId/{projectId}")
+    public List<UserDTO> getUsersByRequestId(@PathParam("projectId") long id) {
+        List<UserEntity> userEntities = dbService.getUsersByProjectId(id);
+        List<UserDTO> users = new LinkedList<>();
+        for (UserEntity userEntity : userEntities) {
+            users.add(new UserDTO(userEntity));
+        }
+        return users;
     }
 }

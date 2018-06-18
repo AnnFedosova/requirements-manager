@@ -1,8 +1,11 @@
 package servlets;
 
 import api.ProjectAPI;
+import api.RequirementAPI;
 import api.UserAPI;
 import dto.ProjectDTO;
+import dto.RequirementDTO;
+import dto.UserProjectRoleDTO;
 import templater.PageGenerator;
 
 import javax.servlet.ServletException;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "Project", urlPatterns = "/project")
@@ -27,7 +31,8 @@ public class ProjectServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //TODO тут сделать проверку "если проектов нет"
         response.setContentType("text/html;charset=utf-8");
-        String id = "1"; //request.getParameter("id");
+        //String id = request.getParameter("id");
+        String id = "1";
 
         Map<String, Object> pageVariables = null;
         try {
@@ -44,14 +49,13 @@ public class ProjectServlet extends HttpServlet {
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         ProjectDTO project = ProjectAPI.getProject(id);
-        //List<ProjectPosition> positions = ProjectAPI.getProjectPositions(id);
-        //List<Request> requests = RequestAPI.getRequestsList(id);
+        List<UserProjectRoleDTO> roles = ProjectAPI.getProjectRoles(id);
+        //List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(id);
         Principal user = request.getUserPrincipal();
-//todo дописать, когда будет готово userProjectRoleDTO
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("project", project);
-        //pageVariables.put("positions", positions);
-        //pageVariables.put("requests", requests);
+        pageVariables.put("roles", roles);
+        //pageVariables.put("requirements", requirements);
 
         return pageVariables;
     }

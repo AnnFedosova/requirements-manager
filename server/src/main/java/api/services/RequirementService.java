@@ -85,7 +85,7 @@ public class RequirementService {
 
     @GET
     @Path("getAllRequirements")
-    public List<RequirementDTO> gerAllUsers(){
+    public List<RequirementDTO> getAllRequirements(){
         List<RequirementEntity> requirementEntities = dbService.getAllRequirements();
         List<RequirementDTO> requirementsDTO = new LinkedList<>();
         for (RequirementEntity requirementEntity : requirementEntities) {
