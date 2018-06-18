@@ -26,7 +26,7 @@ public class SpecificationService {
 
     @GET
     @Path("getAllSpecifications")
-    public List<SpecificationDTO> gerAllUsers() {
+    public List<SpecificationDTO> getAllSpecifications() {
         List<SpecificationEntity> releaseEntities = dbService.getAllSpecifications();
         List<SpecificationDTO> specificationDTOS = new LinkedList<>();
         for (SpecificationEntity specificationEntity : releaseEntities) {
