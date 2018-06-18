@@ -32,8 +32,13 @@ public class RequirementDTO {
         this.creationDate = requirementEntity.getCreationDate();
         this.creatorId = requirementEntity.getCreator().getId();
         this.modifiedDate = requirementEntity.getModifiedDate();
-        this.changerId = requirementEntity.getChanger().getId();
-        this.lastVersionId = requirementEntity.getLastVersion().getId();
+        if (requirementEntity.getChanger()==null){
+        this.changerId = 0;}
+        else {this.changerId = requirementEntity.getChanger().getId();}
+        if (requirementEntity.getLastVersion()==null){
+            this.lastVersionId=0;
+        }
+        else{this.lastVersionId = requirementEntity.getLastVersion().getId();}
         this.relevance = requirementEntity.isRelevance();
     }
 

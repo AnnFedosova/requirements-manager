@@ -48,7 +48,7 @@ public class UserService {
 
     @GET
     @Path("getUsersByProjectId/{projectId}")
-    public List<UserDTO> getUsersByRequestId(@PathParam("projectId") long id) {
+    public List<UserDTO> getUsersByProjectId(@PathParam("projectId") long id) {
         List<UserEntity> userEntities = dbService.getUsersByProjectId(id);
         List<UserDTO> users = new LinkedList<>();
         for (UserEntity userEntity : userEntities) {

@@ -270,7 +270,7 @@ public class DBService {
             UserEntity creator = userDAO.get(creatorId);
             RequirementTypeEntity type = requirementTypeDAO.get(typeId);
             RequirementPriorityEntity priority = requirementPriorityDAO.get(priorityId);
-            RequirementStateEntity state = requirementStateDAO.get("New");
+            RequirementStateEntity state = requirementStateDAO.get("Новое");
             RequirementEntity lastVersion=null;
             if(lastVersionId!=0){
                 lastVersion = requirementDAO.get(lastVersionId);
@@ -289,13 +289,12 @@ public class DBService {
         }
     }
 
-
     public RequirementEntity getRequirement(long id) {
         Session session = sessionFactory.openSession();
         RequirementDAO requirementDAO = new RequirementDAO(session);
-        RequirementEntity request = requirementDAO.get(id);
+        RequirementEntity requirementEntity = requirementDAO.get(id);
         session.close();
-        return request;
+        return requirementEntity;
     }
 
     public List<RequirementEntity> getRequirementsByProject(long projectId) {

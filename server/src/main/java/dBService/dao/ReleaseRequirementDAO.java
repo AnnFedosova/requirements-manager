@@ -37,7 +37,7 @@ public class ReleaseRequirementDAO {
         CriteriaQuery<ReleaseRequirementEntity> criteria = builder.createQuery(ReleaseRequirementEntity.class);
         Root<ReleaseRequirementEntity> root = criteria.from(ReleaseRequirementEntity.class);
         ParameterExpression<ReleaseEntity> parameter = builder.parameter(ReleaseEntity.class);
-        criteria.select(root).where(builder.equal(root.get("project"), parameter));
+        criteria.select(root).where(builder.equal(root.get("release"), parameter));
         Query<ReleaseRequirementEntity> query = session.createQuery(criteria);
         ReleaseDAO releaseDAO = new ReleaseDAO(session);
         query.setParameter(parameter, releaseDAO.get(releaseId));

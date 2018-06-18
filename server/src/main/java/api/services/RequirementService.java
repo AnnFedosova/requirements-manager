@@ -73,7 +73,7 @@ public class RequirementService {
     }
 
     @GET
-    @Path("getRequirementsByProject/{releaseId}")
+    @Path("getRequirementsByRelease/{releaseId}")
     public List<RequirementDTO> getRequirementsByRelease(@PathParam("releaseId") long releaseId) {
         List<RequirementDTO> requirementsDTO = new LinkedList<>();
         List<RequirementEntity> requirementEntities = dbService.getRequirementsByRelease(releaseId);
