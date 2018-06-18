@@ -26,11 +26,11 @@ public class ProjectDTO implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getName() {
         return name;
     }
 
-    public void setTitle(String projectName) {
+    public void setName(String projectName) {
         this.name = projectName;
     }
 
@@ -38,7 +38,7 @@ public class ProjectDTO implements Serializable {
     public String toString() {
         return "Project {" +
                 "id=" + id +
-                ", title='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", description='" + description + '}';
     }
 }

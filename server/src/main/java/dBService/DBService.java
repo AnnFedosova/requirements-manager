@@ -101,7 +101,8 @@ public class DBService {
 
             dbService.addAdmin("admin", "admin", "admin", "admin", "admin");
 
-            dbService.addProject("project1", "test1");
+            dbService.addProject("Проект «Газпром»", "В этом проекте наша компания реализует ПО для работы с ценами на топливо для компании Газпром. ПАО «Газпром» — российская (ранее советская) транснациональная энергетическая корпорация");
+            dbService.addProject("Проект «Роскосмос»", "Реализуется ПО, которое служит для выбора кандидатов на работу в космической отрасли.");
             dbService.addProject("project2", "test2");
 
             dbService.addRelease("release1", "test1",new Date());
