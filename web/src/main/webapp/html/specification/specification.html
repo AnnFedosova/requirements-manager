@@ -1,0 +1,58 @@
+<HTML>
+<head>
+    <meta charset="utf-8">
+    <title>${specification.name}</title>
+    <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
+    <link rel="apple-touch-icon" type="image/x-icon" href="/img/apple-icon.png"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="navbar">
+    <nav class='navbar navbar-inverse'>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <#if isAdmin>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
+            </#if>
+        </div>
+        <div class='navbar-right'>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+        </div>
+</div>
+</nav>
+</div>
+
+<div class='container'>
+    <div class='row'>
+        <div class='login'>
+            <div class='page-header'>
+                <h2 class='text-left'>${specification.name}</h2>
+                <a class="btn btn-primary" href="/specification/edit?id=${project.id}"><i title="Edit specification"
+                                                                                    class="fa fa-pencil-square-o"></i> Edit</a>
+            </div>
+
+            <br>
+            <h3 class="text-left">Описание</h3>
+            <div style="font-size: medium">
+                ${specification.description}
+            </div>
+
+            <h3 class="text-left">Плановая дата выпуска</h3>
+            <div style="font-size: medium">
+                ${specification.planned_date}
+            </div>
+
+            <br>
+        </div>
+        <footer class='text-muted'>
+            <div class='pull-left'><span>2018</span></div>
+            <div class='clearfix'></div>
+        </footer>
+    </div>
+</div>
+</body>
+</HTML>

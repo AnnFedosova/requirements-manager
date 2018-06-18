@@ -13,14 +13,14 @@ import java.util.List;
 public class ProjectAPI {
     private final static String URL = ServerConnection.API_URL + "projects/";
 
-    public static List<ProjectDTO> getProjectsList() throws Exception {
-        String json = JSONHelper.getJson(URL + "getProjectsList");
-        return new Gson().fromJson(json, new TypeToken<List<ProjectDTO>>(){}.getType());
-    }
-
     public static ProjectDTO getProject(long projectId) throws Exception {
         String json = JSONHelper.getJson(URL + "getProject/" + projectId);
         return new Gson().fromJson(json, new TypeToken<ProjectDTO>(){}.getType());
+    }
+
+    public static List<ProjectDTO> getProjectsList() throws Exception {
+        String json = JSONHelper.getJson(URL + "getProjectsList");
+        return new Gson().fromJson(json, new TypeToken<List<ProjectDTO>>(){}.getType());
     }
 
     public static List<UserProjectRoleDTO> getProjectRoles(long projectId) throws Exception {

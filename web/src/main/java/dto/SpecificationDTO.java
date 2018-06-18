@@ -6,7 +6,8 @@ public class SpecificationDTO {
     private long id;
     private String name;
     private String description;
-    private Date plannedDate;
+    //private Date plannedDate;
+    private String plannedDate;
 
     public SpecificationDTO(){}
 
@@ -34,11 +35,22 @@ public class SpecificationDTO {
         this.description = description;
     }
 
+    /*
     public Date getPlannedDate() {
         return plannedDate;
     }
+    */
 
+    public String getPlannedDate() {
+        return plannedDate;
+    }
+
+    /*
     public void setPlannedDate(Date plannedDate) {
+        this.plannedDate = plannedDate;
+    }
+    */
+    public void setPlannedDate(String plannedDate) {
         this.plannedDate = plannedDate;
     }
 }
