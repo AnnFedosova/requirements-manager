@@ -1,0 +1,67 @@
+<HTML>
+<head>
+    <meta charset="utf-8">
+    <title>${requirement.name}</title>
+    <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
+    <link rel="apple-touch-icon" type="image/x-icon" href="/img/apple-icon.png"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="navbar">
+    <nav class='navbar navbar-inverse'>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <#if isAdmin>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
+            </#if>
+        </div>
+        <div class='navbar-right'>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+        </div>
+</div>
+</nav>
+</div>
+
+<div class='container'>
+    <div class='row'>
+        <div class='login'>
+            <div class='page-header'>
+                <h2 class='text-left'>${requirement.name}</h2>
+                <a class="btn btn-primary" href="/requirement/edit?id=${requirement.id}"><i title="Edit requirement"
+                                                                                    class="fa fa-pencil-square-o"></i> Edit</a>
+            </div>
+
+
+
+            <br>
+            <h3 class="text-left">Description</h3>
+            <div style="font-size: medium">
+                ${request.description}
+            </div>
+
+            <br>
+            <h3 class="text-left"> Приоритет: </h3>
+            <div style="font-size: medium">
+                ${priority.name}
+            </div>
+
+            <br>
+            <h3 class="text-left"> Состояние: </h3>
+            <div style="font-size: medium">
+                ${state.name}
+            </div>
+
+    <br>
+</div>
+<footer class='text-muted'>
+    <div class='pull-left'><span>2018</span></div>
+    <div class='clearfix'></div>
+</footer>
+</div>
+</div>
+</body>
+</HTML>
