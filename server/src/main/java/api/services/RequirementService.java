@@ -4,6 +4,8 @@ import dBService.DBException;
 import dBService.DBService;
 import dBService.dto.*;
 import dBService.entities.RequirementEntity;
+import dBService.entities.RequirementPriorityEntity;
+import dBService.entities.RequirementTypeEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -68,6 +70,30 @@ public class RequirementService {
         }
         return requirementsDTO;
     }
+
+    @GET
+    @Path("getRequirementPriorities")
+    public List<RequirementPriorityDTO> getAllPriorities(){
+        List<RequirementPriorityEntity> requirementPriorityEntities = dbService.getAllPriorities();
+        List<RequirementPriorityDTO> requirementPriorityDTOS = new LinkedList<>();
+        for (RequirementPriorityEntity requirementPriorityEntity : requirementPriorityEntities) {
+            requirementPriorityDTOS.add(new RequirementPriorityDTO(requirementPriorityEntity));
+        }
+        return requirementPriorityDTOS;
+    }
+
+    @GET
+    @Path("getRequirementTypes")
+    public List<RequirementTypeDTO> getAllTypes(){
+        List<RequirementTypeEntity> requirementTypeEntities = dbService.getAllTypes();
+        List<RequirementTypeDTO> requirementTypeDTOS = new LinkedList<>();
+        for (RequirementTypeEntity requirementTypeEntity : requirementTypeEntities) {
+            requirementTypeDTOS.add(new RequirementTypeDTO(requirementTypeEntity));
+        }
+        return requirementTypeDTOS;
+    }
+
+
 
     @GET
     @Path("getRequirementsByRelease/{releaseId}")

@@ -41,7 +41,7 @@ public class SpecificationRequirementDAO {
         CriteriaQuery<SpecificationRequirementEntity> criteria = builder.createQuery(SpecificationRequirementEntity.class);
         Root<SpecificationRequirementEntity> root = criteria.from(SpecificationRequirementEntity.class);
         ParameterExpression<SpecificationEntity> parameter = builder.parameter(SpecificationEntity.class);
-        criteria.select(root).where(builder.equal(root.get("project"), parameter));
+        criteria.select(root).where(builder.equal(root.get("specification"), parameter));
         Query<SpecificationRequirementEntity> query = session.createQuery(criteria);
         SpecificationDAO specificationDAO = new SpecificationDAO(session);
         query.setParameter(parameter, specificationDAO.get(specificationId));

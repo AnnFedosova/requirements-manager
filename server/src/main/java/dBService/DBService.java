@@ -1,6 +1,7 @@
 package dBService;
 
 import dBService.dao.*;
+import dBService.dto.UserProjectRoleDTO;
 import dBService.entities.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -169,7 +170,8 @@ public class DBService {
 
     public List<UserEntity> getUsersByProjectId(long projectId) {
         Session session = sessionFactory.openSession();
-        Set<UserEntity> users = new TreeSet<>();
+        //Set<UserEntity> users = new TreeSet<>();
+        ArrayList<UserEntity> users = new ArrayList<>();
         List<UserProjectRoleEntity> userProjectRoleList = getUserProjectRoleList(projectId);
         for(UserProjectRoleEntity userProjectRoleEntity : userProjectRoleList) {
             users.add(userProjectRoleEntity.getUser());
@@ -307,7 +309,8 @@ public class DBService {
 
     public List<RequirementEntity> getRequirementsBySpecification(long specificationId) {
         Session session = sessionFactory.openSession();
-        Set<RequirementEntity> requirementEntities = new TreeSet<>();
+        //Set<RequirementEntity> requirementEntities = new TreeSet<>();
+        ArrayList<RequirementEntity> requirementEntities = new ArrayList<>();
         List<SpecificationRequirementEntity> specificationRequirementEntities = getSpecificationRequirementsList(specificationId);
         for(SpecificationRequirementEntity specificationRequirementEntity : specificationRequirementEntities) {
             requirementEntities.add(specificationRequirementEntity.getRequirement());
@@ -326,7 +329,8 @@ public class DBService {
 
     public List<RequirementEntity> getRequirementsByRelease(long releaseId) {
         Session session = sessionFactory.openSession();
-        Set<RequirementEntity> requirementEntities = new TreeSet<>();
+        //Set<RequirementEntity> requirementEntities = new TreeSet<>();
+        ArrayList<RequirementEntity> requirementEntities = new ArrayList<>();
         List<ReleaseRequirementEntity> releaseRequirementEntities = getReleaseRequirementsList(releaseId);
         for(ReleaseRequirementEntity releaseRequirementEntity : releaseRequirementEntities) {
             requirementEntities.add(releaseRequirementEntity.getRequirement());
@@ -380,6 +384,14 @@ public class DBService {
     ///  RequirementPriority  ////
     //////////////////////////////
 
+    public List<RequirementPriorityEntity>  getAllPriorities() {
+        Session session = sessionFactory.openSession();
+        RequirementPriorityDAO requirementPriorityDAO = new RequirementPriorityDAO(session);
+        List<RequirementPriorityEntity> requirementPriorityEntities = requirementPriorityDAO.selectAll();
+        session.close();
+        return requirementPriorityEntities;
+    }
+
     public RequirementPriorityEntity getRequirementPriority(long id){
         Session session = sessionFactory.openSession();
         RequirementPriorityDAO requirementPriorityDAO = new RequirementPriorityDAO(session);
@@ -423,6 +435,14 @@ public class DBService {
     //////////////////////////////
     ////  RequirementType   //////
     //////////////////////////////
+
+    public List<RequirementTypeEntity>  getAllTypes() {
+        Session session = sessionFactory.openSession();
+        RequirementTypeDAO requirementTypeDAO = new RequirementTypeDAO(session);
+        List<RequirementTypeEntity> requirementTypeEntities = requirementTypeDAO.selectAll();
+        session.close();
+        return requirementTypeEntities;
+    }
 
     public RequirementTypeEntity getRequirementType(long id){
         Session session = sessionFactory.openSession();
