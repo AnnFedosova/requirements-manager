@@ -27,8 +27,8 @@ public class RequirementAPI {
         return new Gson().fromJson(json, new TypeToken<List<RequirementStateDTO>>(){}.getType());
     }
 
-    public static List<RequirementPriorityDTO> getRequirementPriorityes() throws Exception {
-        String json = JSONHelper.getJson(URL + "getRequirementPriorityes/");
+    public static List<RequirementPriorityDTO> getRequirementPriorities() throws Exception {
+        String json = JSONHelper.getJson(URL + "getRequirementPriorities/");
         return new Gson().fromJson(json, new TypeToken<List<RequirementStateDTO>>(){}.getType());
     }
 

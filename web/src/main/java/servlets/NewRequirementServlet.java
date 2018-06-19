@@ -19,7 +19,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "Requirement", urlPatterns = "/requirement/new")
+@WebServlet(name = "New_requirement", urlPatterns = "/new_requirement")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
 public class NewRequirementServlet  extends HttpServlet {
 
@@ -38,7 +38,7 @@ public class NewRequirementServlet  extends HttpServlet {
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_OK);
             pageVariables.put("projectid", projectId);
-            response.getWriter().println(PageGenerator.getInstance().getPage("requirement/new/newRequirement.html", pageVariables));
+            response.getWriter().println(PageGenerator.getInstance().getPage("new_requirement/newRequirement.html", pageVariables));
 
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -79,7 +79,9 @@ public class NewRequirementServlet  extends HttpServlet {
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("users", UserAPI.getAllUsers());
-       // pageVariables.put("priorities", PriorityAPI.getAllPriorities());
+        pageVariables.put("priorities", RequirementAPI.getRequirementPriorities());
+        pageVariables.put("requirements", RequirementAPI.getRequirementsList());
+
         return pageVariables;
     }
 
