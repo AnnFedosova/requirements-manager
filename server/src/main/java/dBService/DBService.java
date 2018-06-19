@@ -108,8 +108,8 @@ public class DBService {
             dbService.addRelease("release1", "test1",new Date());
             dbService.addRelease("release2", "test2",new Date());
 
-            dbService.addSpecification("specification1","test1",new Date());
-            dbService.addSpecification("specification2","test2",new Date());
+            dbService.addSpecification("specification1","test1", new Date());
+            dbService.addSpecification("specification2","test2", new Date());
 
             dbService.addUser("user1","123","Sergey","Kuznetcov","Andreevich");
             dbService.addUser("user2","321","Anna","Fedosova","Mihailovna");

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,8 +44,17 @@ public class SpecificationServlet extends HttpServlet {
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         SpecificationDTO specification = SpecificationAPI.getSpecification(id);
+
+        String dateString = null;
+        SimpleDateFormat sdfr = new SimpleDateFormat("dd-MMM-yyyy");
+        dateString = sdfr.format( specification.getPlannedDate() );
+        String ttttt = null;
+        ttttt = "ff";
+
+        //TODO тут исправить дату, она приходит стремной строкой непонятной
         //List<UserProjectRoleDTO> roles = ProjectAPI.getProjectRoles(id);
         //List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(id);
+
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("specification", specification);
