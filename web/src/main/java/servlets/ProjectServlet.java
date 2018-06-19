@@ -31,8 +31,8 @@ public class ProjectServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //TODO тут сделать проверку "если проектов нет"
         response.setContentType("text/html;charset=utf-8");
-        //String id = request.getParameter("id");
-        String id = "1";
+        String id = request.getParameter("id");
+        //String id = "1";
 
         Map<String, Object> pageVariables = null;
         try {

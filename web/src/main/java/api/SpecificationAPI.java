@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SpecificationAPI {
-    private final static String URL = ServerConnection.API_URL + "specification/";
+    private final static String URL = ServerConnection.API_URL + "specifications/";
 
     public static SpecificationDTO getSpecification(long specificationId) throws Exception {
         String json = JSONHelper.getJson(URL + "getSpecification/" + specificationId);

@@ -7,9 +7,15 @@ import dto.UserDTO;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public class UserAPI {
     private final static String URL = ServerConnection.API_URL + "users/";
+
+    public static List<UserDTO> getAllUsers() throws Exception {
+        String json = JSONHelper.getJson(URL +  "getAllUsers");
+        return new Gson().fromJson(json, new TypeToken<List<UserDTO>>(){}.getType());
+    }
 
     public static UserDTO getUser(String userLogin) throws Exception {
         String json = JSONHelper.getJson(URL + "getUserByLogin/" + userLogin);

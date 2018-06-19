@@ -10,14 +10,14 @@ public class RequirementDTO {
     private long priorityId;
     private long typeId;
     private long stateId;
-    private Date creationDate;
+    private String creationDate;
     private long creatorId;
-    private Date modifiedDate;
+    private String modifiedDate;
     private long changerId;
     private long lastVersionId;
     private boolean relevance;
 
-    public RequirementDTO(){}
+    public RequirementDTO(long l, String name, String description, long parseLong, long aLong, int i, String creationDate, String date, int i1, int i2, int i3){}
 
     public long getId() {
         return id;
@@ -75,11 +75,11 @@ public class RequirementDTO {
         this.stateId = stateId;
     }
 
-    public Date getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -91,11 +91,11 @@ public class RequirementDTO {
         this.creatorId = creatorId;
     }
 
-    public Date getModifiedDate() {
+    public String getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Date modifiedDate) {
+    public void setModifiedDate(String modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 
