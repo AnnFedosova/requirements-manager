@@ -29,7 +29,6 @@ public class ProjectServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //TODO тут сделать проверку "если проектов нет"
         response.setContentType("text/html;charset=utf-8");
         String id = request.getParameter("id");
         //String id = "1";
@@ -50,12 +49,12 @@ public class ProjectServlet extends HttpServlet {
         Map<String, Object> pageVariables = new HashMap<>();
         ProjectDTO project = ProjectAPI.getProject(id);
         //List<UserProjectRoleDTO> roles = ProjectAPI.getProjectRoles(id);
-        //List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(id);
+        List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(id);
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("project", project);
         //pageVariables.put("roles", roles);
-        //pageVariables.put("requirements", requirements);
+        pageVariables.put("requirements", requirements);
 
         return pageVariables;
     }

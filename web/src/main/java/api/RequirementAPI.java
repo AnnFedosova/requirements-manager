@@ -58,7 +58,7 @@ public class RequirementAPI {
     }
 
     public static List<RequirementDTO> getRequirementsByProject(long projectId) throws Exception {
-        String json = JSONHelper.getJson(URL + "getRequirementsByProject");
+        String json = JSONHelper.getJson(URL + "getRequirementsByProject/" + projectId);
         return new Gson().fromJson(json, new TypeToken<List<RequirementDTO>>(){}.getType());
     }
 
