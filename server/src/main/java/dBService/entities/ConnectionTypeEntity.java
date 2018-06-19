@@ -18,7 +18,7 @@ public class ConnectionTypeEntity implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "connectionType")
-    private Set<RequirementEntity> connectionTypeSet;
+    private Set<RequirementDependenceEntity> connectionType;
 
     public ConnectionTypeEntity(){}
 
