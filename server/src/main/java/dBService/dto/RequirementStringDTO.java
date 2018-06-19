@@ -33,7 +33,9 @@ public class RequirementStringDTO {
         this.stateId = requirementEntity.getState().getId();
         this.creationDate = sdfr.format(requirementEntity.getCreationDate());
         this.creatorId = requirementEntity.getCreator().getId();
-        this.modifiedDate = sdfr.format(requirementEntity.getModifiedDate());
+        if (requirementEntity.getModifiedDate()==null){
+            this.modifiedDate=null;
+        }else{this.modifiedDate = sdfr.format(requirementEntity.getModifiedDate());}
         if (requirementEntity.getChanger()==null){
             this.changerId = 0;}
         else {this.changerId = requirementEntity.getChanger().getId();}
