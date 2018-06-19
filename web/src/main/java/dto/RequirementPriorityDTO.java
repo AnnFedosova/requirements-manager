@@ -16,12 +16,12 @@ public class RequirementPriorityDTO implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getName() {
         return name;
     }
 
-    public void setTitle(String stateName) {
-        this.name = stateName;
+    public void setName(String priorityName) {
+        this.name = priorityName;
     }
 
     @Override

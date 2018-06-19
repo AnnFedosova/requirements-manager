@@ -16,11 +16,11 @@ public class RequirementStateDTO implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getName() {
         return name;
     }
 
-    public void setTitle(String stateName) {
+    public void setName(String stateName) {
         this.name = stateName;
     }
 

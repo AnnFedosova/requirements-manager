@@ -36,7 +36,7 @@
                     <h2 class='text-center'>New requirement</h2>
                 </div>
 
-                <form id="login-form" action="/new_requirement" method="POST">
+                <form id="login-form" action="/project?id=1" method="POST">
                     <input type="hidden" name="projectid" value="${projectid}">
 
                     <div class='form-group'>
@@ -55,7 +55,13 @@
                         </div>
                     </div>
 
-
+                    <br>
+                    <label for="priorities"><h4> Priority: &nbsp;</h4></label>
+                    <select id="priorities" name="priorities" >
+                        <#list priorities as priority>
+                        <option value="${priority.id}">${priority.name}</option>
+                    </#list>
+                    </select>
 
 
                     <br>
@@ -70,8 +76,8 @@
                     <br><br>
 
                     <div class='form-actions'>
-                        <button value="Login" name="button" type="submit" class="btn btn-primary btn-lg"><i
-                                class="fa fa-plus"></i>
+                        <button value="Login" name="button" type="submit" class="btn btn-primary btn-lg">
+                            <i class="fa fa-plus"></i>
                             Create
                         </button>
                     </div>

@@ -45,6 +45,8 @@
         <mapping class="dBService.entities.SystemRoleEntity"/>
         <mapping class="dBService.entities.UserProjectRoleEntity"/>
         <mapping class="dBService.entities.UserSystemRoleEntity"/>
+        <mapping class="dBService.entities.ConnectionTypeEntity"/>
+        <mapping class="dBService.entities.RequirementDependenceEntity"/>
 
     </session-factory>
 </hibernate-configuration>
