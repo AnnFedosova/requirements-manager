@@ -43,39 +43,39 @@ public class RequirementService {
 
     @GET
     @Path("getLastVersion/{requirementId}")
-    public RequirementDTO getLastVersion(@PathParam("requirementId") long requirementId) {
-        return new RequirementDTO(dbService.getRequirement(requirementId).getLastVersion());
+    public RequirementStringDTO getLastVersion(@PathParam("requirementId") long requirementId) {
+        return new RequirementStringDTO(dbService.getRequirement(requirementId).getLastVersion());
     }
 
     @GET
     @Path("getRequirementsByProject/{projectId}")
-    public List<RequirementDTO> getRequirementsByProject(@PathParam("projectId") long projectId) {
-        List<RequirementDTO> requirementsDTO = new LinkedList<>();
+    public List<RequirementStringDTO> getRequirementsByProject(@PathParam("projectId") long projectId) {
+        List<RequirementStringDTO> requirementsDTO = new LinkedList<>();
         List<RequirementEntity> requirementEntities = dbService.getRequirementsByProject(projectId);
         for (RequirementEntity requirementEntity : requirementEntities) {
-            requirementsDTO.add(new RequirementDTO(requirementEntity));
+            requirementsDTO.add(new RequirementStringDTO(requirementEntity));
         }
         return requirementsDTO;
     }
 
     @GET
     @Path("getRequirementsBySpecification/{specificationId}")
-    public List<RequirementDTO> getRequirementsBySpecification(@PathParam("specificationId") long specificationId) {
-        List<RequirementDTO> requirementsDTO = new LinkedList<>();
+    public List<RequirementStringDTO> getRequirementsBySpecification(@PathParam("specificationId") long specificationId) {
+        List<RequirementStringDTO> requirementsDTO = new LinkedList<>();
         List<RequirementEntity> requirementEntities = dbService.getRequirementsBySpecification(specificationId);
         for (RequirementEntity requirementEntity : requirementEntities) {
-            requirementsDTO.add(new RequirementDTO(requirementEntity));
+            requirementsDTO.add(new RequirementStringDTO(requirementEntity));
         }
         return requirementsDTO;
     }
 
     @GET
     @Path("getRequirementsByRelease/{releaseId}")
-    public List<RequirementDTO> getRequirementsByRelease(@PathParam("releaseId") long releaseId) {
-        List<RequirementDTO> requirementsDTO = new LinkedList<>();
+    public List<RequirementStringDTO> getRequirementsByRelease(@PathParam("releaseId") long releaseId) {
+        List<RequirementStringDTO> requirementsDTO = new LinkedList<>();
         List<RequirementEntity> requirementEntities = dbService.getRequirementsByRelease(releaseId);
         for (RequirementEntity requirementEntity : requirementEntities) {
-            requirementsDTO.add(new RequirementDTO(requirementEntity));
+            requirementsDTO.add(new RequirementStringDTO(requirementEntity));
         }
         return requirementsDTO;
     }

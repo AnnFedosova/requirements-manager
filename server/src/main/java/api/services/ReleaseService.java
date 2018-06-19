@@ -4,6 +4,7 @@ import dBService.DBException;
 import dBService.DBService;
 import dBService.dto.ReleaseDTO;
 import dBService.dto.ReleaseRequirementDTO;
+import dBService.dto.ReleaseStringDTO;
 import dBService.entities.ReleaseEntity;
 
 import javax.ws.rs.*;
@@ -20,17 +21,17 @@ public class ReleaseService {
 
     @GET
     @Path("getRelease/{releaseId}")
-    public ReleaseDTO getRelease(@PathParam("releaseId") long id) {
-        return new ReleaseDTO(dbService.getRelease(id));
+    public ReleaseStringDTO getRelease(@PathParam("releaseId") long id) {
+        return new ReleaseStringDTO(dbService.getRelease(id));
     }
 
     @GET
     @Path("getAllReleases")
-    public List<ReleaseDTO> gerAllUsers() {
+    public List<ReleaseStringDTO> getAllReleases() {
         List<ReleaseEntity> releaseEntities = dbService.getAllReleases();
-        List<ReleaseDTO> releaseDTOS = new LinkedList<>();
+        List<ReleaseStringDTO> releaseDTOS = new LinkedList<>();
         for (ReleaseEntity releaseEntity : releaseEntities) {
-            releaseDTOS.add(new ReleaseDTO(releaseEntity));
+            releaseDTOS.add(new ReleaseStringDTO(releaseEntity));
         }
         return releaseDTOS;
     }
