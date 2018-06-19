@@ -1,7 +1,6 @@
 package dBService;
 
 import dBService.dao.*;
-import dBService.dto.UserProjectRoleDTO;
 import dBService.entities.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -59,6 +58,8 @@ public class DBService {
         configuration.addAnnotatedClass(UserEntity.class);
         configuration.addAnnotatedClass(UserProjectRoleEntity.class);
         configuration.addAnnotatedClass(UserSystemRoleEntity.class);
+        configuration.addAnnotatedClass(ConnectionTypeEntity.class);
+        configuration.addAnnotatedClass(RequirementDependenceEntity.class);
     }
 
     private static SessionFactory createSessionFactory(Configuration configuration) {
@@ -413,6 +414,14 @@ public class DBService {
     //////////////////////////////
     ///  RequirementState  ////
     //////////////////////////////
+
+    public List<RequirementStateEntity>  getAllStates() {
+        Session session = sessionFactory.openSession();
+        RequirementStateDAO requirementStateDAO = new RequirementStateDAO(session);
+        List<RequirementStateEntity> requirementStateEntities = requirementStateDAO.selectAll();
+        session.close();
+        return requirementStateEntities;
+    }
 
     public RequirementStateEntity getRequirementState(long id){
         Session session = sessionFactory.openSession();

@@ -5,11 +5,13 @@ import dBService.DBService;
 import dBService.dto.*;
 import dBService.entities.RequirementEntity;
 import dBService.entities.RequirementPriorityEntity;
+import dBService.entities.RequirementStateEntity;
 import dBService.entities.RequirementTypeEntity;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -80,6 +82,17 @@ public class RequirementService {
             requirementPriorityDTOS.add(new RequirementPriorityDTO(requirementPriorityEntity));
         }
         return requirementPriorityDTOS;
+    }
+
+    @GET
+    @Path("getRequirementStates")
+    public List<RequirementStateDTO> getAllStates(){
+        List<RequirementStateEntity> requirementPriorityEntities = dbService.getAllStates();
+        List<RequirementStateDTO> requirementStateDTOS = new LinkedList<>();
+        for (RequirementStateEntity requirementStateEntity : requirementPriorityEntities) {
+            requirementStateDTOS.add(new RequirementStateDTO(requirementStateEntity));
+        }
+        return requirementStateDTOS;
     }
 
     @GET
@@ -156,7 +169,7 @@ public class RequirementService {
         requirementEntity.setChanger(dbService.getUser(requirementDTO.getChangerId()));
         requirementEntity.setPriority(dbService.getRequirementPriority(requirementDTO.getPriorityId()));
         requirementEntity.setState(dbService.getRequirementState(requirementDTO.getStateId()));
-
+        requirementEntity.setModifiedDate(new Date());
         dbService.updateRequirement(requirementEntity);
 
         String result = "Request updated with id = " + requirementDTO.getId();

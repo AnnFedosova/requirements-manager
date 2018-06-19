@@ -45,4 +45,13 @@ public class RequirementStateDAO {
         query.setParameter(parameter, name);
         return query.uniqueResult();
     }
+
+    public List<RequirementStateEntity> selectAll() {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<RequirementStateEntity> criteria = builder.createQuery(RequirementStateEntity.class);
+        Root<RequirementStateEntity> root = criteria.from(RequirementStateEntity.class);
+        criteria.select(root);
+        Query<RequirementStateEntity> query = session.createQuery(criteria);
+        return query.getResultList();
+    }
 }
