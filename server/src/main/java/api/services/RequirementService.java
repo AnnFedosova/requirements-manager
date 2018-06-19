@@ -2,10 +2,7 @@ package api.services;
 
 import dBService.DBException;
 import dBService.DBService;
-import dBService.dto.RequirementDTO;
-import dBService.dto.RequirementPriorityDTO;
-import dBService.dto.RequirementStateDTO;
-import dBService.dto.RequirementTypeDTO;
+import dBService.dto.*;
 import dBService.entities.RequirementEntity;
 
 import javax.ws.rs.*;
@@ -40,8 +37,8 @@ public class RequirementService {
 
     @GET
     @Path("getRequirement/{requirementId}")
-    public RequirementDTO getRequirement(@PathParam("requirementId") long requirementId) {
-        return new RequirementDTO(dbService.getRequirement(requirementId));
+    public RequirementStringDTO getRequirement(@PathParam("requirementId") long requirementId) {
+        return new RequirementStringDTO(dbService.getRequirement(requirementId));
     }
 
     @GET

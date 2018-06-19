@@ -27,11 +27,11 @@ public class SpecificationService {
 
     @GET
     @Path("getAllSpecifications")
-    public List<SpecificationDTO> getAllSpecifications() {
+    public List<SpecificationStringDTO> getAllSpecifications() {
         List<SpecificationEntity> releaseEntities = dbService.getAllSpecifications();
-        List<SpecificationDTO> specificationDTOS = new LinkedList<>();
+        List<SpecificationStringDTO> specificationDTOS = new LinkedList<>();
         for (SpecificationEntity specificationEntity : releaseEntities) {
-            specificationDTOS.add(new SpecificationDTO(specificationEntity));
+            specificationDTOS.add(new SpecificationStringDTO(new SpecificationDTO(specificationEntity)));
         }
         return specificationDTOS;
     }
