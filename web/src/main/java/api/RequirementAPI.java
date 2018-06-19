@@ -23,17 +23,17 @@ public class RequirementAPI {
     }
 
     public static List<RequirementStateDTO> getRequirementStates() throws Exception {
-        String json = JSONHelper.getJson(URL + "getRequirementStates/");
+        String json = JSONHelper.getJson(URL + "getRequirementStates");
         return new Gson().fromJson(json, new TypeToken<List<RequirementStateDTO>>(){}.getType());
     }
 
     public static List<RequirementPriorityDTO> getRequirementPriorities() throws Exception {
-        String json = JSONHelper.getJson(URL + "getRequirementPriorities/");
-        return new Gson().fromJson(json, new TypeToken<List<RequirementStateDTO>>(){}.getType());
+        String json = JSONHelper.getJson(URL + "getRequirementPriorities");
+        return new Gson().fromJson(json, new TypeToken<List<RequirementPriorityDTO>>(){}.getType());
     }
 
     public static List<RequirementTypeDTO> getRequirementTypes() throws Exception {
-        String json = JSONHelper.getJson(URL + "getRequirementTypes/" );
+        String json = JSONHelper.getJson(URL + "getRequirementTypes" );
         return new Gson().fromJson(json, new TypeToken<List<RequirementTypeDTO>>(){}.getType());
     }
 

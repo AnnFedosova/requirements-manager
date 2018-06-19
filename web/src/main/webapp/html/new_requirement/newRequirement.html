@@ -56,16 +56,10 @@
                     </div>
 
 
-                    <br>
-                    <label for="priorities"><h4>Priority: &nbsp;</h4></label>
-                    <select id="priorities" name="priorities" >
-                        <#list priorities as priority>
-                        <option value="${priority.id}">${priority.name}</option>
-                    </#list>
-                    </select>
+
 
                     <br>
-                    <label for="requirements"><h4>Last version: &nbsp;</h4></label>
+                    <label for="requirements"><h4> Last version: &nbsp;</h4></label>
                     <select id="requirements" name="requirements" >
                         <#list requirements as old_requirement>
                         <option value="${old_requirement.id}">${old_requirement.name}</option>

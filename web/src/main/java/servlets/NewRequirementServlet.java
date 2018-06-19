@@ -29,13 +29,12 @@ public class NewRequirementServlet  extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
-        String id = request.getParameter("projectid");
-
+        String projectId = request.getParameter("projectid");
         Map<String, Object> pageVariables = null;
+
         try {
-            pageVariables = createPageVariablesMap(request);
-            String projectId = request.getParameter("projectid");
-            response.setContentType("text/html;charset=utf-8");
+
+            pageVariables = createPageVariablesMap(request, projectId);
             response.setStatus(HttpServletResponse.SC_OK);
             pageVariables.put("projectid", projectId);
             response.getWriter().println(PageGenerator.getInstance().getPage("new_requirement/newRequirement.html", pageVariables));
@@ -74,13 +73,14 @@ public class NewRequirementServlet  extends HttpServlet {
         }
     }
 
-    private Map<String, Object> createPageVariablesMap(HttpServletRequest request) throws Exception {
+    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, String projectId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("users", UserAPI.getAllUsers());
         pageVariables.put("priorities", RequirementAPI.getRequirementPriorities());
-        pageVariables.put("requirements", RequirementAPI.getRequirementsList());
+        pageVariables.put("requirements", RequirementAPI.getRequirementsByProject(Long.parseLong(projectId)));
+        pageVariables.put("types", RequirementAPI.getRequirementTypes());
 
         return pageVariables;
     }

@@ -28,7 +28,7 @@ public class RequirementPriorityDTO implements Serializable {
     public String toString() {
         return "State {" +
                 "id=" + id +
-                ", title='" + name + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

@@ -29,7 +29,7 @@ public class RequirementTypeDTO implements Serializable {
     public String toString() {
         return "State {" +
                 "id=" + id +
-                ", title='" + name + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
