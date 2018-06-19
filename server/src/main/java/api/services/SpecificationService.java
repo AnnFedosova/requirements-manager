@@ -4,6 +4,7 @@ import dBService.DBException;
 import dBService.DBService;
 import dBService.dto.SpecificationDTO;
 import dBService.dto.SpecificationRequirementDTO;
+import dBService.dto.SpecificationStringDTO;
 import dBService.entities.SpecificationEntity;
 
 import javax.ws.rs.*;
@@ -20,8 +21,8 @@ public class SpecificationService {
 
     @GET
     @Path("getSpecification/{specificationId}")
-    public SpecificationDTO getSpecification(@PathParam("specificationId") long id) {
-        return new SpecificationDTO(dbService.getSpecification(id));
+    public SpecificationStringDTO getSpecification(@PathParam("specificationId") long id) {
+        return new SpecificationStringDTO(new SpecificationDTO(dbService.getSpecification(id)));
     }
 
     @GET
