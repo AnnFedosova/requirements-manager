@@ -82,6 +82,9 @@ public class DBService {
             dbService.addRequirementPriority("Средний");
             dbService.addRequirementPriority("Высокий");
 
+            //dbService.addRequirementPriority("Иерархическая зависимость");
+            //dbService.addConnectionType("Взаимная зависимость");
+
             //Заполнение таблицы RequirementState
             dbService.addRequirementState("Новое");
             dbService.addRequirementState("Уточнено");
