@@ -50,9 +50,10 @@ public class NewRequirementServlet  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-        String projectId = request.getParameter("project_id");
-        String priorityId = request.getParameter("requirement_priority_id");
-        String typeId = request.getParameter("requirement_type_id");
+        String projectId = request.getParameter("projectid");
+        String priorityId = request.getParameter("2");
+        String old_requirementid = request.getParameter("1");
+
         String creationDate = "19-06-2018";
 
         response.setContentType("text/html;charset=utf-8");

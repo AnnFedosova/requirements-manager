@@ -52,6 +52,7 @@ public class RequirementAPI {
         return new Gson().fromJson(json, new TypeToken<RequirementDTO>(){}.getType());
     }
 
+
     public static RequirementDTO getRequirementState(long requirementId) throws Exception {
         String json = JSONHelper.getJson(URL + "getState/" + requirementId);
         return new Gson().fromJson(json, new TypeToken<RequirementDTO>(){}.getType());

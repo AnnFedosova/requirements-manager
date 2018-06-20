@@ -46,10 +46,8 @@ public class RequirementServlet extends HttpServlet {
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("requirement", requirement);
         //pageVariables.put("creator", UserAPI.getUser(requestEntity.getCreatorId()));
-        //pageVariables.put("customer", UserAPI.getUser(requestEntity.getCustomerId()));
         pageVariables.put("priority", RequirementAPI.getRequirementPriority(requirement.getPriorityId()));
         pageVariables.put("state", RequirementAPI.getRequirementState(requirement.getStateId()));
-        //pageVariables.put("tasks", TaskAPI.getTasksList(requestId));
 
         return pageVariables;
     }
