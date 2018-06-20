@@ -45,7 +45,6 @@ public class UserServlet extends HttpServlet{
 
         //pageVariables.put("isAdmin", UserAPI.isAdmin(request.getUserPrincipal().getName()));
         pageVariables.put("user", user);
-        //pageVariables.put("internal", Boolean.toString(user.getInternal()));
 
         return pageVariables;
     }
