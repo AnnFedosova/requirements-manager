@@ -5,6 +5,7 @@ import api.RequirementAPI;
 import api.UserAPI;
 import dto.ProjectDTO;
 import dto.RequirementDTO;
+import dto.UserDTO;
 import dto.UserProjectRoleDTO;
 import templater.PageGenerator;
 
@@ -48,12 +49,14 @@ public class ProjectServlet extends HttpServlet {
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         ProjectDTO project = ProjectAPI.getProject(id);
-        //List<UserProjectRoleDTO> roles = ProjectAPI.getProjectRoles(id);
         List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(id);
         Principal user = request.getUserPrincipal();
+        List<UserDTO> users = ProjectAPI.getUsersByProject(id);
+
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("project", project);
-        //pageVariables.put("roles", roles);
+        pageVariables.put("users", users);
+
         pageVariables.put("requirements", requirements);
 
         return pageVariables;

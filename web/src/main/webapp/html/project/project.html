@@ -71,6 +71,35 @@
     </table>
 </#list>
 </div>
+
+    <br>
+    <h3 class="text-left">Users</h3>
+    <div style="font-size: medium">
+        <#list users>
+        <table width="100%">
+            <div class='col-sm-2'>
+                <div class='list-group'>
+                    <#items as user>
+                    <tr>
+                        <td width="5%">
+                            <div class="list-group-item text-center">
+                                ${user?counter}
+                            </div>
+                        </td>
+                        <td>
+                        <td><a class="list-group-item text-center"
+                               href="/user?id=${user.id}">${user.login}</a>
+
+                    </td>
+                    </tr>
+                </#items>
+            </div>
+    </div>
+    </table>
+</#list>
+</div>
+
+
 <br>
 </div>
 <footer class='text-muted'>

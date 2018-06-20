@@ -73,6 +73,13 @@
                     </#list>
                     </select>
 
+                    <br>
+                    <label for="types"><h4> Type: &nbsp;</h4></label>
+                    <select id="types" name="types" >
+                        <#list types as type>
+                        <option value="${type.id}">${type.name}</option>
+                    </#list>
+                    </select>
 
                     <br><br>
 
