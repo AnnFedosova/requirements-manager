@@ -88,6 +88,9 @@ public class DBService {
             dbService.addRequirementState("Разработано");
             dbService.addRequirementState("Протестировано");
             dbService.addRequirementState("Вошло в релиз");
+            dbService.addRequirementState("Отклонено");
+            dbService.addRequirementState("Отожено");
+
 
             //Заполнение таблицы RequirementType
             dbService.addRequirementType("Бизнес-требование");
@@ -105,7 +108,7 @@ public class DBService {
 
             dbService.addProject("Проект «Газпром»", "В этом проекте наша компания реализует ПО для работы с ценами на топливо для компании Газпром. ПАО «Газпром» — российская (ранее советская) транснациональная энергетическая корпорация");
             dbService.addProject("Проект «Роскосмос»", "Реализуется ПО, которое служит для выбора кандидатов на работу в космической отрасли.");
-            dbService.addProject("project2", "test2");
+            dbService.addProject("Проект «Сбербанк России»", "«Сбербанк» — российский финансовый конгломерат, крупнейший транснациональный и универсальный банк России, Центральной и Восточной Европы. Контролируется Центральным банком Российской Федерации, которому принадлежат более 52 % акций.");
 
             dbService.addRelease("release1", "test1",new Date());
             dbService.addRelease("release2", "test2",new Date());
@@ -123,9 +126,9 @@ public class DBService {
             dbService.addUserToProject(3,2,1);
             dbService.addUserToProject(4,2,2);
 
-            dbService.addRequirement(1,"requirement1","asdf",1,1,1,0);
-            dbService.addRequirement(1,"requirement2","dfedf new",3,1,2,1);
-            dbService.addRequirement(2,"requirement3","hjg",2,2,4,0);
+            dbService.addRequirement(1,"Требование 1","Необходимо обновить функциональность ПО",1,1,1,0);
+            dbService.addRequirement(1,"Требование 2","Требование к обновлению справочных данных",3,1,2,1);
+            dbService.addRequirement(2,"Требование 3","hjg",2,2,4,0);
 
             dbService.addRequirementToSpecification(1,1);
             dbService.addRequirementToSpecification(2,2);
