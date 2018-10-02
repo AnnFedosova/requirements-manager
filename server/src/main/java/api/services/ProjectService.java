@@ -9,14 +9,13 @@ import dBService.entities.ProjectEntity;
 import dBService.entities.UserEntity;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.LinkedList;
 import java.util.List;
 
 @Path("/api/projects")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Produces("text/json; charset=UTF-8")
+@Consumes("text/json; charset=UTF-8")
 public class ProjectService {
     private DBService dbService = DBService.getInstance();
 
