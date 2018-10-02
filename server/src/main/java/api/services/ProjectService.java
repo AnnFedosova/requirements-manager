@@ -14,8 +14,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Path("/api/projects")
-@Produces("text/json; charset=UTF-8")
-@Consumes("text/json; charset=UTF-8")
+@Produces("application/json; charset=UTF-8")
+@Consumes("application/json; charset=UTF-8")
 public class ProjectService {
     private DBService dbService = DBService.getInstance();
 

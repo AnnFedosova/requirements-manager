@@ -9,15 +9,14 @@ import dBService.entities.RequirementStateEntity;
 import dBService.entities.RequirementTypeEntity;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 @Path("/api/requirements")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Produces("application/json; charset=UTF-8")
+@Consumes("application/json; charset=UTF-8")
 public class RequirementService {
     private DBService dbService = DBService.getInstance();
 
