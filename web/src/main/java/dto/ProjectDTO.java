@@ -10,6 +10,11 @@ public class ProjectDTO implements Serializable {
 
     public ProjectDTO(){}
 
+    public ProjectDTO(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public String getDescription() {
         return description;
     }

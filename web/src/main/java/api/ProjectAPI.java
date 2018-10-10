@@ -42,5 +42,11 @@ public class ProjectAPI {
         return builder.post(Entity.entity(project, MediaType.APPLICATION_JSON));
     }
 
+    public static Response addProject(ProjectDTO project) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL + "addProject");
+        Invocation.Builder builder = target.request();
+        return builder.post(Entity.entity(project, MediaType.APPLICATION_JSON));
+    }
 
 }

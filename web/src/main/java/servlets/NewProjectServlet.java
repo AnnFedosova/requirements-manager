@@ -1,9 +1,9 @@
 package servlets;
 
 import api.APIActions;
-import api.RequirementAPI;
+import api.ProjectAPI;
 import api.UserAPI;
-import dto.RequirementDTO;
+import dto.ProjectDTO;
 import templater.PageGenerator;
 
 import javax.servlet.annotation.HttpConstraint;
@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.security.Principal;
@@ -47,10 +46,8 @@ public class NewProjectServlet  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-        String priorityId = request.getParameter("2");
-        String old_requirementid = request.getParameter("1");
 
-        String creationDate = "19-06-2018";
+        String creationDate = "10-10-2018";
 
         response.setContentType("text/html;charset=utf-8");
 
@@ -62,7 +59,7 @@ public class NewProjectServlet  extends HttpServlet {
 
         try {
             long creatorId = UserAPI.getUser(request.getUserPrincipal().getName()).getId();
-            Response restResponse = RequirementAPI.addRequirement(new RequirementDTO(1, name, description, 1 /*Long.parseLong(priorityId)*/, 1/* Long.parseLong(typeId)*/, 1, creationDate, creationDate, 1, 0, 1 ));
+            Response restResponse = ProjectAPI.addProject(new ProjectDTO(name, description));
             APIActions.checkResponseStatus(restResponse, response);
         } catch (Exception e) {
             response.getWriter().println("Not created");

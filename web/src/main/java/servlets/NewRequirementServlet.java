@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.security.Principal;
@@ -66,7 +65,7 @@ public class NewRequirementServlet  extends HttpServlet {
 
         try {
             long creatorId = UserAPI.getUser(request.getUserPrincipal().getName()).getId();
-            Response restResponse = RequirementAPI.addRequirement(new RequirementDTO(Long.parseLong(projectId), name, description, 1 /*Long.parseLong(priorityId)*/, 1/* Long.parseLong(typeId)*/, 1, creationDate, creationDate, 1, 0, 1 ));
+            Response restResponse = RequirementAPI.addRequirement(new RequirementDTO(Long.parseLong(projectId), name, description, 1 /*Long.parseLong(priorityId)*/, 1/* Long.parseLong(typeId)*/, 1, creationDate, creationDate, 1, 0, false ));
             APIActions.checkResponseStatus(restResponse, response);
         } catch (Exception e) {
             response.getWriter().println("Not created");

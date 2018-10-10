@@ -1,7 +1,5 @@
 package dto;
 
-import java.util.Date;
-
 public class RequirementDTO {
     private long id;
     private long projectId;
@@ -17,7 +15,36 @@ public class RequirementDTO {
     private long lastVersionId;
     private boolean relevance;
 
-    public RequirementDTO(long l, String name, String description, long parseLong, long aLong, int i, String creationDate, String date, int i1, int i2, int i3){}
+    public RequirementDTO(long id, long projectId, String name, String description, long priorityId, long typeId, long stateId, String creationDate, long creatorId, String modifiedDate, long changerId, long lastVersionId, boolean relevance) {
+        this.id = id;
+        this.projectId = projectId;
+        this.name = name;
+        this.description = description;
+        this.priorityId = priorityId;
+        this.typeId = typeId;
+        this.stateId = stateId;
+        this.creationDate = creationDate;
+        this.creatorId = creatorId;
+        this.modifiedDate = modifiedDate;
+        this.changerId = changerId;
+        this.lastVersionId = lastVersionId;
+        this.relevance = relevance;
+    }
+
+    //without some fields
+    public RequirementDTO(long projectId, String name, String description, long priorityId, long typeId, long stateId, String creationDate,  String modifiedDate, long changerId, long lastVersionId, boolean relevance) {
+        this.projectId = projectId;
+        this.name = name;
+        this.description = description;
+        this.priorityId = priorityId;
+        this.typeId = typeId;
+        this.stateId = stateId;
+        this.creationDate = creationDate;
+        this.modifiedDate = modifiedDate;
+        this.changerId = changerId;
+        this.lastVersionId = lastVersionId;
+        this.relevance = relevance;
+    }
 
     public long getId() {
         return id;
