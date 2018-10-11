@@ -15,12 +15,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(name = "New_requirement", urlPatterns = "/new_requirement")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
 public class NewRequirementServlet  extends HttpServlet {
+    final DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
     public NewRequirementServlet() {
     }
@@ -53,7 +57,7 @@ public class NewRequirementServlet  extends HttpServlet {
         String priorityId = request.getParameter("2");
         String old_requirementid = request.getParameter("1");
 
-        String creationDate = "19-06-2018";
+        String creationDate = dateFormat.format(new Date());
 
         response.setContentType("text/html;charset=utf-8");
 

@@ -8,7 +8,6 @@ import dto.RequirementStateDTO;
 import dto.RequirementTypeDTO;
 
 import javax.ws.rs.client.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class RequirementAPI {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL + "addRequirement");
         Invocation.Builder builder = target.request();
-        return builder.post(Entity.entity(requirement, MediaType.APPLICATION_JSON));
+        return builder.post(Entity.entity(requirement, "application/json; charset=UTF-8"));
     }
 
     public static List<RequirementStateDTO> getRequirementStates() throws Exception {
