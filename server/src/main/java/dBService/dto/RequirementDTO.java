@@ -12,6 +12,7 @@ public class RequirementDTO {
     private long priorityId;
     private long typeId;
     private long stateId;
+    //private Date creationDate;
     private String creationDate;
     private long creatorId;
     private String modifiedDate;
