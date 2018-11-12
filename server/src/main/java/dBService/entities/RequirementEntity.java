@@ -38,16 +38,16 @@ public class RequirementEntity implements Serializable {
     private RequirementStateEntity state;
 
     @Column(name = "creation_date")
-    @Temporal(TemporalType.DATE)
-    private Date creationDate;
+    //@Temporal(TemporalType.DATE)
+    private String creationDate;
 
     @ManyToOne
     @JoinColumn(name = "creator_id")
     private UserEntity creator;
 
     @Column(name = "modified_date")
-    @Temporal(TemporalType.DATE)
-    private Date modifiedDate;
+    //@Temporal(TemporalType.DATE)
+    private String modifiedDate;
 
     @ManyToOne
     @JoinColumn(name = "changer_id")
@@ -68,7 +68,7 @@ public class RequirementEntity implements Serializable {
 
     public RequirementEntity(){}
 
-    public RequirementEntity(ProjectEntity project, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementStateEntity state, Date creationDate, UserEntity creator, Date modifiedDate, UserEntity changer, RequirementEntity lastVersion, boolean relevance) {
+    public RequirementEntity(ProjectEntity project, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementStateEntity state, String creationDate, UserEntity creator, String modifiedDate, UserEntity changer, RequirementEntity lastVersion, boolean relevance) {
         this.project = project;
         this.name = name;
         this.description = description;
@@ -82,7 +82,7 @@ public class RequirementEntity implements Serializable {
         this.lastVersion = lastVersion;
         this.relevance = relevance;
     }
-    public RequirementEntity(ProjectEntity project, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementStateEntity state, Date creationDate, UserEntity creator, RequirementEntity lastVersion, boolean relevance) {
+    public RequirementEntity(ProjectEntity project, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementStateEntity state, String creationDate, UserEntity creator, RequirementEntity lastVersion, boolean relevance) {
         this.project = project;
         this.name = name;
         this.description = description;
@@ -167,11 +167,11 @@ public class RequirementEntity implements Serializable {
         this.state = state;
     }
 
-    public Date getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -183,11 +183,11 @@ public class RequirementEntity implements Serializable {
         this.creator = creator;
     }
 
-    public Date getModifiedDate() {
+    public String getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Date modifiedDate) {
+    public void setModifiedDate(String modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 

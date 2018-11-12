@@ -129,6 +129,13 @@ public class RequirementService {
         return requirementsDTO;
     }
 
+    @GET
+    @Path("getCreator/{requirementId}")
+    public UserDTO getCreator(@PathParam("requirementId") long requirementId) {
+        return new UserDTO(dbService.getRequirement(requirementId).getCreator());
+    }
+
+
     @POST
     @Path("addRequirement")
     public Response addRequirement(RequirementDTO requirementDTO) {
@@ -168,7 +175,7 @@ public class RequirementService {
         requirementEntity.setChanger(dbService.getUser(requirementDTO.getChangerId()));
         requirementEntity.setPriority(dbService.getRequirementPriority(requirementDTO.getPriorityId()));
         requirementEntity.setState(dbService.getRequirementState(requirementDTO.getStateId()));
-        requirementEntity.setModifiedDate(new Date());
+        requirementEntity.setModifiedDate("Текущая дата");
         dbService.updateRequirement(requirementEntity);
 
         String result = "Request updated with id = " + requirementDTO.getId();
