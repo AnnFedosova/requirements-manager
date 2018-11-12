@@ -23,7 +23,7 @@ public class RequirementStringDTO {
     public RequirementStringDTO(){}
 
     public RequirementStringDTO(RequirementEntity requirementEntity) {
-        SimpleDateFormat sdfr = new SimpleDateFormat("dd-MMM-yyyy");
+        //SimpleDateFormat sdfr = new SimpleDateFormat("dd-MMM-yyyy");
         this.id = requirementEntity.getId();
         this.projectId = requirementEntity.getProject().getId();
         this.name = requirementEntity.getName();
@@ -31,11 +31,11 @@ public class RequirementStringDTO {
         this.priorityId = requirementEntity.getPriority().getId();
         this.typeId = requirementEntity.getType().getId();
         this.stateId = requirementEntity.getState().getId();
-        this.creationDate = sdfr.format(requirementEntity.getCreationDate());
+        this.creationDate = "Дата";//sdfr.format(requirementEntity.getCreationDate());
         this.creatorId = requirementEntity.getCreator().getId();
         if (requirementEntity.getModifiedDate()==null){
             this.modifiedDate=null;
-        }else{this.modifiedDate = sdfr.format(requirementEntity.getModifiedDate());}
+        }else{this.modifiedDate = "Дата";}//sdfr.format(requirementEntity.getModifiedDate());}
         if (requirementEntity.getChanger()==null){
             this.changerId = 0;}
         else {this.changerId = requirementEntity.getChanger().getId();}
