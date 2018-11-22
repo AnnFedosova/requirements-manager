@@ -2,13 +2,11 @@ package api;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import dto.ProjectDTO;
 import dto.SpecificationDTO;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.LinkedList;
 import java.util.List;
 
 public class SpecificationAPI {
@@ -21,6 +19,11 @@ public class SpecificationAPI {
 
     public List<SpecificationDTO> getAllSpecifications() throws Exception {
         String json = JSONHelper.getJson(URL + "getAllSpecifications");
+        return new Gson().fromJson(json, new TypeToken<List<SpecificationDTO>>(){}.getType());
+    }
+
+    public static List<SpecificationDTO> getSpecificationsByProject(long projectId) throws Exception {
+        String json = JSONHelper.getJson(URL + "getSpecificationsByProject/" + projectId);
         return new Gson().fromJson(json, new TypeToken<List<SpecificationDTO>>(){}.getType());
     }
 

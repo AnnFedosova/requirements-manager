@@ -2,11 +2,12 @@ package servlets;
 
 import api.ProjectAPI;
 import api.RequirementAPI;
+import api.SpecificationAPI;
 import api.UserAPI;
 import dto.ProjectDTO;
 import dto.RequirementDTO;
+import dto.SpecificationDTO;
 import dto.UserDTO;
-import dto.UserProjectRoleDTO;
 import templater.PageGenerator;
 
 import javax.servlet.ServletException;
@@ -32,7 +33,6 @@ public class ProjectServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         String id = request.getParameter("id");
-        //String id = "1";
 
         Map<String, Object> pageVariables = null;
         try {
@@ -52,11 +52,12 @@ public class ProjectServlet extends HttpServlet {
         List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(id);
         Principal user = request.getUserPrincipal();
         List<UserDTO> users = ProjectAPI.getUsersByProject(id);
+        List<SpecificationDTO> specifications = SpecificationAPI.getSpecificationsByProject(id);
 
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("project", project);
         pageVariables.put("users", users);
-
+        pageVariables.put("specifications", specifications);
         pageVariables.put("requirements", requirements);
 
         return pageVariables;
