@@ -70,6 +70,11 @@ public class RequirementAPI {
         return new Gson().fromJson(json, new TypeToken<RequirementDTO>(){}.getType());
     }
 
+    public static RequirementDTO getRequirementType(long requirementId) throws Exception {
+        String json = JSONHelper.getJson(URL + "getType/" + requirementId);
+        return new Gson().fromJson(json, new TypeToken<RequirementDTO>(){}.getType());
+    }
+
     public static List<RequirementDTO> getRequirementsByProject(long projectId) throws Exception {
         String json = JSONHelper.getJson(URL + "getRequirementsByProject/" + projectId);
         return new Gson().fromJson(json, new TypeToken<List<RequirementDTO>>(){}.getType());

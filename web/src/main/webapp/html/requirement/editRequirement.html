@@ -64,6 +64,21 @@
                     </#list>
                     </select>
 
+                    <br>
+                    <label for="states"><h4> State: &nbsp;</h4></label>
+                    <select id="states" name="states" >
+                        <#list states as state>
+                        <option value="${state.id}">${state.name}</option>
+                    </#list>
+                    </select>
+
+                    <br>
+                    <label for="types"><h4> Type: &nbsp;</h4></label>
+                    <select id="types" name="types" >
+                        <#list types as type>
+                        <option value="${type.id}">${type.name}</option>
+                    </#list>
+                    </select>
 
                     <br><br>
 
@@ -74,6 +89,7 @@
                         </button>
                     </div>
                 </form>
+
             </div>
             <footer class='text-muted'>
                 <div class='pull-left'><span>2018</span></div>

@@ -79,10 +79,15 @@ public class EditRequirementServlet extends HttpServlet {
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("requirement", requirement);
         //pageVariables.put("creator", UserAPI.getUser(requestEntity.getCreatorId()));
-        //pageVariables.put("priority", RequirementAPI.getRequirementPriority(requirement.getPriorityId()));
-        //pageVariables.put("state", RequirementAPI.getRequirementState(requirement.getStateId()));
-        pageVariables.put("states", RequirementAPI.getRequirementState(requirement.getStateId()));
+        pageVariables.put("priority", RequirementAPI.getRequirementPriority(requirement.getPriorityId()));
         pageVariables.put("priorities", RequirementAPI.getRequirementPriorities());
+
+        pageVariables.put("state", RequirementAPI.getRequirementState(requirement.getStateId()));
+        pageVariables.put("states", RequirementAPI.getRequirementStates());
+
+        pageVariables.put("type", RequirementAPI.getRequirementType(requirement.getTypeId()));
+        pageVariables.put("types", RequirementAPI.getRequirementTypes());
+
 
         return pageVariables;
     }
