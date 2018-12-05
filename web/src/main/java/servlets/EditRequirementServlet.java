@@ -1,9 +1,9 @@
 package servlets;
 
 import api.APIActions;
-import api.ProjectAPI;
+import api.RequirementAPI;
 import api.UserAPI;
-import dto.ProjectDTO;
+import dto.RequirementDTO;
 import templater.PageGenerator;
 
 import javax.servlet.annotation.HttpConstraint;
@@ -14,24 +14,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "Edit_project", urlPatterns = "/edit_project")
-@ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
-public class EditProjectServlet extends HttpServlet {
 
-    public EditProjectServlet() {
+@WebServlet(name = "Edit_Requirement", urlPatterns = "/edit_requirement")
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
+
+public class EditRequirementServlet extends HttpServlet {
+
+    public EditRequirementServlet() {
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
+
         String id = request.getParameter("id");
         Map<String, Object> pageVariables = null;
         try {
-            pageVariables = createPageVariablesMap(request, id);
+            pageVariables = createPageVariablesMap(request, Long.parseLong(id));
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(PageGenerator.getInstance().getPage("project/editProject.html", pageVariables));
+            response.getWriter().println(PageGenerator.getInstance().getPage("requirement/editRequirement.html", pageVariables));
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println("Error!  " + HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -41,22 +46,24 @@ public class EditProjectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
         httpResponse.setContentType("text/html;charset=utf-8");
+        String requirementId = httpRequest.getParameter("id");
         String name = httpRequest.getParameter("name");
         String description = httpRequest.getParameter("description");
-        String projectId = httpRequest.getParameter("id");
 
+        String priorityId = httpRequest.getParameter("priorityId");
+        //String old_requirementid = httpRequest.getParameter("old_requirementid");
 
-        if (name == null || description == null || projectId == null) {
-            httpResponse.getWriter().println("Project not created");
+        if (name == null || description == null || requirementId == null) {
+            httpResponse.getWriter().println("Not created");
             httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         try {
-            ProjectDTO project = ProjectAPI.getProject(Long.parseLong(projectId));
-            project.setName(name);
-            project.setDescription(description);
-            Response response = ProjectAPI.editProject(project);
+            RequirementDTO requirement = RequirementAPI.getRequirement(Long.parseLong(requirementId));
+            requirement.setName(name);
+            requirement.setDescription(description);
+            Response response = RequirementAPI.editRequirement(requirement);
             APIActions.checkResponseStatus(response, httpResponse);
         } catch (Exception e) {
             httpResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -64,12 +71,19 @@ public class EditProjectServlet extends HttpServlet {
         }
     }
 
-    private Map<String, Object> createPageVariablesMap(HttpServletRequest httpRequest, String projectId) throws Exception {
+    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long requirementId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        ProjectDTO project = ProjectAPI.getProject(Long.parseLong(projectId));
+        RequirementDTO requirement = RequirementAPI.getRequirement(requirementId);
 
-        pageVariables.put("isAdmin", UserAPI.isAdmin(httpRequest.getUserPrincipal().getName()));
-        pageVariables.put("project", project);
+        Principal user = request.getUserPrincipal();
+        pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+        pageVariables.put("requirement", requirement);
+        //pageVariables.put("creator", UserAPI.getUser(requestEntity.getCreatorId()));
+        //pageVariables.put("priority", RequirementAPI.getRequirementPriority(requirement.getPriorityId()));
+        //pageVariables.put("state", RequirementAPI.getRequirementState(requirement.getStateId()));
+        pageVariables.put("states", RequirementAPI.getRequirementState(requirement.getStateId()));
+        pageVariables.put("priorities", RequirementAPI.getRequirementPriorities());
+
         return pageVariables;
     }
 }

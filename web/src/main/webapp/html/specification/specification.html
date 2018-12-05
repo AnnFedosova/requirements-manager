@@ -44,7 +44,31 @@
 
 
 
-
+            <br>
+            <h3 class="text-left">Requirements</h3>
+            <div style="font-size: medium">
+                <#list requirements>
+                <table width="100%">
+                    <div class='col-sm-2'>
+                        <div class='list-group'>
+                            <#items as requirement>
+                            <tr>
+                                <td width="5%">
+                                    <div class="list-group-item text-center">
+                                        ${requirement?counter}
+                                    </div>
+                                </td>
+                                <td>
+                                <td><a class="list-group-item text-center"
+                                       href="/requirement?id=${requirement.id}">${requirement.name}</a>
+                                </td>
+                            </tr>
+                        </#items>
+                    </div>
+            </div>
+            </table>
+        </#list>
+    </div>
 
 
 

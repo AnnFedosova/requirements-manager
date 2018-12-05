@@ -21,6 +21,19 @@ public class RequirementAPI {
         return builder.post(Entity.entity(requirement, "application/json; charset=UTF-8"));
     }
 
+    public static Response editRequirement(RequirementDTO requirement) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL + "editRequirement");
+        Invocation.Builder builder = target.request();
+        return builder.post(Entity.entity(requirement, "application/json; charset=UTF-8"));
+    }
+
+    public static List<RequirementDTO> getRequirementsBySpecification(long requirementId) throws Exception {
+        String json = JSONHelper.getJson(URL + "getRequirementsBySpecification/" + requirementId);
+        return new Gson().fromJson(json, new TypeToken<List<RequirementDTO>>(){}.getType());
+    }
+
+
     public static List<RequirementStateDTO> getRequirementStates() throws Exception {
         String json = JSONHelper.getJson(URL + "getRequirementStates");
         return new Gson().fromJson(json, new TypeToken<List<RequirementStateDTO>>(){}.getType());

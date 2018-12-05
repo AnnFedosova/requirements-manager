@@ -1,7 +1,9 @@
 package servlets;
 
+import api.RequirementAPI;
 import api.SpecificationAPI;
 import api.UserAPI;
+import dto.RequirementDTO;
 import dto.SpecificationDTO;
 import templater.PageGenerator;
 
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "Specification", urlPatterns = "/specification")
@@ -43,11 +46,13 @@ public class SpecificationServlet extends HttpServlet {
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         SpecificationDTO specification = SpecificationAPI.getSpecification(id);
+        List<RequirementDTO> requirements = RequirementAPI.getRequirementsBySpecification(id);
+
 
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("specification", specification);
-        //pageVariables.put("requirements", requirements);
+        pageVariables.put("requirements", requirements);
 
         return pageVariables;
     }
