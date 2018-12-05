@@ -23,17 +23,22 @@ public class SpecificationEntity implements Serializable {
 
     @Column(name = "planned_date")
     @Temporal(TemporalType.DATE)
-    private Date plannedDate;
+    private String plannedDate;
 
     @OneToMany(mappedBy = "specification")
     private Set<SpecificationRequirementEntity> specification;
 
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private ProjectEntity project;
+
     public SpecificationEntity(){}
 
-    public SpecificationEntity(String name, String description, Date plannedDate) {
+    public SpecificationEntity(String name, String description, String plannedDate, ProjectEntity projectEntity) {
         this.name = name;
         this.description = description;
         this.plannedDate = plannedDate;
+        this.project=projectEntity;
     }
 
     public SpecificationEntity(SpecificationEntity specificationEntety) {
@@ -41,6 +46,7 @@ public class SpecificationEntity implements Serializable {
         this.name = specificationEntety.name;
         this.description = specificationEntety.description;
         this.plannedDate = specificationEntety.plannedDate;
+        this.project=specificationEntety.project;
     }
 
     public long getId() {
@@ -67,11 +73,19 @@ public class SpecificationEntity implements Serializable {
         this.description = description;
     }
 
-    public Date getPlannedDate() {
+    public String getPlannedDate() {
         return plannedDate;
     }
 
-    public void setPlannedDate(Date plannedDate) {
+    public void setPlannedDate(String plannedDate) {
         this.plannedDate = plannedDate;
+    }
+
+    public ProjectEntity getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectEntity project) {
+        this.project = project;
     }
 }

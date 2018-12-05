@@ -116,8 +116,8 @@ public class DBService {
             dbService.addRelease("release1", "test1",new Date());
             dbService.addRelease("release2", "test2",new Date());
 
-            dbService.addSpecification("specification1","test1", new Date());
-            dbService.addSpecification("specification2","test2", new Date());
+            dbService.addSpecification("specification1","test1", "Какая-то дата", 1);
+            dbService.addSpecification("specification2","test2", "Какая-то дата", 2);
 
             dbService.addUser("user1","123","Sergey","Kuznetcov","Andreevich");
             dbService.addUser("user2","321","Anna","Fedosova","Mihailovna");
@@ -602,12 +602,16 @@ public class DBService {
         return specificationEntities;
     }
 
-    public long addSpecification(String name, String description, Date plannedDate) throws DBException {
+
+
+    public long addSpecification(String name, String description, String plannedDate, long projectId) throws DBException {
         try {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             SpecificationDAO specificationDAO = new SpecificationDAO(session);
-            long specificationId = specificationDAO.addSpecification(name, description, plannedDate);
+            ProjectDAO projectDAO = new ProjectDAO(session);
+            ProjectEntity projectEntity = projectDAO.get(projectId);
+            long specificationId = specificationDAO.addSpecification(name, description, plannedDate, projectEntity);
             transaction.commit();
             session.close();
             return specificationId;
@@ -641,5 +645,13 @@ public class DBService {
         releaseRequirementDAO.addReleaseRequirement(releaseDAO.get(releaseId),requirementDAO.get(requirementId));
         transaction.commit();
         session.close();
+    }
+
+    public List<SpecificationEntity> getSpecByProjectId(long projectId) {
+        Session session = sessionFactory.openSession();
+        SpecificationDAO specificationDAO = new SpecificationDAO(session);
+        List <SpecificationEntity> list = specificationDAO.getSpecificationsByProjectId(projectId);
+        session.close();
+        return list;
     }
 }

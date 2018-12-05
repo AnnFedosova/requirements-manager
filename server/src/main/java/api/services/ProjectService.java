@@ -3,9 +3,11 @@ package api.services;
 import dBService.DBException;
 import dBService.DBService;
 import dBService.dto.ProjectDTO;
+import dBService.dto.SpecificationDTO;
 import dBService.dto.UserDTO;
 import dBService.dto.UserProjectRoleDTO;
 import dBService.entities.ProjectEntity;
+import dBService.entities.SpecificationEntity;
 import dBService.entities.UserEntity;
 
 import javax.ws.rs.*;
@@ -76,5 +78,16 @@ public class ProjectService {
             users.add(new UserDTO(userEntity));
         }
         return users;
+    }
+
+    @GET
+    @Path("getSpecByProjectId/{projectId}")
+    public List<SpecificationDTO> getSpecByProjectId(@PathParam("projectId") long id){
+        List<SpecificationEntity> specificationEntities = dbService.getSpecByProjectId(id);
+        List<SpecificationDTO> specificationDTO = new LinkedList<>();
+        for (SpecificationEntity specificationEntity : specificationEntities) {
+            specificationDTO.add(new SpecificationDTO(specificationEntity));
+        }
+        return specificationDTO;
     }
 }

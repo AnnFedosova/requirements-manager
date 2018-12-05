@@ -7,7 +7,8 @@ public class SpecificationDTO {
     private long id;
     private String name;
     private String description;
-    private Date plannedDate;
+    private String plannedDate;
+    private long projectId;
 
     public SpecificationDTO(){}
 
@@ -16,6 +17,7 @@ public class SpecificationDTO {
         this.name = specificationEntity.getName();
         this.description = specificationEntity.getDescription();
         this.plannedDate = specificationEntity.getPlannedDate();
+        this.projectId=specificationEntity.getProject().getId();
     }
 
     public long getId() {
@@ -42,11 +44,19 @@ public class SpecificationDTO {
         this.description = description;
     }
 
-    public Date getPlannedDate() {
+    public String getPlannedDate() {
         return plannedDate;
     }
 
-    public void setPlannedDate(Date plannedDate) {
+    public void setPlannedDate(String plannedDate) {
         this.plannedDate = plannedDate;
+    }
+
+    public long getProject() {
+        return projectId;
+    }
+
+    public void setProject(long project) {
+        this.projectId = project;
     }
 }
