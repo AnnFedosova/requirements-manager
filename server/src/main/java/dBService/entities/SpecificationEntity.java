@@ -2,7 +2,6 @@ package dBService.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -22,7 +21,7 @@ public class SpecificationEntity implements Serializable {
     private String description;
 
     @Column(name = "planned_date")
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private String plannedDate;
 
     @OneToMany(mappedBy = "specification")

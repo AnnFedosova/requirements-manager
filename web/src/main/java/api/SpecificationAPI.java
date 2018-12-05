@@ -22,10 +22,7 @@ public class SpecificationAPI {
         return new Gson().fromJson(json, new TypeToken<List<SpecificationDTO>>(){}.getType());
     }
 
-    public static List<SpecificationDTO> getSpecificationsByProject(long projectId) throws Exception {
-        String json = JSONHelper.getJson(URL + "getSpecificationsByProject/" + projectId);
-        return new Gson().fromJson(json, new TypeToken<List<SpecificationDTO>>(){}.getType());
-    }
+
 
     public static Response editSpecification(SpecificationDTO specification) {
         Client client = ClientBuilder.newClient();

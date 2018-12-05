@@ -3,6 +3,7 @@ package api;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import dto.ProjectDTO;
+import dto.SpecificationDTO;
 import dto.UserDTO;
 import dto.UserProjectRoleDTO;
 
@@ -29,6 +30,10 @@ public class ProjectAPI {
         return new Gson().fromJson(json, new TypeToken<List<UserProjectRoleDTO>>(){}.getType());
     }
 
+    public static List<SpecificationDTO> getSpecByProjectId(long projectId) throws Exception {
+        String json = JSONHelper.getJson(URL + "getSpecByProjectId/" + projectId);
+        return new Gson().fromJson(json, new TypeToken<List<SpecificationDTO>>(){}.getType());
+    }
 
     public static List<UserDTO> getUsersByProject(long projectId) throws Exception {
         String json = JSONHelper.getJson(URL + "getUsersByProjectId/" + projectId);

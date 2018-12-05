@@ -22,7 +22,7 @@ public class ReleaseEntity implements Serializable {
     private String description;
 
     @Column(name = "releaseDate")
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     private Date releaseDate;
 
     @OneToMany(mappedBy = "release")

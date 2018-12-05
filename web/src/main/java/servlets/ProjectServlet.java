@@ -2,7 +2,6 @@ package servlets;
 
 import api.ProjectAPI;
 import api.RequirementAPI;
-import api.SpecificationAPI;
 import api.UserAPI;
 import dto.ProjectDTO;
 import dto.RequirementDTO;
@@ -52,7 +51,7 @@ public class ProjectServlet extends HttpServlet {
         List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(id);
         Principal user = request.getUserPrincipal();
         List<UserDTO> users = ProjectAPI.getUsersByProject(id);
-        List<SpecificationDTO> specifications = SpecificationAPI.getSpecificationsByProject(id);
+        List<SpecificationDTO> specifications = ProjectAPI.getSpecByProjectId(id);
 
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("project", project);
