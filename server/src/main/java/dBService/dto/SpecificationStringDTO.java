@@ -10,6 +10,7 @@ public class SpecificationStringDTO {
     private String name;
     private String description;
     private String plannedDate;
+    //dkhs
 
     public SpecificationStringDTO(){}
 
