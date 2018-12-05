@@ -26,8 +26,8 @@ public class SpecificationService {
 
     @GET
     @Path("getSpecification/{specificationId}")
-    public SpecificationStringDTO getSpecification(@PathParam("specificationId") long id) {
-        return new SpecificationStringDTO(new SpecificationDTO(dbService.getSpecification(id)));
+    public SpecificationDTO getSpecification(@PathParam("specificationId") long id) {
+        return new SpecificationDTO(dbService.getSpecification(id));
     }
 
     @GET
