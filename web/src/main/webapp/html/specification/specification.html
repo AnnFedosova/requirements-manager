@@ -31,10 +31,6 @@
         <div class='login'>
             <div class='page-header'>
                 <h2 class='text-left'>${specification.name}</h2>
-                <a class="btn btn-primary" href="/specification/edit?id=${specification.id}">
-                    <i title="Edit specification"class="fa fa-pencil-square-o"></i>
-                    Edit
-                </a>
 
             </div>
 
@@ -42,6 +38,12 @@
             <h3 class="text-left">Description</h3>
             <div style="font-size: medium">
                 ${specification.description}
+            </div>
+
+            <br>
+            <h3 class="text-left">Planned Date</h3>
+            <div style="font-size: medium">
+                ${specification.plannedDate}
             </div>
 
 
@@ -74,9 +76,9 @@
 
 
     <br>
-    <a class="btn btn-primary" href="/specification/edit?id=${specification.id}">
+    <a class="btn btn-primary" href="/print_specification?id=${specification.id}">
         <i title="Print"></i>
-        Print
+        Print report
     </a>
 
         <br>
