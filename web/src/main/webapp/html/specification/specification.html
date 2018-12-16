@@ -7,9 +7,37 @@
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
     <link rel="apple-touch-icon" type="image/x-icon" href="/img/apple-icon.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        $(window).load(function() {
+            var fixHelperModified = function (e, tr) {
+                    var $originals = tr.children();
+                    var $helper = tr.clone();
+                    $helper.children().each(function (index) {
+                        $(this).width($originals.eq(index).width())
+                    });
+                    return $helper;
+                },
+                updateIndex = function (e, ui) {
+                    $('td.index', ui.item.parent()).each(function (i) {
+                        $(this).html(i + 1);
+                    });
+                };
+
+            $("#sort tbody").sortable({
+                helper: fixHelperModified,
+                // stop: updateIndex
+            }).disableSelection();
+        });
+    </script>
 </head>
 
 <body>
+
+
+
 <div id="navbar">
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
@@ -52,28 +80,28 @@
             <h3 class="text-left">Requirements</h3>
             <div style="font-size: medium">
                 <#list requirements>
-                <table width="100%">
-                    <div class='col-sm-2'>
-                        <div class='list-group'>
-                            <#items as requirement>
-                            <tr>
-                                <td width="5%">
-                                    <div class="list-group-item text-center">
-                                        ${requirement?counter}
-                                    </div>
-                                </td>
-                                <td>
-                                <td><a class="list-group-item text-center"
-                                       href="/requirement?id=${requirement.id}">${requirement.name}</a>
-                                </td>
-                            </tr>
-                        </#items>
-                    </div>
+                <table id="sort" class="grid" width="100%">
+                    <tbody>
+                        <div class='col-sm-2'>
+                            <div class='list-group'>
+                                <#items as requirement>
+                                    <tr>
+                                        <td class="index" width="5%">
+                                            <div class="list-group-item text-center">
+                                                ${requirement?counter}
+                                            </div>
+                                        </td>
+                                        <td class="index"><a class="list-group-item text-center"
+                                               href="/requirement?id=${requirement.id}">${requirement.name}</a>
+                                        </td>
+                                    </tr>
+                                </#items>
+                        </div>
+                    </tbody>
             </div>
             </table>
         </#list>
     </div>
-
 
     <br>
     <a class="btn btn-primary" href="/print_specification?id=${specification.id}">
