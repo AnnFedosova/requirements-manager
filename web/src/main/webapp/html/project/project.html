@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
 <div id="navbar">
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
@@ -19,6 +20,7 @@
                 <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
             </#if>
         </div>
+
         <div class='navbar-right'>
             <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
         </div>
@@ -29,12 +31,13 @@
 <div class='container'>
     <div class='row'>
         <div class='login'>
+
             <div class='page-header'>
                 <h2 class='text-left'>${project.name}</h2>
                 <a class="btn btn-primary" href="/edit_project?id=${project.id}"><i title="Edit project"
                                                                                     class="fa fa-pencil-square-o"></i> Edit</a>
                 <a class="btn btn-primary" href="/new_requirement?projectid=${project.id}"><i title="Create requirement"
-                                                                                          class="fa fa-plus"></i> Create
+                                                                                              class="fa fa-plus"></i> Create
                     requirement</a>
             </div>
 
@@ -44,33 +47,31 @@
                 ${project.description}
             </div>
 
+            <br>
+            <h3 class="text-left">Requirements</h3>
+            <div style="font-size: medium">
+                <#list requirements>
+                <table width="100%">
+                    <div class='col-sm-2'>
+                        <div class='list-group'>
+                            <#items as requirement>
+                            <tr>
+                                <td width="5%">
+                                    <div class="list-group-item text-center">
+                                        ${requirement?counter}
+                                    </div>
+                                </td>
 
-    <br>
-    <h3 class="text-left">Requirements</h3>
-    <div style="font-size: medium">
-        <#list requirements>
-        <table width="100%">
-            <div class='col-sm-2'>
-                <div class='list-group'>
-                    <#items as requirement>
-                    <tr>
-                        <td width="5%">
-                            <div class="list-group-item text-center">
-                                ${requirement?counter}
-                            </div>
-                        </td>
-                        <td>
-                        <td><a class="list-group-item text-center"
-                               href="/requirement?id=${requirement.id}">${requirement.name}</a>
-                        </td>
-                    </tr>
-                </#items>
+                                <td><a class="list-group-item text-center"
+                                       href="/requirement?id=${requirement.id}">${requirement.name}</a>
+                                </td>
+                            </tr>
+                        </#items>
+                    </div>
             </div>
+            </table>
+        </#list>
     </div>
-    </table>
-</#list>
-</div>
-
 
     <br>
     <h3 class="text-left">Specifications</h3>
@@ -86,7 +87,6 @@
                                 ${specification?counter}
                             </div>
                         </td>
-                        <td>
                         <td><a class="list-group-item text-center"
                                href="/specification?id=${specification.id}">${specification.name}</a>
                         </td>
@@ -94,47 +94,48 @@
                     </#items>
                 </div>
             </div>
-    </table>
-</#list>
-</div>
-
-
-
-    <br>
-    <h3 class="text-left">Users</h3>
-    <div style="font-size: medium">
-        <#list users>
-        <table width="100%">
-            <div class='col-sm-2'>
-                <div class='list-group'>
-                    <#items as user>
-                    <tr>
-                        <td width="5%">
-                            <div class="list-group-item text-center">
-                                ${user?counter}
-                            </div>
-                        </td>
-                        <td>
-                        <td><a class="list-group-item text-center"
-                               href="/user?id=${user.id}">${user.login}</a>
-
-                    </td>
-                    </tr>
-                </#items>
-            </div>
+        </table>
+        </#list>
     </div>
-    </table>
+
+<br>
+<h3 class="text-left">Users</h3>
+<div style="font-size: medium">
+    <#list users>
+    <table width="100%">
+        <div class='col-sm-2'>
+            <div class='list-group'>
+                <#items as user>
+                <tr>
+                    <td width="5%">
+                        <div class="list-group-item text-center">
+                            ${user?counter}
+                        </div>
+                    </td>
+
+                    <td><a class="list-group-item text-center"
+                           href="/user?id=${user.id}">${user.login}</a>
+                    </td>
+                </tr>
+            </#items>
+        </div>
+</div>
+</table>
 </#list>
 </div>
 
 
 <br>
+<div>
+    <footer class='text-muted'>
+        <div class='pull-left'><span>2018</span></div>
+        <div class='clearfix'></div>
+    </footer>
 </div>
-<footer class='text-muted'>
-    <div class='pull-left'><span>2018</span></div>
-    <div class='clearfix'></div>
-</footer>
+
 </div>
 </div>
+</div>
+
 </body>
 </HTML>

@@ -2,10 +2,7 @@ package api;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import dto.ProjectDTO;
-import dto.SpecificationDTO;
-import dto.UserDTO;
-import dto.UserProjectRoleDTO;
+import dto.*;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
@@ -33,6 +30,11 @@ public class ProjectAPI {
     public static List<SpecificationDTO> getSpecByProjectId(long projectId) throws Exception {
         String json = JSONHelper.getJson(URL + "getSpecByProjectId/" + projectId);
         return new Gson().fromJson(json, new TypeToken<List<SpecificationDTO>>(){}.getType());
+    }
+
+    public static List<ReleaseDTO> getReleasesByProjectId(long projectId) throws Exception {
+        String json = JSONHelper.getJson(URL + "getReleasesByProjectId/" + projectId);
+        return new Gson().fromJson(json, new TypeToken<List<ReleaseDTO>>(){}.getType());
     }
 
     public static List<UserDTO> getUsersByProject(long projectId) throws Exception {

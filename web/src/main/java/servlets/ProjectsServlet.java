@@ -44,6 +44,8 @@ public class ProjectsServlet extends HttpServlet {
         Map<String, Object> pageVariables = new HashMap<>();
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+        String projectsTitle = "Проекты";
+        pageVariables.put("projectsTitle", projectsTitle);
         pageVariables.put("projects", ProjectAPI.getProjectsList());
         return pageVariables;
     }

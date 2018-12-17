@@ -52,12 +52,16 @@ public class ProjectServlet extends HttpServlet {
         Principal user = request.getUserPrincipal();
         List<UserDTO> users = ProjectAPI.getUsersByProject(id);
         List<SpecificationDTO> specifications = ProjectAPI.getSpecByProjectId(id);
+        //List<ReleaseDTO> releases = ProjectAPI.getReleasesByProjectId(id);
+
 
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("project", project);
         pageVariables.put("users", users);
         pageVariables.put("specifications", specifications);
         pageVariables.put("requirements", requirements);
+        //pageVariables.put("releases", releases);
+
 
         return pageVariables;
     }
