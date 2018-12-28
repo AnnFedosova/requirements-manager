@@ -620,7 +620,7 @@ public class DBService {
             throw new DBException(e);
         }
     }
-
+//78
     public void addRequirementToSpecification(long specificationId, long requirementId){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
