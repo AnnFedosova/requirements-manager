@@ -113,8 +113,8 @@ public class DBService {
             dbService.addProject("Проект «Роскосмос»", "Реализуется ПО, которое служит для выбора кандидатов на работу в космической отрасли.");
             dbService.addProject("Проект «Сбербанк России»", "«Сбербанк» — российский финансовый конгломерат, крупнейший транснациональный и универсальный банк России, Центральной и Восточной Европы. Контролируется Центральным банком Российской Федерации, которому принадлежат более 52 % акций.");
 
-            dbService.addRelease("release1", "test1",new Date());
-            dbService.addRelease("release2", "test2",new Date());
+            dbService.addRelease("release1", "test1",new Date(), 1);
+            dbService.addRelease("release2", "test2",new Date(), 2);
 
             dbService.addSpecification("specification1","test1", "Какая-то дата", 1);
             dbService.addSpecification("specification2","test2", "Какая-то дата", 2);
@@ -567,12 +567,14 @@ public class DBService {
         return releaseEntities;
     }
 
-    public long addRelease(String name, String description, Date releaseDate) throws DBException {
+    public long addRelease(String name, String description, Date releaseDate, long projectId) throws DBException {
         try {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             ReleaseDAO releaseDAO = new ReleaseDAO(session);
-            long releaseId = releaseDAO.addRelease(name, description, releaseDate);
+            ProjectDAO projectDAO = new ProjectDAO(session);
+            ProjectEntity projectEntity = projectDAO.get(projectId);
+            long releaseId = releaseDAO.addRelease(name, description, releaseDate, projectEntity);
             transaction.commit();
             session.close();
             return releaseId;
@@ -602,9 +604,7 @@ public class DBService {
         return specificationEntities;
     }
 
-
-
-    public long addSpecification(String name, String description, String plannedDate, long projectId) throws DBException {
+     public long addSpecification(String name, String description, String plannedDate, long projectId) throws DBException {
         try {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
@@ -651,6 +651,14 @@ public class DBService {
         Session session = sessionFactory.openSession();
         SpecificationDAO specificationDAO = new SpecificationDAO(session);
         List <SpecificationEntity> list = specificationDAO.getSpecificationsByProjectId(projectId);
+        session.close();
+        return list;
+    }
+
+    public List<ReleaseEntity> getReleasesByProjectId(long projectId) {
+        Session session = sessionFactory.openSession();
+        ReleaseDAO releaseDAO = new ReleaseDAO(session);
+        List <ReleaseEntity> list = releaseDAO.getReleasesByProjectId(projectId);
         session.close();
         return list;
     }

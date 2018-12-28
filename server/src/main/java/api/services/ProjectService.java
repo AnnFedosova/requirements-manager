@@ -2,11 +2,9 @@ package api.services;
 
 import dBService.DBException;
 import dBService.DBService;
-import dBService.dto.ProjectDTO;
-import dBService.dto.SpecificationDTO;
-import dBService.dto.UserDTO;
-import dBService.dto.UserProjectRoleDTO;
+import dBService.dto.*;
 import dBService.entities.ProjectEntity;
+import dBService.entities.ReleaseEntity;
 import dBService.entities.SpecificationEntity;
 import dBService.entities.UserEntity;
 
@@ -89,5 +87,16 @@ public class ProjectService {
             specificationDTO.add(new SpecificationDTO(specificationEntity));
         }
         return specificationDTO;
+    }
+
+    @GET
+    @Path("getReleasesByProjectId/{projectId}")
+    public List<ReleaseDTO> getReleasesByProjectId(@PathParam("projectId") long id){
+        List<ReleaseEntity> releaseEntities = dbService.getReleasesByProjectId(id);
+        List<ReleaseDTO> releaseDTOS = new LinkedList<>();
+        for (ReleaseEntity releaseEntity : releaseEntities) {
+            releaseDTOS.add(new ReleaseDTO(releaseEntity));
+        }
+        return releaseDTOS;
     }
 }

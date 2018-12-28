@@ -9,6 +9,7 @@ public class ReleaseDTO {
     private String name;
     private String description;
     private Date releaseDate;
+    private long project;
 
     public ReleaseDTO(){}
 
@@ -17,6 +18,7 @@ public class ReleaseDTO {
         this.name = releaseEntity.getName();
         this.description = releaseEntity.getDescription();
         this.releaseDate = releaseEntity.getReleaseDate();
+        this.project = releaseEntity.getProject().getId();
     }
 
     public long getId() {
@@ -49,5 +51,13 @@ public class ReleaseDTO {
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public long getProject() {
+        return project;
+    }
+
+    public void setProject(long project) {
+        this.project = project;
     }
 }

@@ -28,12 +28,17 @@ public class ReleaseEntity implements Serializable {
     @OneToMany(mappedBy = "release")
     private Set<ReleaseRequirementEntity> releases;
 
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private ProjectEntity project;
+
     public ReleaseEntity(){}
 
-    public ReleaseEntity(String name, String description, Date releaseDate) {
+    public ReleaseEntity(String name, String description, Date releaseDate, ProjectEntity projectEntity) {
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
+        this.project = projectEntity;
     }
 
     public ReleaseEntity(ReleaseEntity releaseEntity) {
@@ -41,6 +46,7 @@ public class ReleaseEntity implements Serializable {
         this.name = releaseEntity.name;
         this.description = releaseEntity.description;
         this.releaseDate = releaseEntity.releaseDate;
+        this.project = releaseEntity.project;
     }
 
     public long getId() {
@@ -73,5 +79,13 @@ public class ReleaseEntity implements Serializable {
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public ProjectEntity getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectEntity project) {
+        this.project = project;
     }
 }
