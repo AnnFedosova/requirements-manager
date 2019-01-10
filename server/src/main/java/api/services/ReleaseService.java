@@ -39,7 +39,7 @@ public class ReleaseService {
     @Path("addRelease")
     public Response addRelease(ReleaseDTO releaseDTO) {
         try {
-            long releaseId = dbService.addRelease(releaseDTO.getName(), releaseDTO.getDescription(), releaseDTO.getReleaseDate());
+            long releaseId = dbService.addRelease(releaseDTO.getName(), releaseDTO.getDescription(), releaseDTO.getReleaseDate(), releaseDTO.getProject());
             String result = "Release added with id = " + releaseId;
             return Response.ok().entity(result).build();
         } catch (DBException e) {
