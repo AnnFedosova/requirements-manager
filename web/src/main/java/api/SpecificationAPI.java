@@ -22,8 +22,6 @@ public class SpecificationAPI {
         return new Gson().fromJson(json, new TypeToken<List<SpecificationDTO>>(){}.getType());
     }
 
-
-
     public static Response editSpecification(SpecificationDTO specification) {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL + "editSpecification");

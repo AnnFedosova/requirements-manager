@@ -7,6 +7,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
     <link rel="apple-touch-icon" type="image/x-icon" href="/img/apple-icon.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
     <script type="text/javascript">
@@ -58,8 +59,17 @@
         <div class='login'>
             <div class='page-header'>
                 <h2 class='text-left'>${specification.name}</h2>
-
+                <a class="btn btn-primary" href="/edit_specification?id=${specification.id}"><i title="Edit specification"
+                                                                                    class="fa fa-pencil-square-o"></i> Edit</a>
+                <a class="btn btn-primary" href="/new_requirement_for_spec?specification=${specification.id}"><i title="Create requirement"
+                                                                                              class="fa fa-plus"></i> Create
+                    requirement</a>
+                <a class="btn btn-primary" href="/add_requirement_in_spec?specification=${specification.id}"><i title="Add requirement"
+                                                                                                        class="fa fa-plus"></i> Add
+                    requirement</a>
             </div>
+
+
 
             <br>
             <h3 class="text-left">Description</h3>
