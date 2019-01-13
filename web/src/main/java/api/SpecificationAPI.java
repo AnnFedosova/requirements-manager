@@ -28,4 +28,6 @@ public class SpecificationAPI {
         Invocation.Builder builder = target.request();
         return builder.post(Entity.entity(specification, MediaType.APPLICATION_JSON));
     }
+
+
 }

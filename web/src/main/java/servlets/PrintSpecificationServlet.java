@@ -1,7 +1,9 @@
 package servlets;
 
 
+import api.SpecificationAPI;
 import api.UserAPI;
+import reportsgenerator.ReportGenerator;
 
 import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.annotation.ServletSecurity;
@@ -26,6 +28,12 @@ public class PrintSpecificationServlet extends HttpServlet{
         //при нажатии на кнопку отчетов попадаем сюда
         response.setContentType("text/html;charset=utf-8");
         Map<String, Object> pageVariables = null;
+        try {
+            ReportGenerator reportGenerator = new ReportGenerator();
+            reportGenerator.template(SpecificationAPI.getSpecification(1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
             pageVariables = createPageVariablesMap(request);
