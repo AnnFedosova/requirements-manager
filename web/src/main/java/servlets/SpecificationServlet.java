@@ -29,7 +29,6 @@ public class SpecificationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         String id = request.getParameter("id");
-        //String id = "1";
 
         Map<String, Object> pageVariables = null;
         try {
@@ -47,7 +46,6 @@ public class SpecificationServlet extends HttpServlet {
         Map<String, Object> pageVariables = new HashMap<>();
         SpecificationDTO specification = SpecificationAPI.getSpecification(id);
         List<RequirementDTO> requirements = RequirementAPI.getRequirementsBySpecification(id);
-
 
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));

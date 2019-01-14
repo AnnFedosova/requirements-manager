@@ -38,7 +38,6 @@ public class RequirementAPI {
         return new Gson().fromJson(json, new TypeToken<List<RequirementDTO>>(){}.getType());
     }
 
-
     public static List<RequirementStateDTO> getRequirementStates() throws Exception {
         String json = JSONHelper.getJson(URL + "getRequirementStates");
         return new Gson().fromJson(json, new TypeToken<List<RequirementStateDTO>>(){}.getType());
@@ -64,20 +63,20 @@ public class RequirementAPI {
         return new Gson().fromJson(json, new TypeToken<RequirementDTO>(){}.getType());
     }
 
-    public static RequirementDTO getRequirementPriority(long requirementId) throws Exception {
+    public static RequirementPriorityDTO getRequirementPriority(long requirementId) throws Exception {
         String json = JSONHelper.getJson(URL + "getPriority/" + requirementId);
-        return new Gson().fromJson(json, new TypeToken<RequirementDTO>(){}.getType());
+        return new Gson().fromJson(json, new TypeToken<RequirementPriorityDTO>(){}.getType());
     }
 
 
-    public static RequirementDTO getRequirementState(long requirementId) throws Exception {
+    public static RequirementStateDTO getRequirementState(long requirementId) throws Exception {
         String json = JSONHelper.getJson(URL + "getState/" + requirementId);
-        return new Gson().fromJson(json, new TypeToken<RequirementDTO>(){}.getType());
+        return new Gson().fromJson(json, new TypeToken<RequirementStateDTO>(){}.getType());
     }
 
-    public static RequirementDTO getRequirementType(long requirementId) throws Exception {
+    public static RequirementTypeDTO getRequirementType(long requirementId) throws Exception {
         String json = JSONHelper.getJson(URL + "getType/" + requirementId);
-        return new Gson().fromJson(json, new TypeToken<RequirementDTO>(){}.getType());
+        return new Gson().fromJson(json, new TypeToken<RequirementTypeDTO>(){}.getType());
     }
 
     public static List<RequirementDTO> getRequirementsByProject(long projectId) throws Exception {
