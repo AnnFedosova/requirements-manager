@@ -10,6 +10,7 @@ public class RequirementForReport {
     private long projectId;
     private String name;
     private String description;
+
     private long priorityId;
     private String priority; //new
 
@@ -46,6 +47,7 @@ public class RequirementForReport {
         try {
             this.priority = RequirementAPI.getRequirementPriority(requirementDTO.getPriorityId()).getName();
         } catch (Exception e) {
+            this.priority = "-";
             e.printStackTrace();
         }
 
@@ -54,6 +56,7 @@ public class RequirementForReport {
         try {
             this.type = RequirementAPI.getRequirementType(requirementDTO.getTypeId()).getName();
         } catch (Exception e) {
+            this.type = "-";
             e.printStackTrace();
         }
 
@@ -62,6 +65,7 @@ public class RequirementForReport {
         try {
             this.state = RequirementAPI.getRequirementState(requirementDTO.getStateId()).getName();
         } catch (Exception e) {
+            this.state = "-";
             e.printStackTrace();
         }
 
@@ -70,6 +74,7 @@ public class RequirementForReport {
         try {
             this.creatorLogin = UserAPI.getUser(requirementDTO.getCreatorId()).getLogin();
         } catch (Exception e) {
+            this.creatorLogin = "-";
             e.printStackTrace();
         }
 
@@ -81,6 +86,7 @@ public class RequirementForReport {
         try {
             this.changerLogin = UserAPI.getUser(requirementDTO.getChangerId()).getLogin();
         } catch (Exception e) {
+            this.changerLogin = "-";
             e.printStackTrace();
         }
 
@@ -89,6 +95,7 @@ public class RequirementForReport {
         try {
             this.lastVersion = RequirementAPI.getRequirement(requirementDTO.getLastVersionId()).getName();
         } catch (Exception e) {
+            this.lastVersion = "-";
             e.printStackTrace();
         }
 
