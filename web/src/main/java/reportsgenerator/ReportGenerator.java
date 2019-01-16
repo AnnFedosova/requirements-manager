@@ -6,14 +6,18 @@ import org.wickedsource.docxstamper.DocxStamperConfiguration;
 import java.io.*;
 
 public class ReportGenerator {
-    public void template(SpecificationWithRequirements specificationWithRequirements) throws IOException {
+    public byte[] template(SpecificationWithRequirements specificationWithRequirements) throws IOException {
         InputStream in = getClass().getResourceAsStream("SpecificationReport.docx");
         OutputStream out = new FileOutputStream(File.createTempFile(getClass().getSimpleName(), ".docx"));
-
         DocxStamper stamper = new DocxStamperConfiguration().setFailOnUnresolvedExpression(false).build();
 
-        stamper.stamp(in, specificationWithRequirements,  out);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        stamper.stamp(in, specificationWithRequirements,  outputStream);
         in.close();
         out.close();
+
+        byte[] result = outputStream.toByteArray();
+        return result;
     }
 }

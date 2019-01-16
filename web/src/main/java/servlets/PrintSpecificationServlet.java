@@ -10,6 +10,7 @@ import reportsgenerator.ReportGenerator;
 import reportsgenerator.RequirementForReport;
 import reportsgenerator.SpecificationWithRequirements;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +41,8 @@ public class PrintSpecificationServlet extends HttpServlet {
         try {
             ReportGenerator reportGenerator = new ReportGenerator();
             pageVariables = createPageVariablesMap(request, Long.parseLong(id));
-            reportGenerator.template(
+            // Массив байтов получившегося файла
+            byte[] byteArray = reportGenerator.template(
                     new SpecificationWithRequirements(
                             (SpecificationDTO) pageVariables.get("specification"),
                             ((List<RequirementDTO>) (pageVariables.get("requirements")))
@@ -50,6 +52,13 @@ public class PrintSpecificationServlet extends HttpServlet {
                                     )
                     )
             );
+            String specificationName = ((SpecificationDTO) pageVariables.get("specification")).getName();
+            response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+            response.setHeader("Content-disposition", "attachment; filename=\"" + specificationName + ".docx\"");
+            ServletOutputStream servletOutputStream = response.getOutputStream();
+            servletOutputStream.write(byteArray);
+            servletOutputStream.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
