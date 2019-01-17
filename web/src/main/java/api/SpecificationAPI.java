@@ -3,6 +3,7 @@ package api;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import dto.SpecificationDTO;
+import dto.SpecificationRequirementDTO;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
@@ -29,5 +30,10 @@ public class SpecificationAPI {
         return builder.post(Entity.entity(specification, MediaType.APPLICATION_JSON));
     }
 
-
+    public static Response addReqToSpec(SpecificationRequirementDTO specificationRequirementDTO) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL + "addReqToSpec");
+        Invocation.Builder builder = target.request();
+        return builder.post(Entity.entity(specificationRequirementDTO, "application/json; charset=UTF-8"));
+    }
 }
