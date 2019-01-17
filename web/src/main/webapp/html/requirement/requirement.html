@@ -63,19 +63,19 @@
             <br>
             <h3 class="text-left"> Relevance </h3>
             <div style="font-size: medium">
-                is relevance
+                ${requirement.getRelevance()}
             </div>
 
             <br>
             <h3 class="text-left"> Created Date </h3>
             <div style="font-size: medium">
-                20-06-2018 by Admin
+                ${requirement.creationDate} by ${creator.getLogin()}
             </div>
 
             <br>
             <h3 class="text-left"> Modified Date </h3>
             <div style="font-size: medium">
-                20-06-2018 by Admin
+                ${requirement.modifiedDate} by ${changer.getLogin()}
             </div>
 
 

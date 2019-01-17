@@ -178,6 +178,11 @@ public class RequirementDTO {
         return relevance;
     }
 
+    public String getRelevance() {
+        return Boolean.toString(relevance);
+    }
+
+
     public void setRelevance(boolean relevance) {
         this.relevance = relevance;
     }

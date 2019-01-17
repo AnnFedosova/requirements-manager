@@ -49,9 +49,10 @@ public class EditRequirementServlet extends HttpServlet {
         String requirementId = httpRequest.getParameter("id");
         String name = httpRequest.getParameter("name");
         String description = httpRequest.getParameter("description");
-
-        String priorityId = httpRequest.getParameter("priorityId");
-        //String old_requirementid = httpRequest.getParameter("old_requirementid");
+        String priorityId = httpRequest.getParameter("priorities");
+        String stateId = httpRequest.getParameter("states");
+        String typeId = httpRequest.getParameter("types");
+        String lastVersionId = httpRequest.getParameter("requirements");
 
         if (name == null || description == null || requirementId == null) {
             httpResponse.getWriter().println("Not created");
@@ -63,6 +64,11 @@ public class EditRequirementServlet extends HttpServlet {
             RequirementDTO requirement = RequirementAPI.getRequirement(Long.parseLong(requirementId));
             requirement.setName(name);
             requirement.setDescription(description);
+            requirement.setPriorityId(Long.parseLong(priorityId));
+            requirement.setStateId(Long.parseLong(stateId));
+            requirement.setTypeId(Long.parseLong(typeId));
+            requirement.setLastVersionId(Long.parseLong(lastVersionId));
+
             Response response = RequirementAPI.editRequirement(requirement);
             APIActions.checkResponseStatus(response, httpResponse);
         } catch (Exception e) {
@@ -77,8 +83,10 @@ public class EditRequirementServlet extends HttpServlet {
 
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+
         pageVariables.put("requirement", requirement);
-        //pageVariables.put("creator", UserAPI.getUser(requestEntity.getCreatorId()));
+        pageVariables.put("requirements", RequirementAPI.getRequirementsByProject(requirement.getProjectId()));
+
         pageVariables.put("priority", RequirementAPI.getRequirementPriority(requirement.getPriorityId()));
         pageVariables.put("priorities", RequirementAPI.getRequirementPriorities());
 

@@ -1,12 +1,10 @@
 package dto;
 
-import java.util.Date;
-
 public class ReleaseDTO {
     private long id;
     private String name;
     private String description;
-    private Date releaseDate;
+    private String releaseDate;
 
     public ReleaseDTO(){}
 
@@ -34,11 +32,11 @@ public class ReleaseDTO {
         this.description = description;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 }

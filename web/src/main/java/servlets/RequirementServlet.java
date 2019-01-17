@@ -3,6 +3,7 @@ package servlets;
 import api.RequirementAPI;
 import api.UserAPI;
 import dto.RequirementDTO;
+import dto.UserDTO;
 import templater.PageGenerator;
 
 import javax.servlet.annotation.HttpConstraint;
@@ -45,10 +46,19 @@ public class RequirementServlet extends HttpServlet {
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("requirement", requirement);
-        //pageVariables.put("creator", UserAPI.getUser(requestEntity.getCreatorId()));
+        pageVariables.put("creator", UserAPI.getUser(requirement.getCreatorId()));
+        UserDTO changer = UserAPI.getUser(requirement.getCreatorId()); //getChangerId
+        if (changer == null){
+            changer = UserAPI.getUser(requirement.getCreatorId());
+        }
+        pageVariables.put("changer", changer);
+
         pageVariables.put("priority", RequirementAPI.getRequirementPriority(requirement.getPriorityId()));
         pageVariables.put("state", RequirementAPI.getRequirementState(requirement.getStateId()));
         pageVariables.put("type", RequirementAPI.getRequirementType(requirement.getTypeId()));
+        if (requirement.getModifiedDate() == null){
+            requirement.setModifiedDate(requirement.getCreationDate());
+        }
 
 
         return pageVariables;

@@ -7,6 +7,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
     <link rel="apple-touch-icon" type="image/x-icon" href="/img/apple-icon.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
     <script type="text/javascript">
@@ -58,8 +59,17 @@
         <div class='login'>
             <div class='page-header'>
                 <h2 class='text-left'>${release.name}</h2>
-
+                <a class="btn btn-primary" href="/edit_release?id=${release.id}"><i title="Edit release"
+                                                                                                class="fa fa-pencil-square-o"></i> Edit</a>
+                <a class="btn btn-primary" href="/new_requirement_for_release?release=${release.id}"><i title="Create requirement"
+                                                                                                                 class="fa fa-plus"></i> Create
+                    requirement</a>
+                <a class="btn btn-primary" href="/addReqToRelease?releaseId=${release.id}"><i title="Add requirement"
+                                                                                                       class="fa fa-plus"></i> Add
+                    requirement</a>
             </div>
+
+
 
             <br>
             <h3 class="text-left">Description</h3>
@@ -68,7 +78,7 @@
             </div>
 
             <br>
-            <h3 class="text-left">Release Date</h3>
+            <h3 class="text-left">Planned Date</h3>
             <div style="font-size: medium">
                 ${release.releaseDate}
             </div>
@@ -103,9 +113,9 @@
     </div>
 
     <br>
-    <a class="btn btn-primary" href="/print_specification?id=${specification.id}">
-        <i title="Print"></i>
-        Print report
+    <a class="btn btn-primary" href="/print_release?id=${release.id}">
+        <i title="Report"></i>
+        Report
     </a>
 
     <br>

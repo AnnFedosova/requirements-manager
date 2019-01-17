@@ -80,6 +80,15 @@
                     </#list>
                     </select>
 
+                    <br>
+                    <label for="requirements"><h4> Last version: &nbsp;</h4></label>
+                    <select id="requirements" name="requirements" >
+                        <#list requirements as old_requirement>
+                        <option value="${old_requirement.id}">${old_requirement.name}</option>
+                    </#list>
+                    </select>
+
+
                     <br><br>
 
                     <div class='form-actions'>

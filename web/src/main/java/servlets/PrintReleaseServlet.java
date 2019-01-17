@@ -1,14 +1,14 @@
 package servlets;
 
 
+import api.ReleaseAPI;
 import api.RequirementAPI;
-import api.SpecificationAPI;
 import api.UserAPI;
+import dto.ReleaseDTO;
 import dto.RequirementDTO;
-import dto.SpecificationDTO;
+import reportsgenerator.ReleaseWithRequirements;
 import reportsgenerator.ReportGenerator;
 import reportsgenerator.RequirementForReport;
-import reportsgenerator.SpecificationWithRequirements;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.HttpConstraint;
@@ -24,11 +24,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "Print_specification", urlPatterns = "/print_specification")
+@WebServlet(name = "Print_release", urlPatterns = "/print_release")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
-public class PrintSpecificationServlet extends HttpServlet {
+public class PrintReleaseServlet extends HttpServlet {
 
-    public PrintSpecificationServlet() {
+    public PrintReleaseServlet() {
     }
 
     @Override
@@ -43,8 +43,8 @@ public class PrintSpecificationServlet extends HttpServlet {
             pageVariables = createPageVariablesMap(request, Long.parseLong(id));
             // Массив байтов получившегося файла
             byte[] byteArray = reportGenerator.template(
-                    new SpecificationWithRequirements(
-                            (SpecificationDTO) pageVariables.get("specification"),
+                    new ReleaseWithRequirements(
+                            (ReleaseDTO) pageVariables.get("release"),
                             ((List<RequirementDTO>) (pageVariables.get("requirements")))
                                     .stream()
                                     .map(RequirementForReport::new)
@@ -52,9 +52,10 @@ public class PrintSpecificationServlet extends HttpServlet {
                                     )
                     )
             );
-            String specificationName = ((SpecificationDTO) pageVariables.get("specification")).getName();
+
+            String releaseName = ((ReleaseDTO) pageVariables.get("release")).getName();
             response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-            response.setHeader("Content-disposition", "attachment; filename=\"" + specificationName + ".docx\"");
+            response.setHeader("Content-disposition", "attachment; filename=\"" + releaseName + ".docx\"");
             ServletOutputStream servletOutputStream = response.getOutputStream();
             servletOutputStream.write(byteArray);
             servletOutputStream.close();
@@ -82,12 +83,12 @@ public class PrintSpecificationServlet extends HttpServlet {
 
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        SpecificationDTO specification = SpecificationAPI.getSpecification(id);
-        List<RequirementDTO> requirements = RequirementAPI.getRequirementsBySpecification(id);
+        ReleaseDTO release = ReleaseAPI.getRelease(id);
+        List<RequirementDTO> requirements = RequirementAPI.getRequirementsByRelease(id);
 
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
-        pageVariables.put("specification", specification);
+        pageVariables.put("release", release);
         pageVariables.put("requirements", requirements);
 
         return pageVariables;

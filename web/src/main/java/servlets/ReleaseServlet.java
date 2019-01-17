@@ -47,7 +47,6 @@ public class ReleaseServlet extends HttpServlet {
         ReleaseDTO release = ReleaseAPI.getRelease(id);
         List<RequirementDTO> requirements = RequirementAPI.getRequirementsByRelease(id);
 
-
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("release", release);
