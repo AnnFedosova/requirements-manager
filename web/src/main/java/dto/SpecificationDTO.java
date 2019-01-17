@@ -9,6 +9,14 @@ public class SpecificationDTO {
 
     public SpecificationDTO(){}
 
+    public SpecificationDTO(long id, String name, String description, String plannedDate, long projectId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.plannedDate = plannedDate;
+        this.projectId = projectId;
+    }
+
     public long getId() {
         return id;
     }

@@ -48,7 +48,8 @@ public class AddReqToSpecServlet extends HttpServlet {
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
 
         SpecificationDTO specification = SpecificationAPI.getSpecification(specificationId);
-        List<RequirementDTO> requirements = RequirementAPI.getRequirementsBySpecification(specificationId);
+        List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(specification.getProjectId());
+
 
         pageVariables.put("specification", specification);
         pageVariables.put("requirements", requirements);
