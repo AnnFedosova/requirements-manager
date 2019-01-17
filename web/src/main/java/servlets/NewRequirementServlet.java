@@ -55,10 +55,21 @@ public class NewRequirementServlet  extends HttpServlet {
         String description = request.getParameter("description");
         String projectId = request.getParameter("projectid");
         String priorityId = request.getParameter("priorities");
-        String old_requirementid = request.getParameter("requirements");
+        String lastVersionId = request.getParameter("requirements");
+        String typeId = request.getParameter("types");
+        String userId = "";
+        try {
+            Principal user = request.getUserPrincipal();
+            String userName = user.getName();
+            userId = String.valueOf((UserAPI.getUser(userName)).getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+
+        //todo проверить
         String creationDate = dateFormat.format(new Date());
-
+        Principal user = request.getUserPrincipal();
         response.setContentType("text/html;charset=utf-8");
 
         if (name == null || description == null || projectId == null ) {
@@ -69,7 +80,20 @@ public class NewRequirementServlet  extends HttpServlet {
 
         try {
             long creatorId = UserAPI.getUser(request.getUserPrincipal().getName()).getId();
-            Response restResponse = RequirementAPI.addRequirement(new RequirementDTO(Long.parseLong(projectId), name, description, 1 /*Long.parseLong(priorityId)*/, 1/* Long.parseLong(typeId)*/, 1, creationDate, creationDate, 1, 0, false ));
+            Response restResponse = RequirementAPI.addRequirement(
+                    new RequirementDTO( "10",
+                                        projectId,
+                                        name,
+                                        description,
+                                        priorityId,
+                                        typeId,
+                                        "1",
+                                        userId,
+                                        creationDate,
+                                        creationDate,
+                                        userId,
+                                        lastVersionId,
+                                        "true"));
             APIActions.checkResponseStatus(restResponse, response);
         } catch (Exception e) {
             response.getWriter().println("Not created");

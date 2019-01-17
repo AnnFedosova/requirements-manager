@@ -15,6 +15,38 @@ public class RequirementDTO {
     private long lastVersionId;
     private boolean relevance;
 
+    //constructor with String field
+    public RequirementDTO(
+            String id,
+            String projectId,
+            String name,
+            String description,
+            String priorityId,
+            String typeId,
+            String stateId,
+            String creatorId,
+            String creationDate,
+            String modifiedDate,
+            String changerId,
+            String lastVersionId,
+            String relevance){
+
+        this.id = Long.parseLong(id);
+        this.projectId = Long.parseLong(projectId);
+        this.name = name;
+        this.description = description;
+        this.priorityId = Long.parseLong(priorityId);
+        this.typeId = Long.parseLong(typeId);
+        this.stateId = Long.parseLong(stateId);
+        this.creatorId = Long.parseLong(creatorId);
+        this.creationDate = creationDate;
+        this.modifiedDate = modifiedDate;
+        this.changerId = Long.parseLong(changerId);
+        this.lastVersionId = Long.parseLong(lastVersionId);
+        this.relevance = Boolean.valueOf(relevance);
+    }
+
+
     public RequirementDTO(long id, long projectId, String name, String description, long priorityId, long typeId, long stateId, String creationDate, long creatorId, String modifiedDate, long changerId, long lastVersionId, boolean relevance) {
         this.id = id;
         this.projectId = projectId;
