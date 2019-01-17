@@ -1,7 +1,6 @@
 package dBService.dto;
 
 import dBService.entities.SpecificationEntity;
-import java.util.Date;
 
 public class SpecificationDTO {
     private long id;
@@ -17,7 +16,7 @@ public class SpecificationDTO {
         this.name = specificationEntity.getName();
         this.description = specificationEntity.getDescription();
         this.plannedDate = specificationEntity.getPlannedDate();
-        this.projectId=specificationEntity.getProject().getId();
+        this.projectId = specificationEntity.getProject().getId();
     }
 
     public long getId() {
@@ -52,11 +51,11 @@ public class SpecificationDTO {
         this.plannedDate = plannedDate;
     }
 
-    public long getProject() {
+    public long getProjectId() {
         return projectId;
     }
 
-    public void setProject(long project) {
+    public void setProjectId(long project) {
         this.projectId = project;
     }
 }

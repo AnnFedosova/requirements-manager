@@ -1,10 +1,12 @@
 package servlets;
 
+import api.APIActions;
 import api.RequirementAPI;
 import api.SpecificationAPI;
 import api.UserAPI;
 import dto.RequirementDTO;
 import dto.SpecificationDTO;
+import dto.SpecificationRequirementDTO;
 import templater.PageGenerator;
 
 import javax.servlet.ServletException;
@@ -14,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
@@ -41,6 +44,28 @@ public class AddReqToSpecServlet extends HttpServlet {
 
     }
 
+    @Override
+    protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
+        httpResponse.setContentType("text/html;charset=utf-8");
+
+        String requirementId = httpRequest.getParameter("requirements");
+        String specificationId = httpRequest.getParameter("specificationId");
+
+        if (requirementId == null || specificationId == null) {
+            httpResponse.getWriter().println("Not added");
+            httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        try {
+            SpecificationRequirementDTO specificationRequirementDTO = new SpecificationRequirementDTO(specificationId, requirementId);
+            Response response = SpecificationAPI.addReqToSpec(specificationRequirementDTO);
+            APIActions.checkResponseStatus(response, httpResponse);
+        } catch (Exception e) {
+            httpResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            httpResponse.getWriter().println("Error!  " + HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
 
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long specificationId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();

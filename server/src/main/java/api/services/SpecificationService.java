@@ -45,7 +45,7 @@ public class SpecificationService {
     @Path("addSpecification")
     public Response addUSpecification(SpecificationDTO specificationDTO) {
         try {
-            long specificationId = dbService.addSpecification(specificationDTO.getName(), specificationDTO.getDescription(), specificationDTO.getPlannedDate(), specificationDTO.getProject());
+            long specificationId = dbService.addSpecification(specificationDTO.getName(), specificationDTO.getDescription(), specificationDTO.getPlannedDate(), specificationDTO.getProjectId());
             String result = "Specification added with id = " + specificationId;
             return Response.ok().entity(result).build();
         } catch (DBException e) {

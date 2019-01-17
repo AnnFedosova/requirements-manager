@@ -54,8 +54,8 @@ public class NewRequirementServlet  extends HttpServlet {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
         String projectId = request.getParameter("projectid");
-        String priorityId = request.getParameter("2");
-        String old_requirementid = request.getParameter("1");
+        String priorityId = request.getParameter("priorities");
+        String old_requirementid = request.getParameter("requirements");
 
         String creationDate = dateFormat.format(new Date());
 

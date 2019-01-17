@@ -6,6 +6,16 @@ public class SpecificationRequirementDTO {
 
     public SpecificationRequirementDTO(){}
 
+    public SpecificationRequirementDTO(String specificationId, String requirementId) {
+        this.specificationId = Long.parseLong(specificationId);
+        this.requirementId = Long.parseLong(requirementId);
+    }
+
+    public SpecificationRequirementDTO(long specificationId, long requirementId) {
+        this.specificationId = specificationId;
+        this.requirementId = requirementId;
+    }
+
     public long getSpecificationId() {
         return specificationId;
     }
