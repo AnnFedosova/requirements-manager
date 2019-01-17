@@ -67,7 +67,6 @@ public class NewRequirementServlet  extends HttpServlet {
         }
 
 
-        //todo проверить
         String creationDate = dateFormat.format(new Date());
         Principal user = request.getUserPrincipal();
         response.setContentType("text/html;charset=utf-8");
