@@ -117,7 +117,7 @@ public class DBService {
             dbService.addRelease("release2", "test2",new Date(), 2);
 
             dbService.addSpecification("specification1","test1", "Какая-то дата", 1);
-            dbService.addSpecification("specification2","test2", "Какая-то дата", 2);
+            dbService.addSpecification("specification2","test2", "Какая-то дата", 1);
 
             dbService.addUser("user1","123","Sergey","Kuznetcov","Andreevich");
             dbService.addUser("user2","321","Anna","Fedosova","Mihailovna");
@@ -135,7 +135,7 @@ public class DBService {
 
             dbService.addRequirementToSpecification(1,1);
             dbService.addRequirementToSpecification(2,2);
-            dbService.addRequirementToSpecification(2,3);
+            //dbService.addRequirementToSpecification(2,3);
 
             dbService.addRequirementToRelease(1,2);
             dbService.addRequirementToRelease(2,3);
