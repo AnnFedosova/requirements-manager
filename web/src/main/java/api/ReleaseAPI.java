@@ -18,6 +18,13 @@ public class ReleaseAPI {
         return new Gson().fromJson(json, new TypeToken<ReleaseDTO>(){}.getType());
     }
 
+    public static Response addRelease(ReleaseDTO release) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL + "addRelease");
+        Invocation.Builder builder = target.request();
+        return builder.post(Entity.entity(release, "application/json; charset=UTF-8"));
+    }
+
     public List<ReleaseDTO> getAllReleases() throws Exception {
         String json = JSONHelper.getJson(URL + "getAllReleases");
         return new Gson().fromJson(json, new TypeToken<List<ReleaseDTO>>(){}.getType());

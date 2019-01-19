@@ -31,11 +31,20 @@
                 // stop: updateIndex
             }).disableSelection();
         });
+
+        let getReport = function () {
+            let ids = [];
+            let refTab = document.getElementById("sort");
+            for (let i = 0; i < refTab.rows.length; i++) {
+                let row = refTab.rows[i];
+                alert(row.cells[2].firstChild.nodeValue);
+                ids[i] = row.cells[2].firstChild.nodeValue;
+            }
+        }
     </script>
 </head>
 
 <body>
-
 
 
 <div id="navbar">
@@ -103,12 +112,24 @@
                                         <td class="index"><a class="list-group-item text-center"
                                                href="/requirement?id=${requirement.id}">${requirement.name}</a>
                                         </td>
+                                        <td style="display:none;" class="index">
+                                            ${requirement.id}
+                                        </td>
                                     </tr>
                                 </#items>
                         </div>
                     </tbody>
             </div>
             </table>
+            <!--<script>-->
+                <!--let ids = [];-->
+                <!--let refTab = document.getElementById("sort");-->
+                <!--for (let i = 0; i < refTab.rows.length; i++) {-->
+                    <!--let row = refTab.rows[i];-->
+                    <!--alert(row.cells[2].firstChild.nodeValue);-->
+                    <!--ids[i] = row.cells[2].firstChild.nodeValue;-->
+                <!--}-->
+            <!--</script>-->
         </#list>
     </div>
 

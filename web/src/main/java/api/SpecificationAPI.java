@@ -18,6 +18,13 @@ public class SpecificationAPI {
         return new Gson().fromJson(json, new TypeToken<SpecificationDTO>(){}.getType());
     }
 
+    public static Response addSpecification(SpecificationDTO specification) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL + "addSpecification");
+        Invocation.Builder builder = target.request();
+        return builder.post(Entity.entity(specification, "application/json; charset=UTF-8"));
+    }
+
     public List<SpecificationDTO> getAllSpecifications() throws Exception {
         String json = JSONHelper.getJson(URL + "getAllSpecifications");
         return new Gson().fromJson(json, new TypeToken<List<SpecificationDTO>>(){}.getType());

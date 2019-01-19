@@ -11,7 +11,9 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.jboss.crypto.CryptoUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class DBService {
@@ -130,11 +132,13 @@ public class DBService {
             dbService.addUserToProject(4,2,2);
 
             dbService.addRequirement(1,"Требование 1","Необходимо обновить функциональность ПО",1,1,1,0);
+            dbService.addRequirement(1,"Требование 11","Необходимо обновить справочные данные",1,1,1,0);
             dbService.addRequirement(1,"Требование 2","Требование к обновлению справочных данных",3,1,2,1);
             dbService.addRequirement(2,"Требование 3","hjg",2,2,4,0);
 
             dbService.addRequirementToSpecification(1,1);
-            dbService.addRequirementToSpecification(2,2);
+            dbService.addRequirementToSpecification(1,2);
+            dbService.addRequirementToSpecification(2,3);
             //dbService.addRequirementToSpecification(2,3);
 
             dbService.addRequirementToRelease(1,2);

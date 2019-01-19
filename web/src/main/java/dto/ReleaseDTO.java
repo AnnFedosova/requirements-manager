@@ -5,8 +5,17 @@ public class ReleaseDTO {
     private String name;
     private String description;
     private String releaseDate;
+    private long projectId;
 
     public ReleaseDTO(){}
+
+    public ReleaseDTO(long id, String name, String description, String releaseDate, long projectId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.projectId = projectId;
+    }
 
     public long getId() {
         return id;
@@ -39,4 +48,14 @@ public class ReleaseDTO {
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
+
+
 }
