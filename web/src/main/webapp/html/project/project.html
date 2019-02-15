@@ -19,13 +19,13 @@
                 <#if isAdmin>
                 <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
                 </#if>
-        </div>
+            </div>
 
-        <div class='navbar-right'>
-            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+            <div class='navbar-right'>
+                <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+            </div>
         </div>
-</div>
-</nav>
+    </nav>
 </div>
 
 <div class='container'>
@@ -34,8 +34,12 @@
 
             <div class='page-header'>
                 <h2 class='text-left'>${project.name}</h2>
-                <a class="btn btn-primary" href="/edit_project?id=${project.id}"><i title="Edit project"
-                                                                                    class="fa fa-pencil-square-o"></i> Edit</a>
+
+                <a class="btn btn-primary" href="/edit_project?id=${project.id}">
+                    <i title="Edit project" class="fa fa-pencil-square-o"></i>
+                    Edit
+                </a>
+
                 <a class="btn btn-primary" href="/new_requirement?projectid=${project.id}"><i title="Create requirement"
                                                                                               class="fa fa-plus"></i> Create
                     requirement</a>

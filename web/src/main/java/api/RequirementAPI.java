@@ -28,6 +28,7 @@ public class RequirementAPI {
         return builder.post(Entity.entity(requirement, "application/json; charset=UTF-8"));
     }
 
+
     public static List<RequirementDTO> getRequirementsByRelease(long requirementId) throws Exception {
         String json = JSONHelper.getJson(URL + "getRequirementsByRelease/" + requirementId);
         return new Gson().fromJson(json, new TypeToken<List<RequirementDTO>>(){}.getType());

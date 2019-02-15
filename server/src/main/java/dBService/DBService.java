@@ -115,11 +115,11 @@ public class DBService {
             dbService.addProject("Проект «Роскосмос»", "Реализуется ПО, которое служит для выбора кандидатов на работу в космической отрасли.");
             dbService.addProject("Проект «Сбербанк России»", "«Сбербанк» — российский финансовый конгломерат, крупнейший транснациональный и универсальный банк России, Центральной и Восточной Европы. Контролируется Центральным банком Российской Федерации, которому принадлежат более 52 % акций.");
 
-            dbService.addRelease("release1", "test1",new Date(), 1);
+            dbService.addRelease("Release1", "В данный релиз включено большенство требований соответствующей спецификации. Реализованы требования, касающиеся обновления справочной информации.", new Date(), 1);
             dbService.addRelease("release2", "test2",new Date(), 2);
 
-            dbService.addSpecification("specification1","test1", "Какая-то дата", 1);
-            dbService.addSpecification("specification2","test2", "Какая-то дата", 1);
+            dbService.addSpecification("Specification1","Данный документ содержит описание функциональных требований к реализации схем проверок справочных данных.", "20-01-2019", 1);
+            dbService.addSpecification("specification2","test2", "20-01-2019", 1);
 
             dbService.addUser("user1","123","Sergey","Kuznetcov","Andreevich");
             dbService.addUser("user2","321","Anna","Fedosova","Mihailovna");
@@ -131,7 +131,7 @@ public class DBService {
             dbService.addUserToProject(3,2,1);
             dbService.addUserToProject(4,2,2);
 
-            dbService.addRequirement(1,"Требование 1","Необходимо обновить функциональность ПО",1,1,1,0);
+            dbService.addRequirement(1,"Требование 1","Необходимо обновить функциональность ПО для корректной работы справочной информации",1,1,1,0);
             dbService.addRequirement(1,"Требование 11","Необходимо обновить справочные данные",1,1,1,0);
             dbService.addRequirement(1,"Требование 2","Требование к обновлению справочных данных",3,1,2,1);
             dbService.addRequirement(2,"Требование 3","hjg",2,2,4,0);

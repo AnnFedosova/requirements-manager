@@ -1,4 +1,5 @@
-<HTML>
+<html>
+
 <head>
     <meta charset="utf-8">
     <title>${requirement.name}</title>
@@ -31,8 +32,51 @@
         <div class='login'>
             <div class='page-header'>
                 <h2 class='text-left'>${requirement.name}</h2>
-                <a class="btn btn-primary" href="/edit_requirement?id=${requirement.id}"><i title="Edit requirement"
-                                                                                    class="fa fa-pencil-square-o"></i> Edit</a>
+                <a class="btn btn-primary" href="/edit_requirement?id=${requirement.id}">
+                    <i title="Edit requirement" class="fa fa-pencil-square-o"></i>
+                    Edit
+                </a>
+
+
+                <button class="btn btn-primary" onclick="openDeleteRequirementDialog()">
+                    Delete requirement
+                </button>
+
+                <dialog id="DeleteRequirementDialog">
+                    <h3 class="text-left"> Delete requirement </h3>
+                    Are you sure?
+                    <br/><br/>
+                    <button class="btn btn-primary" onclick="yesDeleteRequirement(${requirement.id})">yes</button>
+                    <button class="btn btn-primary" onclick="cancelDeleteRequirement()">cancel</button>
+
+                </dialog>
+
+                <script>
+                    function openDeleteRequirementDialog() {
+                        (document.getElementById("DeleteRequirementDialog")).open = true;
+                    }
+
+                    function cancelDeleteRequirement() {
+                        (document.getElementById("DeleteRequirementDialog")).close();
+                    }
+
+                    function yesDeleteRequirement(requirementId) {
+                        (document.getElementById("DeleteRequirementDialog")).close();
+
+                        let xhr = new XMLHttpRequest();
+                        let json = JSON.stringify({
+                            id: requirementId,
+                        });
+
+                        let URL = "http://localhost:8080/requirements/";
+                        xhr.open("POST", 'deleteRequirement', true);
+                        xhr.setRequestHeader(requirementId, 'application/json; charset=utf-8');
+
+                        console.log("I want to send json " + json)
+                        // xhr.send(json);
+                    }
+                </script>
+
             </div>
 
 
