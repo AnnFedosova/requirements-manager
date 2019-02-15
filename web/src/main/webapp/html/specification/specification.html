@@ -76,8 +76,52 @@
                 <a class="btn btn-primary" href="/addReqToSpec?specificationId=${specification.id}"><i title="Add requirement"
                                                                                                         class="fa fa-plus"></i> Add
                     requirement</a>
-            </div>
 
+
+                <button class="btn btn-primary" onclick="openDeleteSpecificationDialog()">
+                    Delete specification
+                </button>
+
+                <dialog id="DeleteSpecificationDialog">
+                    <h3 class="text-left"> Delete specification </h3>
+                    Are you sure?
+                    <br/><br/>
+                    <button class="btn btn-primary"
+                            onclick="yesDeleteSpecification(${specification.id})">
+                        yes
+                    </button>
+                    <button class="btn btn-primary" onclick="cancelDeleteSpecification()">cancel</button>
+
+                </dialog>
+
+                <script>
+                    function openDeleteSpecificationDialog() {
+                        (document.getElementById("DeleteSpecificationDialog")).open = true;
+                    }
+
+                    function cancelDeleteSpecification() {
+                        (document.getElementById("DeleteSpecificationDialog")).close();
+                    }
+
+                    function yesDeleteSpecification(specificationId) {
+                        (document.getElementById("DeleteSpecificationDialog")).close();
+                        let hrefProjectPage = "/project?id=${specification.projectId}";
+                        let xhr = new XMLHttpRequest();
+                        let json = JSON.stringify({
+                            id: specificationId,
+                        });
+
+                        let URL = "http://localhost:8080/specifications/";
+                        xhr.open("POST", 'deleteSpecification', true);
+                        xhr.setRequestHeader(specificationId, 'application/json; charset=utf-8');
+
+                        console.log("I want to send json " + json);
+                        // xhr.send(json);
+
+                        window.location.href = hrefProjectPage;
+                    }
+                </script>
+            </div>
 
 
             <br>
@@ -91,7 +135,6 @@
             <div style="font-size: medium">
                 ${specification.plannedDate}
             </div>
-
 
 
             <br>

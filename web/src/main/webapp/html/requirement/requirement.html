@@ -46,7 +46,10 @@
                     <h3 class="text-left"> Delete requirement </h3>
                     Are you sure?
                     <br/><br/>
-                    <button class="btn btn-primary" onclick="yesDeleteRequirement(${requirement.id})">yes</button>
+                    <button class="btn btn-primary"
+                            onclick="yesDeleteRequirement(${requirement.id})">
+                        yes
+                    </button>
                     <button class="btn btn-primary" onclick="cancelDeleteRequirement()">cancel</button>
 
                 </dialog>
@@ -62,7 +65,7 @@
 
                     function yesDeleteRequirement(requirementId) {
                         (document.getElementById("DeleteRequirementDialog")).close();
-
+                        let hrefProjectPage = "/project?id=${requirement.projectId}";
                         let xhr = new XMLHttpRequest();
                         let json = JSON.stringify({
                             id: requirementId,
@@ -72,8 +75,10 @@
                         xhr.open("POST", 'deleteRequirement', true);
                         xhr.setRequestHeader(requirementId, 'application/json; charset=utf-8');
 
-                        console.log("I want to send json " + json)
+                        console.log("I want to send json " + json);
                         // xhr.send(json);
+
+                        window.location.href = hrefProjectPage;
                     }
                 </script>
 
