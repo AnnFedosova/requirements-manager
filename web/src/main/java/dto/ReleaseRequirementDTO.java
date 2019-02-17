@@ -6,6 +6,16 @@ public class ReleaseRequirementDTO {
 
     public ReleaseRequirementDTO(){}
 
+    public ReleaseRequirementDTO(String releaseId, String requirementId) {
+        this.releaseId = Long.parseLong(releaseId);
+        this.requirementId = Long.parseLong(requirementId);
+    }
+
+    public ReleaseRequirementDTO(long releaseId, long requirementId) {
+        this.releaseId = releaseId;
+        this.requirementId = requirementId;
+    }
+
     public long getReleaseId() {
         return releaseId;
     }

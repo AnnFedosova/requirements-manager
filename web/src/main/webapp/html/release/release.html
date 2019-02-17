@@ -67,6 +67,52 @@
                 <a class="btn btn-primary" href="/addReqToRelease?releaseId=${release.id}"><i title="Add requirement"
                                                                                                        class="fa fa-plus"></i> Add
                     requirement</a>
+
+                <button class="btn btn-primary" onclick="openDeleteReleaseDialog()">
+                    Delete release
+                </button>
+
+                <dialog id="DeleteReleaseDialog">
+                    <h3 class="text-left"> Delete release </h3>
+                    Are you sure?
+                    <br/><br/>
+                    <button class="btn btn-primary"
+                            onclick="yesDeleteRelease(${release.id})">
+                        yes
+                    </button>
+                    <button class="btn btn-primary" onclick="cancelDeleteRelease()">cancel</button>
+
+                </dialog>
+
+                <script>
+                    function openDeleteReleaseDialog() {
+                        (document.getElementById("DeleteReleaseDialog")).open = true;
+                    }
+
+                    function cancelDeleteRelease() {
+                        (document.getElementById("DeleteReleaseDialog")).close();
+                    }
+
+                    function yesDeleteRelease(releaseId) {
+                        (document.getElementById("DeleteReleaseDialog")).close();
+                        let hrefProjectPage = "/project?id=${release.projectId}";
+                        let xhr = new XMLHttpRequest();
+                        let json = JSON.stringify({
+                            id: releaseId,
+                        });
+
+                        let URL = "http://localhost:8080/releases/";
+                        xhr.open("POST", 'deleteRelease', true);
+                        xhr.setRequestHeader(releaseId, 'application/json; charset=utf-8');
+
+                        console.log("I want to send json " + json);
+                        // xhr.send(json);
+
+                        window.location.href = hrefProjectPage;
+                    }
+                </script>
+
+
             </div>
 
 

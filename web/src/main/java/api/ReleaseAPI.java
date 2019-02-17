@@ -3,6 +3,7 @@ package api;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import dto.ReleaseDTO;
+import dto.ReleaseRequirementDTO;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
@@ -35,5 +36,12 @@ public class ReleaseAPI {
         WebTarget target = client.target(URL + "editRelease");
         Invocation.Builder builder = target.request();
         return builder.post(Entity.entity(release, MediaType.APPLICATION_JSON));
+    }
+
+    public static Response addReqToRelease(ReleaseRequirementDTO releaseRequirementDTO) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL + "addReqToRelease");
+        Invocation.Builder builder = target.request();
+        return builder.post(Entity.entity(releaseRequirementDTO, "application/json; charset=UTF-8"));
     }
 }
