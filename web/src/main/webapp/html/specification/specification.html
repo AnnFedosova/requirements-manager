@@ -164,20 +164,56 @@
                     </tbody>
             </div>
             </table>
-            <!--<script>-->
-                <!--let ids = [];-->
-                <!--let refTab = document.getElementById("sort");-->
-                <!--for (let i = 0; i < refTab.rows.length; i++) {-->
-                    <!--let row = refTab.rows[i];-->
-                    <!--alert(row.cells[2].firstChild.nodeValue);-->
-                    <!--ids[i] = row.cells[2].firstChild.nodeValue;-->
-                <!--}-->
-            <!--</script>-->
+
+            <script>
+
+                function getUrl() {
+                    let a = document.getElementById('myLink');
+                    a.href = "/print_specification?specificationId=${specification.id}&requirementIds=" + getIds();
+                }
+
+                function getIds() {
+                    let ids = [];
+                    let refTab = document.getElementById("sort");
+                    for (let i = 0; i < refTab.rows.length; i++) {
+                        let row = refTab.rows[i];
+                        alert(row.cells[2].firstChild.nodeValue);
+                        ids[i] = row.cells[2].firstChild.nodeValue;
+                    }
+
+                    return ids;
+                }
+
+            </script>
+
+
+
+
         </#list>
     </div>
 
+
+
+
+
     <br>
-    <a class="btn btn-primary" href="/print_specification?id=${specification.id}">
+
+
+    <a id=myLink class="btn btn-primary"
+       onclick="getUrl()"
+    >
+        <i title="Report2"></i>
+        Report2
+    </a>
+
+
+
+
+
+    <a id=PrintButton class="btn btn-primary"
+       href="/print_specification?specificationId=${specification.id}"
+
+    >
         <i title="Report"></i>
         Report
     </a>
