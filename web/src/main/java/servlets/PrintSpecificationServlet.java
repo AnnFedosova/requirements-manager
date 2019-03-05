@@ -49,23 +49,6 @@ public class PrintSpecificationServlet extends HttpServlet {
             ReportGenerator reportGenerator = new ReportGenerator();
             pageVariables = createPageVariablesMap(request, Long.parseLong(id));
 
-/*
-* byte[] byteArray = reportGenerator.template(
-                    new SpecificationWithRequirements(
-                            (SpecificationDTO) pageVariables.get("specification"),
-
-                            ((List<RequirementDTO>) (pageVariables.get("requirements")))
-                                    .stream()
-                                    .map(RequirementForReport::new)
-                                    .collect(Collectors.toList())
-                    )
-            );
-*
-*
-* */
-
-
-
             // Массив байтов получившегося файла
             byte[] byteArray = reportGenerator.template(
                     new SpecificationWithRequirements(
@@ -114,18 +97,15 @@ public class PrintSpecificationServlet extends HttpServlet {
         List<RequirementDTO> requirements = RequirementAPI.getRequirementsBySpecification(id);
         SpecificationWithRequirements specificationWithRequirements = new SpecificationWithRequirements();
 
-        Integer[] ids2 = null;
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("specification", specification);
-
-        pageVariables.put("specificationWithRequirements", specificationWithRequirements);
         pageVariables.put("requirements", requirements);
 
         return pageVariables;
     }
 
-    private List<RequirementDTO> getSortedListOfRequirements(List<RequirementDTO> requirements, String[] requirementIds){
+    public static List<RequirementDTO> getSortedListOfRequirements(List<RequirementDTO> requirements, String[] requirementIds){
         if (requirements.size() != requirementIds.length){
             return requirements;
         }
@@ -137,7 +117,6 @@ public class PrintSpecificationServlet extends HttpServlet {
                     SortedListOfRequirements.add(requirement);
                 }
             }
-
         }
         return SortedListOfRequirements;
     }

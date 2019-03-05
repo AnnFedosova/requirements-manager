@@ -167,9 +167,9 @@
 
             <script>
 
-                function getUrl() {
-                    let a = document.getElementById('myLink');
-                    a.href = "/print_specification?specificationId=${specification.id}&requirementIds=" + getIds();
+                function getUrlForPrintButton() {
+                    document.getElementById('PrintButton').href =
+                        "/print_specification?specificationId=${specification.id}&requirementIds=" + getIds();
                 }
 
                 function getIds() {
@@ -177,43 +177,20 @@
                     let refTab = document.getElementById("sort");
                     for (let i = 0; i < refTab.rows.length; i++) {
                         let row = refTab.rows[i];
-                        alert(row.cells[2].firstChild.nodeValue);
+                        //alert(row.cells[2].firstChild.nodeValue);
                         ids[i] = row.cells[2].firstChild.nodeValue;
                     }
-
                     return ids;
                 }
 
             </script>
-
-
-
-
         </#list>
     </div>
 
 
 
-
-
     <br>
-
-
-    <a id=myLink class="btn btn-primary"
-       onclick="getUrl()"
-    >
-        <i title="Report2"></i>
-        Report2
-    </a>
-
-
-
-
-
-    <a id=PrintButton class="btn btn-primary"
-       href="/print_specification?specificationId=${specification.id}"
-
-    >
+    <a id=PrintButton class="btn btn-primary" onclick="getUrlForPrintButton()">
         <i title="Report"></i>
         Report
     </a>

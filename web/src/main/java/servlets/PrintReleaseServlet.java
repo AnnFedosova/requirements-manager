@@ -35,7 +35,13 @@ public class PrintReleaseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //при нажатии на кнопку отчетов попадаем сюда
         response.setContentType("text/html;charset=utf-8");
-        String id = request.getParameter("id");
+        String id = request.getParameter("releaseId");
+
+        //получаем массив из id требований, они в нужном порядке
+        String requirementIdsString = (request.getParameter("requirementIds")
+                .replaceAll(" ", ""))
+                .replaceAll("\"", "");
+        String[] requirementIds = requirementIdsString.split(",");
 
         Map<String, Object> pageVariables = null;
         try {
@@ -45,7 +51,10 @@ public class PrintReleaseServlet extends HttpServlet {
             byte[] byteArray = reportGenerator.template(
                     new ReleaseWithRequirements(
                             (ReleaseDTO) pageVariables.get("release"),
-                            ((List<RequirementDTO>) (pageVariables.get("requirements")))
+                            (
+                                    PrintSpecificationServlet.getSortedListOfRequirements((List<RequirementDTO>) (pageVariables.get("requirements")),
+                                            requirementIds)
+                            )
                                     .stream()
                                     .map(RequirementForReport::new)
                                     .collect(Collectors.toList()

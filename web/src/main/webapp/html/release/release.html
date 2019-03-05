@@ -148,17 +148,40 @@
                                 <td class="index"><a class="list-group-item text-center"
                                                      href="/requirement?id=${requirement.id}">${requirement.name}</a>
                                 </td>
+                                <td style="display:none;" class="index">
+                                    ${requirement.id}
+                                </td>
                             </tr>
                         </#items>
                     </div>
                     </tbody>
             </div>
             </table>
+
+            <script>
+
+                function getUrlForPrintButton() {
+                    document.getElementById('PrintButton').href =
+                        "/print_release?releaseId=${release.id}&requirementIds=" + getIds();
+                }
+
+                function getIds() {
+                    let ids = [];
+                    let refTab = document.getElementById("sort");
+                    for (let i = 0; i < refTab.rows.length; i++) {
+                        let row = refTab.rows[i];
+                        //alert(row.cells[2].firstChild.nodeValue);
+                        ids[i] = row.cells[2].firstChild.nodeValue;
+                    }
+                    return ids;
+                }
+
+            </script>
         </#list>
     </div>
 
     <br>
-    <a class="btn btn-primary" href="/print_release?id=${release.id}">
+    <a id=PrintButton class="btn btn-primary" onclick="getUrlForPrintButton()">
         <i title="Report"></i>
         Report
     </a>
