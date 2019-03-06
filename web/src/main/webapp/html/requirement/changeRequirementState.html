@@ -1,7 +1,7 @@
 <HTML>
 <head>
     <meta charset="utf-8">
-    <title>Add requirement to ${specification.name}</title>
+    <title>Change requirement state</title>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
@@ -35,17 +35,20 @@
         <div class='col-md-8 col-md-offset-2'>
             <div class='login'>
                 <div class='page-header'>
-                    <h2 class='text-center'>Add requirement</h2>
+                    <h2 class='text-center'>Change requirement state</h2>
                 </div>
 
-                <form id="login-form" action="/addReqToSpec" method="POST">
-                    <input type="hidden" name="specificationId" value="${specification.id}">
+                <br>
+                <h3 class="text-left"> Title:  ${requirement.name}</h3>
+
+                <form id="login-form" action="/changeRequirementState" method="POST">
+                    <input type="hidden" name="requirementId" value="${requirement.id}">
 
                     <br>
-                    <label for="requirements"><h4>Requirement: &nbsp;</h4></label>
-                    <select id="requirements" name="requirements" >
-                        <#list requirements as requirement>
-                        <option value="${requirement.id}">${requirement.name}</option>
+                    <label for="states"><h4>State: &nbsp;</h4></label>
+                    <select id="states" name="states" >
+                        <#list states as state>
+                        <option value="${state.id}">${state.name}</option>
                     </#list>
                     </select>
 
