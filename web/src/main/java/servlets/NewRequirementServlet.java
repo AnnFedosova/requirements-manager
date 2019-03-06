@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "New_requirement", urlPatterns = "/new_requirement")
+@WebServlet(name = "new_requirement", urlPatterns = "/new_requirement")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
 public class NewRequirementServlet  extends HttpServlet {
     final DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
@@ -40,7 +40,7 @@ public class NewRequirementServlet  extends HttpServlet {
             pageVariables = createPageVariablesMap(request, projectId);
             response.setStatus(HttpServletResponse.SC_OK);
             pageVariables.put("projectid", projectId);
-            response.getWriter().println(PageGenerator.getInstance().getPage("new_requirement/newRequirement.html", pageVariables));
+            response.getWriter().println(PageGenerator.getInstance().getPage("requirement/newRequirement.html", pageVariables));
 
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
