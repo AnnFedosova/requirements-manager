@@ -3,6 +3,7 @@ package servlets;
 import api.RequirementAPI;
 import api.UserAPI;
 import dto.RequirementDTO;
+import dto.TestCaseDTO;
 import dto.UserDTO;
 import templater.PageGenerator;
 
@@ -42,18 +43,21 @@ public class RequirementServlet extends HttpServlet {
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long requirementId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         RequirementDTO requirement = RequirementAPI.getRequirement(requirementId);
+        TestCaseDTO testCaseDTO = new TestCaseDTO();
 
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("requirement", requirement);
         pageVariables.put("creator", UserAPI.getUser(requirement.getCreatorId()));
         UserDTO changer = UserAPI.getUser(requirement.getCreatorId()); //getChangerId
+
         if (changer == null){
             changer = UserAPI.getUser(requirement.getCreatorId());
         }
         pageVariables.put("changer", changer);
-
         pageVariables.put("priority", RequirementAPI.getRequirementPriority(requirement.getPriorityId()));
+
+        pageVariables.put("testCases", testCaseDTO );
         pageVariables.put("state", RequirementAPI.getRequirementState(requirement.getStateId()));
         pageVariables.put("type", RequirementAPI.getRequirementType(requirement.getTypeId()));
         if (requirement.getModifiedDate() == null){
