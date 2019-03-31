@@ -175,7 +175,7 @@ public class RequirementService {
         requirementEntity.setChanger(dbService.getUser(requirementDTO.getChangerId()));
         requirementEntity.setPriority(dbService.getRequirementPriority(requirementDTO.getPriorityId()));
         requirementEntity.setState(dbService.getRequirementState(requirementDTO.getStateId()));
-        requirementEntity.setModifiedDate("Текущая дата");
+        requirementEntity.setModifiedDate("21-03-2019");
         dbService.updateRequirement(requirementEntity);
 
         String result = "Request updated with id = " + requirementDTO.getId();

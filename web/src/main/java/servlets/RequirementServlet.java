@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "Requirement", urlPatterns = "/requirement")
@@ -43,7 +45,16 @@ public class RequirementServlet extends HttpServlet {
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long requirementId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         RequirementDTO requirement = RequirementAPI.getRequirement(requirementId);
-        TestCaseDTO testCaseDTO = new TestCaseDTO();
+        List<TestCaseDTO> testCases = new ArrayList<>();
+        TestCaseDTO testCaseDTO = new TestCaseDTO(
+                1, 1, "Test-case 1 functional",
+                "", "","","","", 1);
+        testCases.add(testCaseDTO);
+        List<RequirementDTO> dependedRequirements = new ArrayList<>();
+        dependedRequirements.add(RequirementAPI.getRequirement(2));
+        dependedRequirements.add(RequirementAPI.getRequirement(3));
+
+
 
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
@@ -57,7 +68,9 @@ public class RequirementServlet extends HttpServlet {
         pageVariables.put("changer", changer);
         pageVariables.put("priority", RequirementAPI.getRequirementPriority(requirement.getPriorityId()));
 
-        pageVariables.put("testCases", testCaseDTO );
+        pageVariables.put("testCases", testCases );
+        pageVariables.put("dependedRequirements", dependedRequirements );
+
         pageVariables.put("state", RequirementAPI.getRequirementState(requirement.getStateId()));
         pageVariables.put("type", RequirementAPI.getRequirementType(requirement.getTypeId()));
         if (requirement.getModifiedDate() == null){

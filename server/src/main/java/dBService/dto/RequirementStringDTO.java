@@ -31,11 +31,11 @@ public class RequirementStringDTO {
         this.priorityId = requirementEntity.getPriority().getId();
         this.typeId = requirementEntity.getType().getId();
         this.stateId = requirementEntity.getState().getId();
-        this.creationDate = "Дата";//sdfr.format(requirementEntity.getCreationDate());
+        this.creationDate = "21-03-2019";//sdfr.format(requirementEntity.getCreationDate());
         this.creatorId = requirementEntity.getCreator().getId();
         if (requirementEntity.getModifiedDate()==null){
             this.modifiedDate=null;
-        }else{this.modifiedDate = "Дата";}//sdfr.format(requirementEntity.getModifiedDate());}
+        }else{this.modifiedDate = "21-03-2019";}//sdfr.format(requirementEntity.getModifiedDate());}
         if (requirementEntity.getChanger()==null){
             this.changerId = 0;}
         else {this.changerId = requirementEntity.getChanger().getId();}

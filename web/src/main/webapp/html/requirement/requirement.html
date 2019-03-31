@@ -87,53 +87,81 @@
                     }
                 </script>
 
+                <br><br>
+                <a class="btn btn-primary" href="/new_testCase?requirementId=${requirement.id}">
+                    <i title="Create test-case" class="fa fa-plus"></i>
+                    Create test-case
+                </a>
+
+                <a class="btn btn-primary" href="/addTestCaseToReq?requirementId=${requirement.id}">
+                    <i title="Add test-case" class="fa fa-plus"></i>
+                    Add test-case
+                </a>
+                <br>
+
             </div>
 
 
-            <br>
             <h3 class="text-left">Description</h3>
             <div style="font-size: medium">
                 ${requirement.description}
             </div>
 
-            <br>
             <h3 class="text-left"> Priority </h3>
             <div style="font-size: medium">
                 ${priority.name}
             </div>
 
-            <br>
             <h3 class="text-left"> State </h3>
             <div style="font-size: medium">
                 ${state.name}
             </div>
 
-            <br>
             <h3 class="text-left"> Type </h3>
             <div style="font-size: medium">
                 ${type.name}
             </div>
 
-            <br>
             <h3 class="text-left"> Relevance </h3>
             <div style="font-size: medium">
                 ${requirement.getRelevance()}
             </div>
 
-            <br>
             <h3 class="text-left"> Created Date </h3>
             <div style="font-size: medium">
                 ${requirement.creationDate} by ${creator.getLogin()}
             </div>
 
-            <br>
             <h3 class="text-left"> Modified Date </h3>
             <div style="font-size: medium">
                 ${requirement.modifiedDate} by ${changer.getLogin()}
             </div>
 
+            <h3 class="text-left">Dependent requirements</h3>
+            <div style="font-size: medium">
+                <#list dependedRequirements>
+                <table width="100%">
+                    <div class='col-sm-2'>
+                        <div class='list-group'>
+                            <#items as dependedRequirement>
+                            <tr>
+                                <td width="5%">
+                                    <div class="list-group-item text-center">
+                                        ${dependedRequirement?counter}
+                                    </div>
+                                </td>
+                                <td><a class="list-group-item text-center"
+                                       href="/dependedRequirement?id=${dependedRequirement.id}">${dependedRequirement.name}</a>
+                                </td>
+                            </tr>
+                            </#items>
+                        </div>
+                    </div>
+                </table>
+                </#list>
+            </div>
 
-            <br>
+
             <h3 class="text-left">Test-cases</h3>
             <div style="font-size: medium">
                 <#list testCases>
@@ -144,20 +172,19 @@
                             <tr>
                                 <td width="5%">
                                     <div class="list-group-item text-center">
-                                        ${specification?counter}
+                                        ${testCase?counter}
                                     </div>
                                 </td>
                                 <td><a class="list-group-item text-center"
-                                       href="/specification?id=${specification.id}">${testCase.name}</a>
+                                       href="/testCase?id=${testCase.id}">${testCase.name}</a>
                                 </td>
                             </tr>
-                        </#items>
+                            </#items>
+                        </div>
                     </div>
+                </table>
+                </#list>
             </div>
-            </table>
-        </#list>
-    </div>
-
 
     <br>
 </div>

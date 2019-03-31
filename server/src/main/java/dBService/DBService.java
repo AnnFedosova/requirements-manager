@@ -289,7 +289,7 @@ public class DBService {
                 lastVersion = requirementDAO.get(lastVersionId);
             }
             RequirementEntity requirementEntity = new RequirementEntity(project, name, description,
-                        priority, type, state, "Текущая дата", creator, lastVersion ,true);
+                        priority, type, state, "21-03-2019", creator, lastVersion ,true);
 
             long requirementId = requirementDAO.addRequirement(requirementEntity);
 
