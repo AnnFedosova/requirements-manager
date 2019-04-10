@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "User")
 public class UserEntity implements Serializable {
-    private static final long serialVersionUID = 14_05_2018L;
+    private static final long serialVersionUID = 10_04_2019L;
 
     @Id
     @Column(name = "id", unique = true, updatable = false)
@@ -29,34 +29,43 @@ public class UserEntity implements Serializable {
     @Column(name = "password")
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "system_role_id")
+    private SystemRoleEntity systemRole;
+
     @OneToMany(mappedBy = "creator")
-    private Set<RequirementEntity> creators;
+    private Set<TestCaseEntity> TestCaseCreators;
+
+    @OneToMany(mappedBy = "tester")
+    private Set<TestCaseResultEntity> TestCaseTesters;
+
+    @OneToMany(mappedBy = "creator")
+    private Set<RequirementEntity> requirementCreators;
 
     @OneToMany(mappedBy = "changer")
-    private Set<RequirementEntity> changers;
+    private Set<RequirementEntity> RequirementChangers;
 
     @OneToMany(mappedBy = "user")
     private Set<UserProjectRoleEntity> projectUsers;
 
-    @OneToMany(mappedBy = "user")
-    private Set<UserSystemRoleEntity> systemUsers;
-
     public UserEntity() {
     }
 
-    public UserEntity(String firstName, String lastName, String middleName, String login, String password) {
+    public UserEntity(String firstName, String lastName, String middleName, String login, String password,SystemRoleEntity systemRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
         this.login = login;
         this.password = password;
+        this.systemRole=systemRole;
     }
 
-    public UserEntity(String firstName, String lastName, String login, String password) {
+    public UserEntity(String firstName, String lastName, String login, String password, SystemRoleEntity systemRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
+        this.systemRole=systemRole;
     }
 
     public UserEntity(UserEntity userEntity) {
@@ -66,6 +75,7 @@ public class UserEntity implements Serializable {
         this.middleName = userEntity.middleName;
         this.login = userEntity.login;
         this.password = userEntity.password;
+        this.systemRole=userEntity.systemRole;
     }
 
     public long getId() {
@@ -102,5 +112,13 @@ public class UserEntity implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public SystemRoleEntity getSystemRole() {
+        return systemRole;
+    }
+
+    public void setSystemRole(SystemRoleEntity systemRole) {
+        this.systemRole = systemRole;
     }
 }

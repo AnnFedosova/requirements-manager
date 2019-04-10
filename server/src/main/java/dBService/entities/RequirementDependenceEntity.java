@@ -10,17 +10,17 @@ public class RequirementDependenceEntity implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "parent_requirement_id")
+    @JoinColumn(name = "parent_requirement_id",nullable = false)
     private RequirementEntity parentRequirement;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "child_requirement_id")
+    @JoinColumn(name = "child_requirement_id",nullable = false)
     private RequirementEntity childRequirement;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "connection_type_id")
+    @JoinColumn(name = "connection_type_id",nullable = false)
     private ConnectionTypeEntity connectionType;
 
     public RequirementDependenceEntity(){}

@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "requirements")
+@Table(name = "Requirement")
 public class RequirementEntity implements Serializable {
     private static final long serialVersionUID = 10_05_2018L;
 
@@ -38,7 +38,6 @@ public class RequirementEntity implements Serializable {
     private RequirementStateEntity state;
 
     @Column(name = "creation_date")
-    //@Temporal(TemporalType.DATE)
     private String creationDate;
 
     @ManyToOne
@@ -46,12 +45,15 @@ public class RequirementEntity implements Serializable {
     private UserEntity creator;
 
     @Column(name = "modified_date")
-    //@Temporal(TemporalType.DATE)
     private String modifiedDate;
 
     @ManyToOne
     @JoinColumn(name = "changer_id")
     private UserEntity changer;
+
+    @ManyToOne
+    @JoinColumn(name = "subsystem_id")
+    private SubsystemEntity subsystem;
 
     @ManyToOne
     @JoinColumn(name = "last_version_id")
@@ -60,15 +62,16 @@ public class RequirementEntity implements Serializable {
     @Column(name = "relevance")
     private boolean relevance;
 
-    @OneToMany(mappedBy = "requirement")
+    @OneToMany(mappedBy = "requirement_id")
     private Set<SpecificationRequirementEntity> specificationRequirements;
 
-    @OneToMany(mappedBy = "requirement")
+    @OneToMany(mappedBy = "requirement_id")
     private Set<ReleaseRequirementEntity> releaseRequirements;
 
     public RequirementEntity(){}
 
-    public RequirementEntity(ProjectEntity project, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementStateEntity state, String creationDate, UserEntity creator, String modifiedDate, UserEntity changer, RequirementEntity lastVersion, boolean relevance) {
+    public RequirementEntity(ProjectEntity project, SubsystemEntity subsystemEntity, String name, String description, RequirementPriorityEntity priority, RequirementTypeEntity type, RequirementStateEntity state, String creationDate, UserEntity creator, String modifiedDate, UserEntity changer, RequirementEntity lastVersion, boolean relevance) {
+        this.subsystem=subsystemEntity;
         this.project = project;
         this.name = name;
         this.description = description;
@@ -97,6 +100,7 @@ public class RequirementEntity implements Serializable {
 
     public RequirementEntity(RequirementEntity requirementEntity) {
         this.id = requirementEntity.id;
+        this.subsystem=requirementEntity.subsystem;
         this.project = requirementEntity.project;
         this.name = requirementEntity.name;
         this.description = requirementEntity.description;
@@ -213,5 +217,13 @@ public class RequirementEntity implements Serializable {
 
     public void setRelevance(boolean relevance) {
         this.relevance = relevance;
+    }
+
+    public SubsystemEntity getSubsystem() {
+        return subsystem;
+    }
+
+    public void setSubsystem(SubsystemEntity subsystem) {
+        this.subsystem = subsystem;
     }
 }

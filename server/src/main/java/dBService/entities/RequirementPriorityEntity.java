@@ -18,7 +18,7 @@ public class RequirementPriorityEntity implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "priority")
-    private Set<RequirementEntity> prioritySet;
+    private Set<RequirementEntity> requirements;
 
     public RequirementPriorityEntity(){}
 

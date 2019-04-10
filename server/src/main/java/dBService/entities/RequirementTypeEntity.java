@@ -14,13 +14,14 @@ public class RequirementTypeEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "type")
     private Set<RequirementEntity> typeSet;
 
-    public RequirementTypeEntity(){}
+    public RequirementTypeEntity() {
+    }
 
     public RequirementTypeEntity(String name) {
         this.name = name;

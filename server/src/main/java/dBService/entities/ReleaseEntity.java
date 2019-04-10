@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "releases")
+@Table(name = "Release")
 public class ReleaseEntity implements Serializable {
     private static final long serialVersionUID = 10_05_2018L;
 
@@ -21,12 +21,18 @@ public class ReleaseEntity implements Serializable {
     @Column(name = "description",columnDefinition = "text")
     private String description;
 
-    @Column(name = "releaseDate")
-//    @Temporal(TemporalType.DATE)
+    @Column(name = "releaseDate", nullable = false)
     private Date releaseDate;
 
+    @Column(name = "ready_flag")
+    private boolean readyFlag;
+
     @OneToMany(mappedBy = "release")
-    private Set<ReleaseRequirementEntity> releases;
+    private Set<ReleaseRequirementEntity> releaseRequirements;
+
+    @ManyToOne
+    @JoinColumn(name = "specification_id")
+    private SpecificationEntity specification;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
@@ -34,11 +40,14 @@ public class ReleaseEntity implements Serializable {
 
     public ReleaseEntity(){}
 
-    public ReleaseEntity(String name, String description, Date releaseDate, ProjectEntity projectEntity) {
+    public ReleaseEntity(String name, String description, Date releaseDate, boolean readyFlag,
+                         SpecificationEntity specification, ProjectEntity project) {
         this.name = name;
         this.description = description;
         this.releaseDate = releaseDate;
-        this.project = projectEntity;
+        this.readyFlag = readyFlag;
+        this.specification = specification;
+        this.project = project;
     }
 
     public ReleaseEntity(ReleaseEntity releaseEntity) {
@@ -47,6 +56,8 @@ public class ReleaseEntity implements Serializable {
         this.description = releaseEntity.description;
         this.releaseDate = releaseEntity.releaseDate;
         this.project = releaseEntity.project;
+        this.readyFlag=releaseEntity.readyFlag;
+        this.specification=releaseEntity.specification;
     }
 
     public long getId() {

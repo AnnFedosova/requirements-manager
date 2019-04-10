@@ -5,30 +5,26 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "system_roles")
-public class SystemRoleEntity implements Serializable {
-    private static final long serialVersionUID = 10_05_2018L;
+@Table(name = "Component_Type")
+public class ComponentTypeEntity implements Serializable {
+    private static final long serialVersionUID = 10_04_2019L;
 
     @Id
-    @Column(name = "id", unique = true, updatable = false)
+    @Column(name = "id", unique = true, updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Id
     @Column(name = "name",unique = true, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "systemRole")
-    private Set<UserEntity> users;
+    @OneToMany(mappedBy = "componentType")
+    private Set<ComponentEntity> components;
 
-    public SystemRoleEntity(){}
+    public ComponentTypeEntity(){}
 
-    public SystemRoleEntity(String name) {
+    public ComponentTypeEntity(String name) {
         this.name = name;
-    }
-
-    public SystemRoleEntity(SystemRoleEntity systemRoleEntity) {
-        this.id=systemRoleEntity.id;
-        this.name = systemRoleEntity.name;
     }
 
     public long getId() {

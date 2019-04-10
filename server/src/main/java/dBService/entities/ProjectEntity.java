@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "projects")
+@Table(name = "Project")
 public class ProjectEntity implements Serializable {
     private static final long serialVersionUID = 10_05_2018L;
 
@@ -14,17 +14,17 @@ public class ProjectEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "description",columnDefinition = "text")
     private String description;
 
     @OneToMany(mappedBy = "project")
-    private Set<UserProjectRoleEntity> projects;
+    private Set<UserProjectRoleEntity> projectUsers;
 
     @OneToMany(mappedBy = "project")
-    private Set<RequirementEntity> requirementProjects;
+    private Set<RequirementEntity> requirements;
 
     public ProjectEntity(){
     }

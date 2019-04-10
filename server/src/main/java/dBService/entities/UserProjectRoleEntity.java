@@ -20,21 +20,21 @@ public class UserProjectRoleEntity implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "role_id")
-    private ProjectRoleEntity role;
+    @JoinColumn(name = "project_role_id")
+    private ProjectRoleEntity projectRole;
 
     public UserProjectRoleEntity(){}
 
-    public UserProjectRoleEntity(UserEntity user, ProjectEntity project, ProjectRoleEntity role) {
+    public UserProjectRoleEntity(UserEntity user, ProjectEntity project, ProjectRoleEntity projectRole) {
         this.user = user;
         this.project = project;
-        this.role = role;
+        this.projectRole = projectRole;
     }
 
     public UserProjectRoleEntity(UserProjectRoleEntity userProjectRoleEntity) {
         this.user = userProjectRoleEntity.user;
         this.project = userProjectRoleEntity.project;
-        this.role = userProjectRoleEntity.role;
+        this.projectRole = userProjectRoleEntity.projectRole;
     }
 
     public UserEntity getUser() {
@@ -53,11 +53,11 @@ public class UserProjectRoleEntity implements Serializable {
         this.project = project;
     }
 
-    public ProjectRoleEntity getRole() {
-        return role;
+    public ProjectRoleEntity getProjectRole() {
+        return projectRole;
     }
 
-    public void setRole(ProjectRoleEntity role) {
-        this.role = role;
+    public void setProjectRole(ProjectRoleEntity projectRole) {
+        this.projectRole = projectRole;
     }
 }

@@ -10,42 +10,56 @@ public class SpecificationEntity implements Serializable {
     private static final long serialVersionUID = 10_05_2018L;
 
     @Id
-    @Column(name = "id", unique = true, updatable = false)
+    @Column(name = "id", unique = true, updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "name",nullable = false)
     private String name;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "planned_date")
-//    @Temporal(TemporalType.DATE)
+    @Column(name = "planned_date",nullable = false)
     private String plannedDate;
 
-    @OneToMany(mappedBy = "specification")
-    private Set<SpecificationRequirementEntity> specification;
+    @Column(name = "ready_flag")
+    private boolean readyFlag;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
     private ProjectEntity project;
 
+    @ManyToOne
+    @JoinColumn(name = "test_plan_id")
+    private TestPlanEntity testPlan;
+
+    @OneToMany(mappedBy = "specification")
+    private Set<SpecificationRequirementEntity> specificationRequirements;
+
+    @OneToMany(mappedBy = "specification")
+    private Set<ReleaseEntity> releases;
+
     public SpecificationEntity(){}
 
-    public SpecificationEntity(String name, String description, String plannedDate, ProjectEntity projectEntity) {
+    public SpecificationEntity(String name, String description, String plannedDate, boolean readyFlag,
+                               ProjectEntity project, TestPlanEntity testPlan) {
         this.name = name;
         this.description = description;
         this.plannedDate = plannedDate;
-        this.project=projectEntity;
+        this.readyFlag = readyFlag;
+        this.project = project;
+        this.testPlan = testPlan;
     }
 
-    public SpecificationEntity(SpecificationEntity specificationEntety) {
-        this.id = specificationEntety.id;
-        this.name = specificationEntety.name;
-        this.description = specificationEntety.description;
-        this.plannedDate = specificationEntety.plannedDate;
-        this.project=specificationEntety.project;
+    public SpecificationEntity(SpecificationEntity specificationEntity) {
+        this.id = specificationEntity.id;
+        this.name = specificationEntity.name;
+        this.description = specificationEntity.description;
+        this.plannedDate = specificationEntity.plannedDate;
+        this.project=specificationEntity.project;
+        this.readyFlag=specificationEntity.readyFlag;
+        this.testPlan=specificationEntity.testPlan;
     }
 
     public long getId() {
@@ -86,5 +100,21 @@ public class SpecificationEntity implements Serializable {
 
     public void setProject(ProjectEntity project) {
         this.project = project;
+    }
+
+    public boolean isReadyFlag() {
+        return readyFlag;
+    }
+
+    public void setReadyFlag(boolean readyFlag) {
+        this.readyFlag = readyFlag;
+    }
+
+    public TestPlanEntity getTestPlan() {
+        return testPlan;
+    }
+
+    public void setTestPlan(TestPlanEntity testPlan) {
+        this.testPlan = testPlan;
     }
 }

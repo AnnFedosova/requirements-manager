@@ -10,12 +10,12 @@ public class SpecificationRequirementEntity implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "specification_id")
+    @JoinColumn(name = "specification_id",nullable = false)
     private SpecificationEntity specification;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "requirement_id")
+    @JoinColumn(name = "requirement_id",nullable = false)
     private RequirementEntity requirement;
 
     public SpecificationRequirementEntity(){}

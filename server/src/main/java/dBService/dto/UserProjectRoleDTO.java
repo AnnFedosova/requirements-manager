@@ -22,7 +22,7 @@ public class UserProjectRoleDTO {
     public UserProjectRoleDTO(UserProjectRoleEntity userProjectRoleEntity) {
         this.userId = userProjectRoleEntity.getUser().getId();
         this.projectId = userProjectRoleEntity.getProject().getId();
-        this.projectRoleId = userProjectRoleEntity.getRole().getId();
+        this.projectRoleId = userProjectRoleEntity.getProjectRole().getId();
     }
 
     public long getUserId() {
