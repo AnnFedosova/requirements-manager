@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>${testEnvironment.name}</title>
+    <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
+    <link rel="apple-touch-icon" type="image/x-icon" href="/img/apple-icon.png"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="navbar">
+    <nav class='navbar navbar-inverse'>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <#if isAdmin>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
+            </#if>
+        </div>
+        <div class='navbar-right'>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+        </div>
+</div>
+</nav>
+</div>
+
+<div class='container'>
+    <div class='row'>
+        <div class='login'>
+            <div class='page-header'>
+                <h2 class='text-left'>${testEnvironment.name}</h2>
+
+                <a class="btn btn-primary" href="/edit_project?testEnvironmentId=${testEnvironment.id}">
+                    <i title="Add component" class="fa fa-pencil-square-o"></i>
+                    Add component
+                </a>
+
+                <br><br>
+                <a class="btn btn-primary" href="/edit_project?testEnvironmentId=${testEnvironment.id}">
+                    <i title="Create component" class="fa fa-plus"></i>
+                    Create component
+                </a>
+
+                <a class="btn btn-primary" href="/addTestCaseToReq?testEnvironmentId=${testEnvironment.id}">
+                    <i title="Edit test environment" class="fa fa-plus"></i>
+                    Edit test environment
+                </a>
+
+                <a class="btn btn-primary" href="/new_testCase?testEnvironmentId=${testEnvironment.id}">
+                    <i title="Delete test environment" class="fa fa-plus"></i>
+                    Delete test environment
+                </a>
+
+            </div>
+
+
+            <h3 class="text-left">Description</h3>
+            <div style="font-size: medium">
+                ${testEnvironment.description}
+            </div>
+
+
+            <h3 class="text-left">Test environment components</h3>
+            <div style="font-size: medium">
+                <#list testEnvironmentComponents>
+                <table width="100%">
+                    <div class='col-sm-2'>
+                        <div class='list-group'>
+                            <#items as testEnvironmentComponent>
+                            <tr>
+                                <td width="5%">
+                                    <div class="list-group-item text-center">
+                                        ${testEnvironmentComponent?counter}
+                                    </div>
+                                </td>
+                                <td><a class="list-group-item text-center"
+                                       href="/testEnvironmentComponent?testEnvironmentComponentId=${testEnvironmentComponent.id}">${testEnvironmentComponent.name}</a>
+                                </td>
+                            </tr>
+                        </#items>
+                    </div>
+            </div>
+            </table>
+        </#list>
+    </div>
+
+
+<br>
+</div>
+<footer class='text-muted'>
+    <div class='pull-left'><span>2018</span></div>
+    <div class='clearfix'></div>
+</footer>
+</div>
+</div>
+</body>
+</HTML>

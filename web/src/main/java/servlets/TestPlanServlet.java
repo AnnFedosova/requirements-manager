@@ -2,6 +2,7 @@ package servlets;
 
 import api.UserAPI;
 import dto.TestCaseDTO;
+import dto.TestEnvironmentDTO;
 import dto.TestPlanDTO;
 import dto.TestSuiteDTO;
 import templater.PageGenerator;
@@ -23,7 +24,7 @@ import java.util.Map;
 @WebServlet(name = "TestPlan", urlPatterns = "/testPlan")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
 public class TestPlanServlet extends HttpServlet {
-    //todo
+
     TestPlanServlet(){}
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
@@ -48,8 +49,8 @@ public class TestPlanServlet extends HttpServlet {
 
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long specificationId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        Principal user = request.getUserPrincipal();
-        pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+        //Principal user = request.getUserPrincipal();
+        pageVariables.put("isAdmin", true /* когда сервер починится UserAPI.isAdmin(user.getName()) */);
         TestPlanDTO testPlan = new TestPlanDTO(1, "Test-Plan",
                 "Документ, описывающий весь объем работ по тестированию. Содержит информацию по тест-кейсам, тест-наборам и пр.",
                 "20-01-2019", "20-09-2019", "", 1, 1);
@@ -61,6 +62,12 @@ public class TestPlanServlet extends HttpServlet {
                 "", "","","","", 1);
         testCases.add(testCase);
         pageVariables.put("testCases", testCases);
+
+        List<TestEnvironmentDTO> testEnvironments = new ArrayList<>();
+        TestEnvironmentDTO testEnvironment = new TestEnvironmentDTO(1, "Test Environment 1",
+                "Конкретный экземпляр конфигурации аппаратного и программного обеспечения, предназначенный для тестирования работы в контролируемой среде.");
+        testEnvironments.add(testEnvironment);
+        pageVariables.put("testEnvironments", testEnvironments);
 
         List<TestSuiteDTO> testSuites = new ArrayList<>();
         TestSuiteDTO testSuite = new TestSuiteDTO(

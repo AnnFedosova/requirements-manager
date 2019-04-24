@@ -87,6 +87,37 @@
                 admin
             </div>
 
+            <h3 class="text-left">Test environment</h3>
+            <div style="font-size: medium">
+                <#list testEnvironments>
+                <table id="noSort"  class="grid" width="100%">
+                    <tbody>
+                    <div class='col-sm-2'>
+                        <div class='list-group'>
+                            <#items as testEnvironment>
+                            <tr>
+                                <td width="5%">
+                                    <div class="list-group-item text-center">
+                                        ${testEnvironment?counter}
+                                    </div>
+                                </td>
+                                <td class="index">
+                                    <a class="list-group-item text-center" href="/testEnvironment?testEnvironmentId=${testEnvironment.id}">
+                                        ${testEnvironment.name}
+                                    </a>
+                                </td>
+                                <td style="display:none;" class="index">
+                                    ${testEnvironment.id}
+                                </td>
+                            </tr>
+                            </#items>
+                        </div>
+                    </div>
+                    </tbody>
+                </table>
+                </#list>
+            </div>
+
             <h3 class="text-left">Test-cases</h3>
             <div style="font-size: medium">
                 <#list testCases>
