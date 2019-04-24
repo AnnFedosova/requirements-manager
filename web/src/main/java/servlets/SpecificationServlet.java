@@ -5,6 +5,7 @@ import api.SpecificationAPI;
 import api.UserAPI;
 import dto.RequirementDTO;
 import dto.SpecificationDTO;
+import dto.TestPlanDTO;
 import templater.PageGenerator;
 
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,10 +49,20 @@ public class SpecificationServlet extends HttpServlet {
         SpecificationDTO specification = SpecificationAPI.getSpecification(id);
         List<RequirementDTO> requirements = RequirementAPI.getRequirementsBySpecification(id);
 
+        TestPlanDTO testPlan = new TestPlanDTO(1, "Test-Plan",
+                "Документ, описывающий весь объем работ по тестированию. Содержит информацию по тест-кейсам, тест-наборам и пр.",
+                "", "", "", 1, 1);
+        List<TestPlanDTO> testPlans = new ArrayList<>();
+        testPlans.add(testPlan);
+
+        List<RequirementDTO> noTestRequirements = RequirementAPI.getRequirementsBySpecification(id); //todo тут должны быть noTestRequirement, а не все
+
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("specification", specification);
         pageVariables.put("requirements", requirements);
+        pageVariables.put("noTestRequirements", noTestRequirements);
+        pageVariables.put("testPlans", testPlans);
 
         return pageVariables;
     }

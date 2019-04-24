@@ -77,7 +77,6 @@
                                                                                                         class="fa fa-plus"></i> Add
                     requirement</a>
 
-
                 <button class="btn btn-primary" onclick="openDeleteSpecificationDialog()">
                     Delete specification
                 </button>
@@ -121,23 +120,19 @@
                         window.location.href = hrefProjectPage;
                     }
                 </script>
+
             </div>
 
-
-            <br>
             <h3 class="text-left">Description</h3>
             <div style="font-size: medium">
                 ${specification.description}
             </div>
 
-            <br>
             <h3 class="text-left">Planned Date</h3>
             <div style="font-size: medium">
                 ${specification.plannedDate}
             </div>
 
-
-            <br>
             <h3 class="text-left">Requirements</h3>
             <div style="font-size: medium">
                 <#list requirements>
@@ -160,12 +155,12 @@
                                         </td>
                                     </tr>
                                 </#items>
-                        </div>
+                            </div>
                     </tbody>
-            </div>
-            </table>
+                        </div>
+                </table>
 
-            <script>
+                <script>
 
                 function getUrlForPrintButton() {
                     document.getElementById('PrintButton').href =
@@ -184,8 +179,58 @@
                 }
 
             </script>
+                </#list>
+            </div>
+
+    <h3 class="text-left">Test-plan</h3>
+    <div style="font-size: medium">
+        <#list testPlans>
+        <table id="noSort"  class="grid" width="100%">
+            <tbody>
+            <div class='col-sm-2'>
+                <div class='list-group'>
+                    <#items as testPlan>
+                    <tr>
+                        <td class="index">
+                            <a class="list-group-item text-center" href="/testPlan?testPlanId=${testPlan.id}">
+                                ${testPlan.name}
+                            </a>
+                        </td>
+                        <td style="display:none;" class="index">
+                            ${testPlan.id}
+                        </td>
+                    </tr>
+                    </#items>
+                </div>
+            </tbody>
+            </div>
+        </table>
         </#list>
     </div>
+
+        <h3 class="text-left">Requirements without test-cases</h3>
+        <div style="font-size: medium">
+            <#list noTestRequirements>
+            <table width="100%">
+                <div class='col-sm-2'>
+                    <div class='list-group'>
+                        <#items as noTestRequirement>
+                        <tr>
+                            <td width="5%">
+                                <div class="list-group-item text-center">
+                                    ${noTestRequirement?counter}
+                                </div>
+                            </td>
+                            <td><a class="list-group-item text-center"
+                                   href="/requirement?id=${noTestRequirement.id}">${noTestRequirement.name}</a>
+                            </td>
+                        </tr>
+                    </#items>
+                </div>
+        </div>
+        </table>
+    </#list>
+</div>
 
 
 
