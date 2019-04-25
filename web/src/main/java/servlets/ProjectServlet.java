@@ -2,6 +2,7 @@ package servlets;
 
 import api.ProjectAPI;
 import api.RequirementAPI;
+import api.TestPlanAPI;
 import api.UserAPI;
 import dto.*;
 import templater.PageGenerator;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +52,12 @@ public class ProjectServlet extends HttpServlet {
         List<UserDTO> users = ProjectAPI.getUsersByProject(id);
         List<SpecificationDTO> specifications = ProjectAPI.getSpecByProjectId(id);
         List<ReleaseDTO> releases = ProjectAPI.getReleasesByProjectId(id);
+        List<TestPlanDTO> testPlans = new ArrayList<>(); // TestPlanAPI.getTestPlansByProjectId(id);
 
+        TestPlanDTO testPlan = new TestPlanDTO(1, "Test-Plan",
+                "Документ, описывающий весь объем работ по тестированию. Содержит информацию по тест-кейсам, тест-наборам и пр.",
+                "20-01-2019", "20-09-2019", "", 1, 1);
+        testPlans.add(testPlan);
 
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("project", project);
@@ -58,7 +65,7 @@ public class ProjectServlet extends HttpServlet {
         pageVariables.put("specifications", specifications);
         pageVariables.put("requirements", requirements);
         pageVariables.put("releases", releases);
-
+        pageVariables.put("testPlans", testPlans);
 
         return pageVariables;
     }

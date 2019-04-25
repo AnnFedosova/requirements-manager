@@ -2,6 +2,7 @@ package api;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import dto.RequirementDTO;
 import dto.TestCaseDTO;
 
 import javax.ws.rs.client.*;
@@ -24,9 +25,14 @@ public class TestCaseAPI {
         return builder.post(Entity.entity(testCase, "application/json; charset=UTF-8"));
     }
 
-    public List<TestCaseDTO> getAllTestCases() throws Exception {
+    public static List<TestCaseDTO> getAllTestCases() throws Exception {
         String json = JSONHelper.getJson(URL + "getAllTestCases");
         return new Gson().fromJson(json, new TypeToken<List<TestCaseDTO>>(){}.getType());
+    }
+
+    public static List<RequirementDTO> getReqByTestCaseId(long testCaseId) throws Exception {
+        String json = JSONHelper.getJson(URL + "getReqByTestCaseId" + testCaseId);
+        return new Gson().fromJson(json, new TypeToken<List<RequirementDTO>>(){}.getType());
     }
 
     public static Response editTestCase(TestCaseDTO testCase) {

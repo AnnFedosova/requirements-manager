@@ -74,9 +74,9 @@ public class TestPlanServlet extends HttpServlet {
                 1, "Test-suite for print function",
                 "Here are tests for report printing features for the card issuance system.",
                 "2, 1", 1);
-
         testSuites.add(testSuite);
         pageVariables.put("testSuites", testSuites);
+
         return pageVariables;
     }
 }

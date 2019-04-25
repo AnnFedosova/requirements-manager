@@ -40,8 +40,6 @@ public class NewTestCaseServlet extends HttpServlet {
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
 
 
-
-
         return pageVariables;
     }
 }

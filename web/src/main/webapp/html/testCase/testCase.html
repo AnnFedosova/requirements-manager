@@ -1,10 +1,176 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html>
 
+<head>
+    <meta charset="utf-8">
+    <title>${testCase.name}</title>
+    <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
+    <link rel="apple-touch-icon" type="image/x-icon" href="/img/apple-icon.png"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="navbar">
+    <nav class='navbar navbar-inverse'>
+        <div class='container-fluid'>
+            <div class='navbar-header'>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <#if isAdmin>
+                    <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
+                </#if>
+            </div>
+
+            <div class='navbar-right'>
+                <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class='container'>
+    <div class='row'>
+        <div class='login'>
+            <div class='page-header'>
+                <h2 class='text-left'>${testCase.name}</h2>
+
+                <a class="btn btn-primary" href="/edit_project?id=${testCase.id}">
+                    <i title="Edit test-case" class="fa fa-pencil-square-o"></i>
+                    Edit test-case
+                </a>
+
+                <br><br>
+                <a class="btn btn-primary" href="/new_testCaseResult?testCaseId=${testCase.id}">
+                    <i title="Add result" class="fa fa-plus"></i>
+                    Add result
+                </a>
+
+                <br><br>
+                <a class="btn btn-primary" href="/new_testCase?testCaseId=${testCase.id}">
+                    <i title="Add requirement" class="fa fa-plus"></i>
+                    Add requirement
+                </a>
+
+            </div>
+
+            <h3 class="text-left">Plan </h3>
+            <div style="font-size: medium">
+                ${testCase.plan}
+            </div>
+
+            <h3 class="text-left">Conditions</h3>
+            <div style="font-size: medium">
+                Start conditions:
+                ${testCase.startConditions}
+
+                End conditions:
+                ${testCase.endConditions}
+            </div>
+
+            <h3 class="text-left">Test date</h3>
+            <div style="font-size: medium">
+                ${testCase.data}
+            </div>
+
+            <h3 class="text-left"> Creation date </h3>
+            <div style="font-size: medium">
+                ${testCase.creationDate} by ${creator.getLogin()}
+            </div>
+
+            <h3 class="text-left">Test environment</h3>
+            <div style="font-size: medium">
+                <#list testEnvironments>
+                <table id="noSort"  class="grid" width="100%">
+                    <tbody>
+                    <div class='col-sm-2'>
+                        <div class='list-group'>
+                            <#items as testEnvironment>
+                            <tr>
+                                <td width="5%">
+                                    <div class="list-group-item text-center">
+                                        ${testEnvironment?counter}
+                                    </div>
+                                </td>
+                                <td class="index">
+                                    <a class="list-group-item text-center" href="/testEnvironment?testEnvironmentId=${testEnvironment.id}">
+                                        ${testEnvironment.name}
+                                    </a>
+                                </td>
+                                <td style="display:none;" class="index">
+                                    ${testEnvironment.id}
+                                </td>
+                            </tr>
+                        </#items>
+                    </div>
+            </div>
+            </tbody>
+            </table>
+        </#list>
+    </div>
+
+    <h3 class="text-left">Requirements </h3>
+    <div style="font-size: medium">
+        <#list requirements>
+        <table width="100%">
+            <div class='col-sm-2'>
+                <div class='list-group'>
+                    <#items as requirement>
+                    <tr>
+                        <td width="5%">
+                            <div class="list-group-item text-center">
+                                ${requirement?counter}
+                            </div>
+                        </td>
+                        <td><a class="list-group-item text-center"
+                               href="/requirement?requirementId=${requirement.id}">${requirement.name}</a>
+                        </td>
+                    </tr>
+                </#items>
+            </div>
+    </div>
+    </table>
+</#list>
+</div>
+
+
+<h3 class="text-left">Test-case results</h3>
+<div style="font-size: medium">
+    <#list testCaseResults>
+    <table width="100%">
+        <div class='col-sm-2'>
+            <div class='list-group'>
+                <#items as testCaseResult>
+                <tr>
+                    <td width="5%">
+                        <div class="list-group-item text-center">
+                            ${testCaseResult?counter}
+                        </div>
+                    </td>
+                    <td><a class="list-group-item text-center"
+                           href="/testCaseResult?testCaseResultId=${testCaseResult.id}">${testCaseResult.name}</a>
+                    </td>
+                </tr>
+            </#items>
+        </div>
+</div>
+</table>
+</#list>
+</div>
+
+
+<br>
+<a id=PrintButton class="btn btn-primary" >
+    <i title="Report"></i>
+    Report
+</a>
+
+<br>
+</div>
+<footer class='text-muted'>
+    <div class='pull-left'><span>2018</span></div>
+    <div class='clearfix'></div>
+</footer>
+</div>
+</div>
 </body>
-</html>
+</HTML>

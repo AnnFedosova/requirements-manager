@@ -30,10 +30,10 @@ public class RequirementServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
 
-        String id = request.getParameter("id");
+        String requirementId = request.getParameter("requirementId");
         Map<String, Object> pageVariables = null;
         try {
-            pageVariables = createPageVariablesMap(request, Long.parseLong(id));
+            pageVariables = createPageVariablesMap(request, Long.parseLong(requirementId));
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().println(PageGenerator.getInstance().getPage("requirement/requirement.html", pageVariables));
         } catch (Exception e) {

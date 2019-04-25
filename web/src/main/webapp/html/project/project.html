@@ -77,12 +77,37 @@
                                        href="/specification?id=${specification.id}">${specification.name}</a>
                                 </td>
                             </tr>
+                            </#items>
+                        </div>
+                    </div>
+                </table>
+                </#list>
+            </div>
+
+            <br>
+            <h3 class="text-left">Test-Plans</h3>
+            <div style="font-size: medium">
+                <#list testPlans>
+                <table width="100%">
+                    <div class='col-sm-2'>
+                        <div class='list-group'>
+                            <#items as testPlan>
+                            <tr>
+                                <td width="5%">
+                                    <div class="list-group-item text-center">
+                                        ${testPlan?counter}
+                                    </div>
+                                </td>
+                                <td><a class="list-group-item text-center"
+                                       href="/testPlan?testPlanId=${testPlan.id}">${testPlan.name}</a>
+                                </td>
+                            </tr>
                         </#items>
                     </div>
             </div>
             </table>
         </#list>
-    </div>
+        </div>
 
     <br>
     <h3 class="text-left">Releases</h3>
@@ -152,7 +177,7 @@
                                 </td>
 
                                 <td><a class="list-group-item text-center"
-                                       href="/requirement?id=${requirement.id}">${requirement.name}</a>
+                                       href="/requirement?requirementId=${requirement.id}">${requirement.name}</a>
                                 </td>
                             </tr>
                         </#items>
