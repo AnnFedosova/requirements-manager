@@ -1,4 +1,4 @@
-package servlets;
+package servlets.testPlan;
 
 import api.UserAPI;
 import dto.TestCaseDTO;

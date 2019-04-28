@@ -53,7 +53,7 @@ public class TestCaseResultServlet extends HttpServlet {
                 1, "10-10-2019",
                 "Тест пройден успешно. Дефектов не обнаружено.",
                 1, 1);
-        pageVariables.put("pageVariables", testCaseResult);
+        pageVariables.put("testCaseResult", testCaseResult);
 
         //UserDTO tester = UserAPI.getUser(testCaseResult.getTesterId());
         UserDTO tester = new UserDTO("Ann", "Fedosova", "", "AnnFedosova", "");

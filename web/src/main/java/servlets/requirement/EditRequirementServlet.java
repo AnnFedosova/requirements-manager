@@ -1,4 +1,4 @@
-package servlets;
+package servlets.requirement;
 
 import api.APIActions;
 import api.RequirementAPI;
@@ -19,12 +19,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@WebServlet(name = "changeRequirementState", urlPatterns = "/changeRequirementState")
+@WebServlet(name = "Edit_Requirement", urlPatterns = "/edit_requirement")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
 
-public class ChangeRequirementState extends HttpServlet {
+public class EditRequirementServlet extends HttpServlet {
 
-    public ChangeRequirementState() {
+    public EditRequirementServlet() {
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ChangeRequirementState extends HttpServlet {
         try {
             pageVariables = createPageVariablesMap(request, Long.parseLong(id));
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(PageGenerator.getInstance().getPage("requirement/changeRequirementState.html", pageVariables));
+            response.getWriter().println(PageGenerator.getInstance().getPage("requirement/editRequirement.html", pageVariables));
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println("Error!  " + HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -46,18 +46,29 @@ public class ChangeRequirementState extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
         httpResponse.setContentType("text/html;charset=utf-8");
-        String requirementId = httpRequest.getParameter("requirementId");
+        String requirementId = httpRequest.getParameter("id");
+        String name = httpRequest.getParameter("name");
+        String description = httpRequest.getParameter("description");
+        String priorityId = httpRequest.getParameter("priorities");
         String stateId = httpRequest.getParameter("states");
+        String typeId = httpRequest.getParameter("types");
+        String lastVersionId = httpRequest.getParameter("requirements");
 
-        if (stateId == null || requirementId == null) {
-            httpResponse.getWriter().println("Not changed");
+        if (name == null || description == null || requirementId == null) {
+            httpResponse.getWriter().println("Not created");
             httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         try {
             RequirementDTO requirement = RequirementAPI.getRequirement(Long.parseLong(requirementId));
+            requirement.setName(name);
+            requirement.setDescription(description);
+            requirement.setPriorityId(Long.parseLong(priorityId));
             requirement.setStateId(Long.parseLong(stateId));
+            requirement.setTypeId(Long.parseLong(typeId));
+            requirement.setLastVersionId(Long.parseLong(lastVersionId));
+
             Response response = RequirementAPI.editRequirement(requirement);
             APIActions.checkResponseStatus(response, httpResponse);
         } catch (Exception e) {
@@ -72,9 +83,19 @@ public class ChangeRequirementState extends HttpServlet {
 
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+
         pageVariables.put("requirement", requirement);
+        pageVariables.put("requirements", RequirementAPI.getRequirementsByProject(requirement.getProjectId()));
+
+        pageVariables.put("priority", RequirementAPI.getRequirementPriority(requirement.getPriorityId()));
+        pageVariables.put("priorities", RequirementAPI.getRequirementPriorities());
+
         pageVariables.put("state", RequirementAPI.getRequirementState(requirement.getStateId()));
         pageVariables.put("states", RequirementAPI.getRequirementStates());
+
+        pageVariables.put("type", RequirementAPI.getRequirementType(requirement.getTypeId()));
+        pageVariables.put("types", RequirementAPI.getRequirementTypes());
+
 
         return pageVariables;
     }

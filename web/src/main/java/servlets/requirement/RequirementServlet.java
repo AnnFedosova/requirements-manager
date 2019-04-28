@@ -1,4 +1,4 @@
-package servlets;
+package servlets.requirement;
 
 import api.RequirementAPI;
 import api.UserAPI;
@@ -53,8 +53,6 @@ public class RequirementServlet extends HttpServlet {
         List<RequirementDTO> dependedRequirements = new ArrayList<>();
         dependedRequirements.add(RequirementAPI.getRequirement(2));
         dependedRequirements.add(RequirementAPI.getRequirement(3));
-
-
 
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));

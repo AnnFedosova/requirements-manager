@@ -1,4 +1,4 @@
-package servlets;
+package servlets.specification;
 
 import api.RequirementAPI;
 import api.SpecificationAPI;

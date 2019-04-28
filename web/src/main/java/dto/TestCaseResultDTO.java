@@ -17,6 +17,14 @@ public class TestCaseResultDTO {
         this.testerId = testerId;
     }
 
+    public TestCaseResultDTO(String id, String date, String description, String testCaseId, String testerId) {
+        this.id = Long.parseLong(id);
+        this.date = date;
+        this.description = description;
+        this.testCaseId = Long.parseLong(testCaseId);
+        this.testerId = Long.parseLong(testerId);
+    }
+
     public long getId() {
         return id;
     }

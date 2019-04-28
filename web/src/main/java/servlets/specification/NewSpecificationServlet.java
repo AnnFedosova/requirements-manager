@@ -1,9 +1,9 @@
-package servlets;
+package servlets.specification;
 
 import api.APIActions;
-import api.ProjectAPI;
+import api.SpecificationAPI;
 import api.UserAPI;
-import dto.ProjectDTO;
+import dto.SpecificationDTO;
 import templater.PageGenerator;
 
 import javax.servlet.annotation.HttpConstraint;
@@ -15,25 +15,31 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "New_project", urlPatterns = "/new_project")
+@WebServlet(name = "New_specification", urlPatterns = "/new_specification")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
-public class NewProjectServlet extends HttpServlet {
+public class NewSpecificationServlet  extends HttpServlet {
+    final DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
-    public NewProjectServlet() {
+    public NewSpecificationServlet() {
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
+        String projectId = request.getParameter("projectid");
         Map<String, Object> pageVariables = null;
 
         try {
-            pageVariables = createPageVariablesMap(request);
+
+            pageVariables = createPageVariablesMap(request, projectId);
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(PageGenerator.getInstance().getPage("project/newProject.html", pageVariables));
+            pageVariables.put("projectid", projectId);
+            response.getWriter().println(PageGenerator.getInstance().getPage("specification/newSpecification.html", pageVariables));
 
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -46,20 +52,34 @@ public class NewProjectServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
+        String plannedDate = request.getParameter("plannedDate");
+        String projectId = request.getParameter("projectid");
+        String userId = "";
+        try {
+            Principal user = request.getUserPrincipal();
+            String userName = user.getName();
+            userId = String.valueOf((UserAPI.getUser(userName)).getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        String creationDate = "10-10-2018";
-
+        Principal user = request.getUserPrincipal();
         response.setContentType("text/html;charset=utf-8");
 
-        if (name == null || description == null ) {
-            response.getWriter().println("Not created");
+        if (name == null || description == null || projectId == null ) {
+            response.getWriter().println("Not  created");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         try {
             long creatorId = UserAPI.getUser(request.getUserPrincipal().getName()).getId();
-            Response restResponse = ProjectAPI.addProject(new ProjectDTO(name, description));
+            Response restResponse = SpecificationAPI.addSpecification(
+                    new SpecificationDTO( Long.parseLong("10"),
+                            name,
+                            description,
+                            plannedDate,
+                            Long.parseLong(projectId)));
             APIActions.checkResponseStatus(restResponse, response);
         } catch (Exception e) {
             response.getWriter().println("Not created");
@@ -67,11 +87,16 @@ public class NewProjectServlet extends HttpServlet {
         }
     }
 
-    private Map<String, Object> createPageVariablesMap(HttpServletRequest request) throws Exception {
+    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, String projectId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+
         return pageVariables;
     }
 
+
+
+
 }
+

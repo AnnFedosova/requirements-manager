@@ -1,4 +1,4 @@
-package servlets;
+package servlets.release;
 
 import api.APIActions;
 import api.ReleaseAPI;

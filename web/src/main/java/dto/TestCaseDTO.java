@@ -25,6 +25,18 @@ public class TestCaseDTO {
         this.creatorId = creatorId;
     }
 
+    public TestCaseDTO(String id, String requirementId, String name, String creationDate, String plan, String startConditions, String endConditions, String data, String creatorId) {
+        this.id = Long.parseLong(id);
+        this.requirementId = Long.parseLong(requirementId);
+        this.name = name;
+        this.creationDate = creationDate;
+        this.plan = plan;
+        this.startConditions = startConditions;
+        this.endConditions = endConditions;
+        this.data = data;
+        this.creatorId = Long.parseLong(creatorId);
+    }
+
     public long getId() {
         return id;
     }

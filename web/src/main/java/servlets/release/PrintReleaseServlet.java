@@ -1,14 +1,15 @@
-package servlets;
+package servlets.release;
 
 
+import api.ReleaseAPI;
 import api.RequirementAPI;
-import api.SpecificationAPI;
 import api.UserAPI;
+import dto.ReleaseDTO;
 import dto.RequirementDTO;
-import dto.SpecificationDTO;
+import reportsgenerator.ReleaseWithRequirements;
 import reportsgenerator.ReportGenerator;
 import reportsgenerator.RequirementForReport;
-import reportsgenerator.SpecificationWithRequirements;
+import servlets.specification.PrintSpecificationServlet;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.HttpConstraint;
@@ -19,24 +20,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "Print_specification", urlPatterns = "/print_specification")
+@WebServlet(name = "Print_release", urlPatterns = "/print_release")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
-public class PrintSpecificationServlet extends HttpServlet {
+public class PrintReleaseServlet extends HttpServlet {
 
-    public PrintSpecificationServlet() {
+    public PrintReleaseServlet() {
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //при нажатии на кнопку отчетов попадаем сюда
         response.setContentType("text/html;charset=utf-8");
-        String id = request.getParameter("specificationId");
+        String id = request.getParameter("releaseId");
 
         //получаем массив из id требований, они в нужном порядке
         String requirementIdsString = (request.getParameter("requirementIds")
@@ -48,24 +48,24 @@ public class PrintSpecificationServlet extends HttpServlet {
         try {
             ReportGenerator reportGenerator = new ReportGenerator();
             pageVariables = createPageVariablesMap(request, Long.parseLong(id));
-
             // Массив байтов получившегося файла
             byte[] byteArray = reportGenerator.template(
-                    new SpecificationWithRequirements(
-                            (SpecificationDTO) pageVariables.get("specification"),
-
+                    new ReleaseWithRequirements(
+                            (ReleaseDTO) pageVariables.get("release"),
                             (
-                                    getSortedListOfRequirements((List<RequirementDTO>) (pageVariables.get("requirements")),
+                                    PrintSpecificationServlet.getSortedListOfRequirements((List<RequirementDTO>) (pageVariables.get("requirements")),
                                             requirementIds)
                             )
                                     .stream()
                                     .map(RequirementForReport::new)
-                                    .collect(Collectors.toList())
+                                    .collect(Collectors.toList()
+                                    )
                     )
             );
-            String specificationName = ((SpecificationDTO) pageVariables.get("specification")).getName();
+
+            String releaseName = ((ReleaseDTO) pageVariables.get("release")).getName();
             response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-            response.setHeader("Content-disposition", "attachment; filename=\"" + specificationName + ".docx\"");
+            response.setHeader("Content-disposition", "attachment; filename=\"" + releaseName + ".docx\"");
             ServletOutputStream servletOutputStream = response.getOutputStream();
             servletOutputStream.write(byteArray);
             servletOutputStream.close();
@@ -93,31 +93,14 @@ public class PrintSpecificationServlet extends HttpServlet {
 
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        SpecificationDTO specification = SpecificationAPI.getSpecification(id);
-        List<RequirementDTO> requirements = RequirementAPI.getRequirementsBySpecification(id);
-        SpecificationWithRequirements specificationWithRequirements = new SpecificationWithRequirements();
+        ReleaseDTO release = ReleaseAPI.getRelease(id);
+        List<RequirementDTO> requirements = RequirementAPI.getRequirementsByRelease(id);
 
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
-        pageVariables.put("specification", specification);
+        pageVariables.put("release", release);
         pageVariables.put("requirements", requirements);
 
         return pageVariables;
-    }
-
-    public static List<RequirementDTO> getSortedListOfRequirements(List<RequirementDTO> requirements, String[] requirementIds){
-        if (requirements.size() != requirementIds.length){
-            return requirements;
-        }
-        List<RequirementDTO> SortedListOfRequirements = new ArrayList<>();
-        for (String requirementId : requirementIds) {
-            int inputReqId = Integer.parseInt(requirementId);
-            for (RequirementDTO requirement : requirements) {
-                if (requirement.getId() == inputReqId) {
-                    SortedListOfRequirements.add(requirement);
-                }
-            }
-        }
-        return SortedListOfRequirements;
     }
 }

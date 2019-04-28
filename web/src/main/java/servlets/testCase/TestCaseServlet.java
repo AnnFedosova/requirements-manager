@@ -1,4 +1,4 @@
-package servlets;
+package servlets.testCase;
 
 import api.*;
 import dto.*;
@@ -66,7 +66,10 @@ public class TestCaseServlet extends HttpServlet {
         pageVariables.put("testCaseResults", testCaseResults);
 
         //List<RequirementDTO> requirements = TestCaseAPI.getReqByTestCaseId(testCaseId);
-        List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(1);
+        //List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(1);
+        List<RequirementDTO> requirements = new ArrayList<>();
+        pageVariables.put("requirements", requirements);
+
         return pageVariables;
     }
 }

@@ -1,9 +1,9 @@
-package servlets;
+package servlets.requirement;
 
 import api.APIActions;
-import api.ReleaseAPI;
+import api.RequirementAPI;
 import api.UserAPI;
-import dto.ReleaseDTO;
+import dto.RequirementDTO;
 import templater.PageGenerator;
 
 import javax.servlet.annotation.HttpConstraint;
@@ -17,15 +17,16 @@ import java.io.IOException;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "New_release", urlPatterns = "/new_release")
+@WebServlet(name = "new_requirement", urlPatterns = "/new_requirement")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
-public class NewReleaseServlet  extends HttpServlet {
+public class NewRequirementServlet  extends HttpServlet {
     final DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
-    public NewReleaseServlet() {
+    public NewRequirementServlet() {
     }
 
     @Override
@@ -39,7 +40,7 @@ public class NewReleaseServlet  extends HttpServlet {
             pageVariables = createPageVariablesMap(request, projectId);
             response.setStatus(HttpServletResponse.SC_OK);
             pageVariables.put("projectid", projectId);
-            response.getWriter().println(PageGenerator.getInstance().getPage("release/newRelease.html", pageVariables));
+            response.getWriter().println(PageGenerator.getInstance().getPage("requirement/newRequirement.html", pageVariables));
 
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -52,34 +53,38 @@ public class NewReleaseServlet  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-        String releaseDate = request.getParameter("releaseDate");
         String projectId = request.getParameter("projectid");
-        String userId = "";
-        try {
-            Principal user = request.getUserPrincipal();
-            String userName = user.getName();
-            userId = String.valueOf((UserAPI.getUser(userName)).getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String priorityId = request.getParameter("priorities");
+        String lastVersionId = request.getParameter("requirements");
+        String typeId = request.getParameter("types");
 
-        Principal user = request.getUserPrincipal();
+        String creationDate = dateFormat.format(new Date());
         response.setContentType("text/html;charset=utf-8");
 
         if (name == null || description == null || projectId == null ) {
-            response.getWriter().println("Not  created");
+            response.getWriter().println("Not created");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         try {
-            long creatorId = UserAPI.getUser(request.getUserPrincipal().getName()).getId();
-            Response restResponse = ReleaseAPI.addRelease(
-                    new ReleaseDTO( Long.parseLong("10"),
-                            name,
-                            description,
-                            releaseDate,
-                            Long.parseLong(projectId)));
+            Principal creator = request.getUserPrincipal();
+            String creatorName = creator.getName();
+            String creatorId = String.valueOf((UserAPI.getUser(creatorName)).getId());
+            Response restResponse = RequirementAPI.addRequirement(
+                    new RequirementDTO( "10",
+                                        projectId,
+                                        name,
+                                        description,
+                                        priorityId,
+                                        typeId,
+                                        "1",
+                                        creatorId,
+                                        creationDate,
+                                        creationDate,
+                                        creatorId,
+                                        lastVersionId,
+                                        "true"));
             APIActions.checkResponseStatus(restResponse, response);
         } catch (Exception e) {
             response.getWriter().println("Not created");
@@ -91,12 +96,11 @@ public class NewReleaseServlet  extends HttpServlet {
         Map<String, Object> pageVariables = new HashMap<>();
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+        pageVariables.put("users", UserAPI.getAllUsers());
+        pageVariables.put("priorities", RequirementAPI.getRequirementPriorities());
+        pageVariables.put("requirements", RequirementAPI.getRequirementsByProject(Long.parseLong(projectId)));
+        pageVariables.put("types", RequirementAPI.getRequirementTypes());
 
         return pageVariables;
     }
-
-
-
-
-}
-
+    }

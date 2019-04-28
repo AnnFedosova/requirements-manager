@@ -62,12 +62,12 @@
             <div style="font-size: medium">
                 Start conditions:
                 ${testCase.startConditions}
-
+                <br>
                 End conditions:
                 ${testCase.endConditions}
             </div>
 
-            <h3 class="text-left">Test date</h3>
+            <h3 class="text-left">Test data</h3>
             <div style="font-size: medium">
                 ${testCase.data}
             </div>
@@ -77,36 +77,6 @@
                 ${testCase.creationDate} by ${creator.getLogin()}
             </div>
 
-            <h3 class="text-left">Test environment</h3>
-            <div style="font-size: medium">
-                <#list testEnvironments>
-                <table id="noSort"  class="grid" width="100%">
-                    <tbody>
-                    <div class='col-sm-2'>
-                        <div class='list-group'>
-                            <#items as testEnvironment>
-                            <tr>
-                                <td width="5%">
-                                    <div class="list-group-item text-center">
-                                        ${testEnvironment?counter}
-                                    </div>
-                                </td>
-                                <td class="index">
-                                    <a class="list-group-item text-center" href="/testEnvironment?testEnvironmentId=${testEnvironment.id}">
-                                        ${testEnvironment.name}
-                                    </a>
-                                </td>
-                                <td style="display:none;" class="index">
-                                    ${testEnvironment.id}
-                                </td>
-                            </tr>
-                        </#items>
-                    </div>
-            </div>
-            </tbody>
-            </table>
-        </#list>
-    </div>
 
     <h3 class="text-left">Requirements </h3>
     <div style="font-size: medium">
@@ -147,7 +117,7 @@
                         </div>
                     </td>
                     <td><a class="list-group-item text-center"
-                           href="/testCaseResult?testCaseResultId=${testCaseResult.id}">${testCaseResult.name}</a>
+                           href="/testCaseResult?testCaseResultId=${testCaseResult.id}">${testCaseResult.date}</a>
                     </td>
                 </tr>
             </#items>
