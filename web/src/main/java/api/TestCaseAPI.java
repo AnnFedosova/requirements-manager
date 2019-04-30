@@ -18,9 +18,16 @@ public class TestCaseAPI {
         return new Gson().fromJson(json, new TypeToken<TestCaseDTO>(){}.getType());
     }
 
-    public static Response addTestCase(TestCaseDTO testCase) {
+    public static Response createTestCaseForTestPlan(TestCaseDTO testCase, String testPlanId) {
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(URL + "addTestCase");
+        WebTarget target = client.target(URL + "createTestCaseForTestPlan" + testPlanId);
+        Invocation.Builder builder = target.request();
+        return builder.post(Entity.entity(testCase, "application/json; charset=UTF-8"));
+    }
+
+    public static Response createTestCaseForReq(TestCaseDTO testCase) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL + "createTestCaseForReq");
         Invocation.Builder builder = target.request();
         return builder.post(Entity.entity(testCase, "application/json; charset=UTF-8"));
     }

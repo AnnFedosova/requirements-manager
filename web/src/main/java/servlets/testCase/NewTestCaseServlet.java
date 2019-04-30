@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.util.Objects.isNull;
+
 @WebServlet(name = "New_testCase", urlPatterns = "/new_testCase")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
 public class NewTestCaseServlet extends HttpServlet {
@@ -30,25 +32,32 @@ public class NewTestCaseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         String requirementId = request.getParameter("requirementId");
-        //todo добавить возможность передать тест-планID для привязки к тест-плану, а не требованию
-        Map<String, Object> pageVariables = null;
+        String testPlanId = request.getParameter("testPlanId");
 
+        Map<String, Object> pageVariables = null;
         try {
-            pageVariables = createPageVariablesMap(request);
+            pageVariables = createPageVariablesMap(request, requirementId, testPlanId );
             response.setStatus(HttpServletResponse.SC_OK);
-            pageVariables.put("requirementId", requirementId);
             response.getWriter().println(PageGenerator.getInstance().getPage("testCase/newTestCase.html", pageVariables));
 
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println("Error!  " + HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
 
+        //создаем новый test-case со страницы требования
         String requirementId = httpRequest.getParameter("requirementId");
+        //создаем новый test-case со страницы тест-плана
+        String testPlanId = httpRequest.getParameter("testPlanId");
+
+        if(isNull(requirementId) & isNull(testPlanId)){
+            throw new IOException("requirementId and testPlanId are null");
+        }
         String name = httpRequest.getParameter("name");
         String plan = httpRequest.getParameter("plan");
         String startConditions = httpRequest.getParameter("startConditions");
@@ -58,38 +67,72 @@ public class NewTestCaseServlet extends HttpServlet {
         String creationDate = dateFormat.format(new Date());
         httpResponse.setContentType("text/html;charset=utf-8");
 
-        if (name == null || requirementId == null ) {
+        if (name == null ) {
             httpResponse.getWriter().println("Not created");
             httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        try {
-            Principal creator = httpRequest.getUserPrincipal();
-            String creatorName = creator.getName();
-            String creatorId = String.valueOf((UserAPI.getUser(creatorName)).getId());
+        //создаем новый test-case со страницы тест-плана
+        if (requirementId.equals("")) {
+            try {
+                Principal creator = httpRequest.getUserPrincipal();
+                String creatorName = creator.getName();
+                String creatorId = String.valueOf((UserAPI.getUser(creatorName)).getId());
 
-            Response restResponse = TestCaseAPI.addTestCase(
-                    new TestCaseDTO( "",
-                            requirementId,
-                            name,
-                            creationDate,
-                            plan,
-                            startConditions,
-                            endConditions,
-                            data,
-                            creatorId));
-            APIActions.checkResponseStatus(restResponse, httpResponse);
-        } catch (Exception e) {
-            httpResponse.getWriter().println("Not created");
-            httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                Response restResponse = TestCaseAPI.createTestCaseForTestPlan(
+                        new TestCaseDTO("",
+                                "",
+                                name,
+                                creationDate,
+                                plan,
+                                startConditions,
+                                endConditions,
+                                data,
+                                creatorId), testPlanId);
+                APIActions.checkResponseStatus(restResponse, httpResponse);
+            } catch (Exception e) {
+                httpResponse.getWriter().println("Not created");
+                httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            }
+        }
+        //создаем новый test-case со страницы требования
+        if (testPlanId.equals("")) {
+            try {
+                Principal creator = httpRequest.getUserPrincipal();
+                String creatorName = creator.getName();
+                String creatorId = String.valueOf((UserAPI.getUser(creatorName)).getId());
+
+                Response restResponse = TestCaseAPI.createTestCaseForReq(
+                        new TestCaseDTO("",
+                                requirementId,
+                                name,
+                                creationDate,
+                                plan,
+                                startConditions,
+                                endConditions,
+                                data,
+                                creatorId));
+                APIActions.checkResponseStatus(restResponse, httpResponse);
+            } catch (Exception e) {
+                httpResponse.getWriter().println("Not created");
+                httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            }
         }
     }
 
-    private Map<String, Object> createPageVariablesMap(HttpServletRequest request) throws Exception {
+    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, String requirementId,
+                                                       String testPlanId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         Principal user = request.getUserPrincipal();
-        pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+        pageVariables.put("isAdmin", true /* пока не починится сервер UserAPI.isAdmin(user.getName())*/);
+        if (isNull(requirementId))
+            requirementId = "1";
+        if (isNull(testPlanId))
+            testPlanId = "1";
+        pageVariables.put("requirementId", requirementId);
+        pageVariables.put("testPlanId", testPlanId);
+
         return pageVariables;
     }
 }
