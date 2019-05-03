@@ -41,6 +41,8 @@ public class TestEnvironmentComponentServlet extends HttpServlet {
 
         @Override
         protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
+            httpRequest.setCharacterEncoding("UTF-8");
+
         }
 
         private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long testEnvironmentComponentId) throws Exception {

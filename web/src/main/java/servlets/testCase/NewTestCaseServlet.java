@@ -49,7 +49,7 @@ public class NewTestCaseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
-
+        httpRequest.setCharacterEncoding("UTF-8");
         //создаем новый test-case со страницы требования
         String requirementId = httpRequest.getParameter("requirementId");
         //создаем новый test-case со страницы тест-плана

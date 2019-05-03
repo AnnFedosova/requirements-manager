@@ -47,6 +47,8 @@ public class NewTestCaseResultServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
+        httpRequest.setCharacterEncoding("UTF-8");
+
         String date = httpRequest.getParameter("date");
         String description = httpRequest.getParameter("description");
         String testCaseId = httpRequest.getParameter("testCaseId");

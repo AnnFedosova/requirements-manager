@@ -38,6 +38,8 @@ public class TestEnvironmentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
+        httpRequest.setCharacterEncoding("UTF-8");
+
     }
 
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long testEnvironmentId) throws Exception {

@@ -50,6 +50,8 @@ public class NewSpecificationServlet  extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+
         String name = request.getParameter("name");
         String description = request.getParameter("description");
         String plannedDate = request.getParameter("plannedDate");

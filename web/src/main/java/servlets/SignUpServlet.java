@@ -40,7 +40,7 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("dopost");
+        request.setCharacterEncoding("UTF-8");
 
         response.setContentType("text/html;charset=utf-8");
         String login = request.getParameter("login");

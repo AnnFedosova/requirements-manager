@@ -45,6 +45,8 @@ public class ChangeRequirementState extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
+        httpRequest.setCharacterEncoding("UTF-8");
+
         httpResponse.setContentType("text/html;charset=utf-8");
         String requirementId = httpRequest.getParameter("requirementId");
         String stateId = httpRequest.getParameter("states");

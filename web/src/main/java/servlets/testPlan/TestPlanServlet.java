@@ -44,6 +44,7 @@ public class TestPlanServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
+        httpRequest.setCharacterEncoding("UTF-8");
 
     }
 

@@ -40,6 +40,8 @@ public class EditSpecificationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
+        httpRequest.setCharacterEncoding("UTF-8");
+
         httpResponse.setContentType("text/html;charset=utf-8");
         String name = httpRequest.getParameter("name");
         String description = httpRequest.getParameter("description");
