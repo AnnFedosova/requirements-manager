@@ -54,4 +54,36 @@ public class TestPlanDTO {
     public long getCreatorId() {
         return creatorId;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDate_from(String date_from) {
+        this.date_from = date_from;
+    }
+
+    public void setDate_to(String date_to) {
+        this.date_to = date_to;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setTest_environment_id(long test_environment_id) {
+        this.test_environment_id = test_environment_id;
+    }
+
+    public void setCreatorId(long creatorId) {
+        this.creatorId = creatorId;
+    }
 }

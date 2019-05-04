@@ -19,6 +19,11 @@ public class TestEnvironmentAPI {
         return new Gson().fromJson(json, new TypeToken<TestEnvironmentDTO>(){}.getType());
     }
 
+    public static List<TestEnvironmentDTO> getAllTestEnvironments() throws Exception {
+        String json = JSONHelper.getJson(URL + "getAllTestEnvironments");
+        return new Gson().fromJson(json, new TypeToken<List<TestEnvironmentDTO>>(){}.getType());
+    }
+
     public static Response addTestEnvironment(TestEnvironmentDTO testEnvironment) {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL + "addTestEnvironment");

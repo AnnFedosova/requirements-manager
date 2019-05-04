@@ -68,7 +68,7 @@
             <div class='page-header'>
                 <h2 class='text-left'>${testPlan.name}</h2>
 
-                <a class="btn btn-primary" href="/edit_project?id=${testPlan.id}">
+                <a class="btn btn-primary" href="/edit_testPlan?testPlanId=${testPlan.id}">
                     <i title="Edit test-plan" class="fa fa-pencil-square-o"></i>
                     Edit test-plan
                 </a>
@@ -79,17 +79,17 @@
                     Create test-case
                 </a>
 
-                <a class="btn btn-primary" href="/addTestCaseToReq?testPlanId=${testPlan.id}">
+                <a class="btn btn-primary" href="/addTestCaseToTestPlan?testPlanId=${testPlan.id}">
                     <i title="Add test-case" class="fa fa-plus"></i>
                     Add test-case
                 </a>
                 <br><br>
-                <a class="btn btn-primary" href="/new_testCase?testPlanId=${testPlan.id}">
-                    <i title="Create test-case" class="fa fa-plus"></i>
+                <a class="btn btn-primary" href="/new_testSuite?testPlanId=${testPlan.id}">
+                    <i title="Create test-suite" class="fa fa-plus"></i>
                     Create test-suite
                 </a>
 
-                <a class="btn btn-primary" href="/new_testCase?testPlanId=${testPlan.id}">
+                <a class="btn btn-primary" href="/addTestSuiteToTestPlan?testPlanId=${testPlan.id}">
                     <i title="Add test-suite" class="fa fa-plus"></i>
                     Add test-suite
                 </a>

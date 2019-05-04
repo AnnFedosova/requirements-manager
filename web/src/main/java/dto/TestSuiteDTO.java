@@ -17,6 +17,14 @@ public class TestSuiteDTO {
         this.creatorId = creatorId;
     }
 
+    public TestSuiteDTO(String id, String name, String description, String plan, String creatorId) {
+        this.id = Long.parseLong(id);
+        this.name = name;
+        this.description = description;
+        this.plan = plan;
+        this.creatorId = Long.parseLong(creatorId);
+    }
+
     public long getId() {
         return id;
     }
