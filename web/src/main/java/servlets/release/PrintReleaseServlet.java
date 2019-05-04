@@ -88,7 +88,7 @@ public class PrintReleaseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("Посылаем пустой отчет на сервер");
+
     }
 
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {

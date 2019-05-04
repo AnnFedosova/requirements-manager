@@ -1,14 +1,11 @@
-package servlets.specification;
+package servlets.testPlan;
 
 
 import api.RequirementAPI;
 import api.SpecificationAPI;
 import api.UserAPI;
-import dto.RequirementDTO;
-import dto.SpecificationDTO;
-import reportsgenerator.ReportGenerator;
-import reportsgenerator.RequirementForReport;
-import reportsgenerator.SpecificationWithRequirements;
+import dto.*;
+import reportsgenerator.*;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.HttpConstraint;
@@ -25,47 +22,62 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "Print_specification", urlPatterns = "/print_specification")
+@WebServlet(name = "Print_testPlan", urlPatterns = "/print_testPlan")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
-public class PrintSpecificationServlet extends HttpServlet {
+public class PrintTestPlanServlet extends HttpServlet {
 
-    public PrintSpecificationServlet() {
+    public PrintTestPlanServlet() {
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //при нажатии на кнопку отчетов попадаем сюда
         response.setContentType("text/html;charset=utf-8");
-        String id = request.getParameter("specificationId");
+        String testPlanId = request.getParameter("testPlanId");
 
-        //получаем массив из id требований, они в нужном порядке
-        String requirementIdsString = (request.getParameter("requirementIds")
+        //получаем массив из id тест-кейсов, они в нужном порядке
+        String estCaseIdsString = (request.getParameter("testCaseIds")
                 .replaceAll(" ", ""))
                 .replaceAll("\"", "");
-        String[] requirementIds = requirementIdsString.split(",");
+        String[] testCaseIds = estCaseIdsString.split(",");
+
+        //получаем массив из id тестовых наборов, они в нужном порядке
+        String testSuiteIdsString = (request.getParameter("testSuiteIds")
+                .replaceAll(" ", ""))
+                .replaceAll("\"", "");
+        String[] testSuiteIds = testSuiteIdsString.split(",");
 
         Map<String, Object> pageVariables = null;
         try {
             ReportGenerator reportGenerator = new ReportGenerator();
-            pageVariables = createPageVariablesMap(request, Long.parseLong(id));
+            pageVariables = createPageVariablesMap(request, Long.parseLong(testPlanId));
 
             // Массив байтов получившегося файла
             byte[] byteArray = reportGenerator.template(
-                    new SpecificationWithRequirements(
-                            (SpecificationDTO) pageVariables.get("specification"),
+                    new TestPlanWithInfoForReport(
+                            (TestPlanDTO) pageVariables.get("testPlan"),
 
                             (
-                                    getSortedListOfRequirements((List<RequirementDTO>) (pageVariables.get("requirements")),
-                                            requirementIds)
+                                    getSortedListOfTestCases((List<TestCaseDTO>) (pageVariables.get("testCases")),
+                                            testCaseIds)
                             )
                                     .stream()
-                                    .map(RequirementForReport::new)
+                                    .map(TestCaseForReport::new)
+                                    .collect(Collectors.toList()),
+
+                            (
+                                    getSortedListOfTestSuites((List<TestSuiteDTO>) (pageVariables.get("testSuites")),
+                                            testSuiteIds)
+                            )
+                                    .stream()
+                                    .map(TestSuiteForReport::new)
                                     .collect(Collectors.toList())
                     )
             );
-            String specificationName = ((SpecificationDTO) pageVariables.get("specification")).getName();
+
+            String testPlanName = ((TestPlanDTO) pageVariables.get("testPlan")).getName();
             response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-            response.setHeader("Content-disposition", "attachment; filename=\"" + specificationName + ".docx\"");
+            response.setHeader("Content-disposition", "attachment; filename=\"" + testPlanName + ".docx\"");
             ServletOutputStream servletOutputStream = response.getOutputStream();
             servletOutputStream.write(byteArray);
             servletOutputStream.close();
@@ -104,19 +116,35 @@ public class PrintSpecificationServlet extends HttpServlet {
         return pageVariables;
     }
 
-    public static List<RequirementDTO> getSortedListOfRequirements(List<RequirementDTO> requirements, String[] requirementIds){
-        if (requirements.size() != requirementIds.length){
-            return requirements;
+    public static List<TestCaseDTO> getSortedListOfTestCases(List<TestCaseDTO> testCases, String[] testCaseIds){
+        if (testCases.size() != testCaseIds.length){
+            return testCases;
         }
-        List<RequirementDTO> SortedListOfRequirements = new ArrayList<>();
-        for (String requirementId : requirementIds) {
-            int inputReqId = Integer.parseInt(requirementId);
-            for (RequirementDTO requirement : requirements) {
-                if (requirement.getId() == inputReqId) {
-                    SortedListOfRequirements.add(requirement);
+        List<TestCaseDTO> SortedListOfTestCases = new ArrayList<>();
+        for (String testCaseId : testCaseIds) {
+            int inputTestCaseId = Integer.parseInt(testCaseId);
+            for (TestCaseDTO testCase : testCases) {
+                if (testCase.getId() == inputTestCaseId) {
+                    SortedListOfTestCases.add(testCase);
                 }
             }
         }
-        return SortedListOfRequirements;
+        return SortedListOfTestCases;
+    }
+
+    public static List<TestSuiteDTO> getSortedListOfTestSuites(List<TestSuiteDTO> testSuites, String[] testSuiteIds){
+        if (testSuites.size() != testSuiteIds.length){
+            return testSuites;
+        }
+        List<TestSuiteDTO> SortedListOfTestSuites = new ArrayList<>();
+        for (String testSuiteId : testSuiteIds) {
+            int inputTestSuiteId = Integer.parseInt(testSuiteId);
+            for (TestSuiteDTO testSuite : testSuites) {
+                if (testSuite.getId() == inputTestSuiteId) {
+                    SortedListOfTestSuites.add(testSuite);
+                }
+            }
+        }
+        return SortedListOfTestSuites;
     }
 }

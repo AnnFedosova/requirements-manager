@@ -36,4 +36,19 @@ public class ReportGenerator {
         byte[] result = outputStream.toByteArray();
         return result;
     }
+
+    public byte[] template(TestPlanWithInfoForReport testPlanWithInfoForReport) throws IOException {
+        InputStream in = getClass().getResourceAsStream("TestPlanReport.docx");
+        OutputStream out = new FileOutputStream(File.createTempFile(getClass().getSimpleName(), ".docx"));
+        DocxStamper stamper = new DocxStamperConfiguration().setFailOnUnresolvedExpression(false).build();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        stamper.stamp(in, testPlanWithInfoForReport,  outputStream);
+        in.close();
+        out.close();
+
+        byte[] result = outputStream.toByteArray();
+        return result;
+    }
 }
