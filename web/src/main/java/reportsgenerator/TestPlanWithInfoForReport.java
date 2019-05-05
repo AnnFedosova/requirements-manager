@@ -5,14 +5,14 @@ import dto.TestPlanDTO;
 import java.util.List;
 
 public class TestPlanWithInfoForReport {
-    private TestPlanDTO testPlan;
+    private TestPlanForReport testPlan;
     private List<TestCaseForReport> testCases;
     private List<TestSuiteForReport> testSuites;
 
     public TestPlanWithInfoForReport(){}
 
     public TestPlanWithInfoForReport(TestPlanDTO testPlan, List<TestCaseForReport> testCases, List<TestSuiteForReport> testSuites) {
-        this.testPlan = testPlan;
+        this.testPlan = new TestPlanForReport(testPlan);
         this.testCases = testCases;
         this.testSuites = testSuites;
     }
@@ -21,7 +21,7 @@ public class TestPlanWithInfoForReport {
         return testPlan;
     }
 
-    public void setTestPlan(TestPlanDTO testPlan) {
+    public void setTestPlan(TestPlanForReport testPlan) {
         this.testPlan = testPlan;
     }
 

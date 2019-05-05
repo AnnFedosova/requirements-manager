@@ -80,7 +80,7 @@ public class AddTestCaseToTestPlanServlet extends HttpServlet {
         List<TestCaseDTO> testCases = new ArrayList<>();
         TestCaseDTO testCase1 = new TestCaseDTO(
                 1, 1, "Test-case 1 functional",
-                "", "","","","", 1);
+                "20-01-2019", "","","","", 1);
         testCases.add(testCase1);
         TestCaseDTO testCase2 = new TestCaseDTO(
                 2, 1, "Интеграционный тест-кейс 1",

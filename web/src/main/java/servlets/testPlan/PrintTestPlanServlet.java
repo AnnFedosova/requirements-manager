@@ -1,9 +1,7 @@
 package servlets.testPlan;
 
 
-import api.RequirementAPI;
-import api.SpecificationAPI;
-import api.UserAPI;
+import api.*;
 import dto.*;
 import reportsgenerator.*;
 
@@ -36,10 +34,10 @@ public class PrintTestPlanServlet extends HttpServlet {
         String testPlanId = request.getParameter("testPlanId");
 
         //получаем массив из id тест-кейсов, они в нужном порядке
-        String estCaseIdsString = (request.getParameter("testCaseIds")
+        String testCaseIdsString = (request.getParameter("testCaseIds")
                 .replaceAll(" ", ""))
                 .replaceAll("\"", "");
-        String[] testCaseIds = estCaseIdsString.split(",");
+        String[] testCaseIds = testCaseIdsString.split(",");
 
         //получаем массив из id тестовых наборов, они в нужном порядке
         String testSuiteIdsString = (request.getParameter("testSuiteIds")
@@ -102,16 +100,34 @@ public class PrintTestPlanServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     }
 
-    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {
+    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long testPlanId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        SpecificationDTO specification = SpecificationAPI.getSpecification(id);
-        List<RequirementDTO> requirements = RequirementAPI.getRequirementsBySpecification(id);
-        SpecificationWithRequirements specificationWithRequirements = new SpecificationWithRequirements();
+
+        //TestPlanDTO testPlan = TestPlanAPI.getTestPlan(testPlanId); //ждем, пока сервер заработает
+        TestPlanDTO testPlan = new TestPlanDTO(1, "Test-Plan",
+                "Документ, описывающий весь объем работ по тестированию. Содержит информацию по тест-кейсам, тест-наборам и пр.",
+                "20-01-2019", "20-09-2019", "", 1, 1);
+
+        //List<TestCaseDTO> testCases = TestCaseAPI.getTestCasesByTestPlanId(testPlanId);
+        List<TestCaseDTO> testCases = new ArrayList<>();
+        TestCaseDTO testCase = new TestCaseDTO(
+                1, 1, "Test-case 1 functional",
+                "20-01-2019", "","","","", 1);
+        testCases.add(testCase);
+
+        //List<TestSuiteDTO> testSuites = TestSuiteAPI.getTestSuitesByTestPlanId(testPlanId);
+        List<TestSuiteDTO> testSuites = new ArrayList<>();
+        TestSuiteDTO testSuite = new TestSuiteDTO(
+                1, "Test-suite for print function",
+                "Here are tests for report printing features for the card issuance system.",
+                "2, 1", 1);
+        testSuites.add(testSuite);
 
         Principal user = request.getUserPrincipal();
-        pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
-        pageVariables.put("specification", specification);
-        pageVariables.put("requirements", requirements);
+        pageVariables.put("isAdmin", true ); //UserAPI.isAdmin(user.getName()));
+        pageVariables.put("testPlan", testPlan);
+        pageVariables.put("testCases", testCases);
+        pageVariables.put("testSuites", testSuites);
 
         return pageVariables;
     }

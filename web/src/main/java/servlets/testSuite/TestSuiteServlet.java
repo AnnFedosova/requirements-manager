@@ -59,7 +59,7 @@ public class TestSuiteServlet extends HttpServlet {
         List<TestCaseDTO> testCases = new ArrayList<>();
         TestCaseDTO testCase = new TestCaseDTO(
                 1, 1, "Функциональный тест-кейс 1 ",
-                "", "","","","", 1);
+                "20-01-2019", "","","","", 1);
         testCases.add(testCase);
         TestCaseDTO testCase2 = new TestCaseDTO(
                 2, 1, "Интеграционный тест-кейс 1",

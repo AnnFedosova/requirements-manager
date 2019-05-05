@@ -177,68 +177,69 @@
             </div>
 
 
-    <h3 class="text-left">Test-suites</h3>
-    <div style="font-size: medium">
-        <#list testSuites>
-        <table id="testSuiteSortTable"  width="100%">
-            <div class='col-sm-2'>
-                <div class='list-group'>
-                    <#items as testSuite>
-                    <tr>
-                        <td width="5%">
-                            <div class="list-group-item text-center">
-                                ${testSuite?counter}
-                            </div>
-                        </td>
-                        <td><a class="list-group-item text-center"
-                               href="/testSuite?testSuiteId=${testSuite.id}">${testSuite.name}</a>
-                        </td>
-                        <td style="display:none;" class="index">
-                            ${testSuite.id}
-                        </td>
-                    </tr>
-                </#items>
+            <h3 class="text-left">Test-suites</h3>
+            <div style="font-size: medium">
+                <#list testSuites>
+                <table id="testSuiteSortTable"  width="100%">
+                    <div class='col-sm-2'>
+                        <div class='list-group'>
+                            <#items as testSuite>
+                            <tr>
+                                <td width="5%">
+                                    <div class="list-group-item text-center">
+                                        ${testSuite?counter}
+                                    </div>
+                                </td>
+                                <td><a class="list-group-item text-center"
+                                       href="/testSuite?testSuiteId=${testSuite.id}">${testSuite.name}</a>
+                                </td>
+                                <td style="display:none;" class="index">
+                                    ${testSuite.id}
+                                </td>
+                            </tr>
+                        </#items>
+                    </div>
             </div>
+                </table>
+                </#list>
+            </div>
+
+
+        <script>
+
+            function getUrlForPrintButton() {
+                document.getElementById('PrintButton').href =
+                    "/print_testPlan?testPlanId=${testPlan.id}&testCaseIds=" + getTestCaseIds()
+                    + "&testSuiteIds=" + getTestSuiteIds();
+            }
+
+            function getTestCaseIds() {
+                let testCaseIds = [];
+                let refTab = document.getElementById("testCaseSortTable");
+                for (let i = 0; i < refTab.rows.length; i++) {
+                    let row = refTab.rows[i];
+                    //alert(row.cells[2].firstChild.nodeValue);
+                    testCaseIds[i] = row.cells[2].firstChild.nodeValue;
+                }
+                return testCaseIds;
+            }
+
+            function getTestSuiteIds() {
+                let testSuiteIds = [];
+                let refTab = document.getElementById("testSuiteSortTable");
+                for (let i = 0; i < refTab.rows.length; i++) {
+                    let row = refTab.rows[i];
+                    testSuiteIds[i] = row.cells[2].firstChild.nodeValue;
+                }
+                return testSuiteIds;
+            }
+
+        </script>
+
     </div>
-    </table>
-</#list>
-</div>
-
-<script>
-
-    function getUrlForPrintButton() {
-        document.getElementById('PrintButton').href =
-            "/print_testPlan?testPlanId=${testPlan.id}&testCaseIds=" + getTestCaseIds()
-            + "&testSuiteIds=" + getTestSuiteIds();
-    }
-
-    function getTestCaseIds() {
-        let testCaseIds = [];
-        let refTab = document.getElementById("testCaseSortTable");
-        for (let i = 0; i < refTab.rows.length; i++) {
-            let row = refTab.rows[i];
-            //alert(row.cells[2].firstChild.nodeValue);
-            testCaseIds[i] = row.cells[2].firstChild.nodeValue;
-        }
-        return testCaseIds;
-    }
-
-    function getTestSuiteIds() {
-        let testSuiteIds = [];
-        let refTab = document.getElementById("testSuiteSortTable");
-        for (let i = 0; i < refTab.rows.length; i++) {
-            let row = refTab.rows[i];
-            testSuiteIds[i] = row.cells[2].firstChild.nodeValue;
-        }
-        return testSuiteIds;
-    }
-
-</script>
-
-</div>
 
 <br>
-<a id=PrintButton class="btn btn-primary" >
+<a id=PrintButton class="btn btn-primary" onclick="getUrlForPrintButton()" >
     <i title="Report"></i>
     Report
 </a>

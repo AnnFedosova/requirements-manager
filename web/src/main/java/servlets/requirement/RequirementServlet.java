@@ -48,7 +48,7 @@ public class RequirementServlet extends HttpServlet {
         List<TestCaseDTO> testCases = new ArrayList<>();
         TestCaseDTO testCaseDTO = new TestCaseDTO(
                 1, 1, "Test-case 1 functional",
-                "", "","","","", 1);
+                "20-01-2019", "","","","", 1);
         testCases.add(testCaseDTO);
         List<RequirementDTO> dependedRequirements = new ArrayList<>();
         dependedRequirements.add(RequirementAPI.getRequirement(2));

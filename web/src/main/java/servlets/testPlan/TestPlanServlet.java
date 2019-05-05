@@ -60,7 +60,7 @@ public class TestPlanServlet extends HttpServlet {
         List<TestCaseDTO> testCases = new ArrayList<>();
         TestCaseDTO testCase = new TestCaseDTO(
                 1, 1, "Test-case 1 functional",
-                "", "","","","", 1);
+                "20-01-2019", "","","","", 1);
         testCases.add(testCase);
         pageVariables.put("testCases", testCases);
 

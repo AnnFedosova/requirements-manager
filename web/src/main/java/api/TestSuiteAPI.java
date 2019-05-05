@@ -38,6 +38,12 @@ public class TestSuiteAPI {
         return new Gson().fromJson(json, new TypeToken<List<TestSuiteDTO>>(){}.getType());
     }
 
+
+    public static List<TestSuiteDTO> getTestSuitesByTestPlanId(long testPlanId) throws Exception {
+        String json = JSONHelper.getJson(URL + "getTestSuitesByTestPlanId" + testPlanId);
+        return new Gson().fromJson(json, new TypeToken<List<TestSuiteDTO>>(){}.getType());
+    }
+
     public static Response editTestSuite(TestSuiteDTO testSuite) {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL + "editTestSuite");

@@ -42,6 +42,11 @@ public class TestCaseAPI {
         return new Gson().fromJson(json, new TypeToken<List<RequirementDTO>>(){}.getType());
     }
 
+    public static List<TestCaseDTO> getTestCasesByTestPlanId(long testPlanId) throws Exception {
+        String json = JSONHelper.getJson(URL + "getTestCasesByTestPlanId" + testPlanId);
+        return new Gson().fromJson(json, new TypeToken<List<TestCaseDTO>>(){}.getType());
+    }
+
     public static Response editTestCase(TestCaseDTO testCase) {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(URL + "editTestCase");
