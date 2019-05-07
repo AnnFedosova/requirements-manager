@@ -59,8 +59,8 @@ public class TestPlanServlet extends HttpServlet {
 
         List<TestCaseDTO> testCases = new ArrayList<>();
         TestCaseDTO testCase = new TestCaseDTO(
-                1, 1, "Test-case 1 functional",
-                "20-01-2019", "","","","", 1);
+                1, 1, "Тест-кейс 1. Проверка заполнения полей",
+                "20-01-2019", "1. Запустить приложение \n2. Проверить, заполнены ли поля на домашней странице","Пользователь зарегистрирован","Выйти из системы","Логин/пароль тестового пользователя: User/User", 1);
         testCases.add(testCase);
         pageVariables.put("testCases", testCases);
 

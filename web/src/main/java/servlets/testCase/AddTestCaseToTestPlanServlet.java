@@ -79,12 +79,12 @@ public class AddTestCaseToTestPlanServlet extends HttpServlet {
         //List<TestSuiteDTO> testCases = TestSuiteAPI.getTestSuitesByProject(TestPlanAPI.getProjectByTestPlanId(testPlanId).getId());
         List<TestCaseDTO> testCases = new ArrayList<>();
         TestCaseDTO testCase1 = new TestCaseDTO(
-                1, 1, "Test-case 1 functional",
-                "20-01-2019", "","","","", 1);
+                1, 1, "Тест-кейс 1. Проверка заполнения полей",
+                "20-01-2019", "1. Запустить приложение \n2. Проверить, заполнены ли поля на домашней странице","Пользователь зарегистрирован","Выйти из системы","Логин/пароль тестового пользователя: User/User", 1);
         testCases.add(testCase1);
         TestCaseDTO testCase2 = new TestCaseDTO(
-                2, 1, "Интеграционный тест-кейс 1",
-                "", "","","","", 1);
+                2, 1, "Интеграционный тест-кейс 2. Взаимодействие модуля А и модуля В",
+                "20-01-2019", "1. Отправить приветственное сообщение из А в В\n2. Убедиться, что сообщение обработано в В","Запущены модули А и В","Завершить работу модулей","", 1);
         testCases.add(testCase2);
 
         pageVariables.put("testPlan", testPlan);

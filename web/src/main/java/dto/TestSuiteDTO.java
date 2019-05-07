@@ -1,5 +1,7 @@
 package dto;
 
+import reportsgenerator.TestSuiteForReport;
+
 public class TestSuiteDTO {
     private long id;
     private String name;
@@ -24,6 +26,15 @@ public class TestSuiteDTO {
         this.plan = plan;
         this.creatorId = Long.parseLong(creatorId);
     }
+
+    public TestSuiteDTO(TestSuiteForReport testSuiteForReport){
+        this.id = testSuiteForReport.getId();
+        this.name = testSuiteForReport.getName();
+        this.description = testSuiteForReport.getDescription();
+        this.plan = testSuiteForReport.getPlan();
+        this.creatorId = testSuiteForReport.getCreatorId();
+    }
+
 
     public long getId() {
         return id;

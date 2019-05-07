@@ -50,8 +50,8 @@ public class TestCaseServlet extends HttpServlet {
         pageVariables.put("isAdmin", true /* когда сервер починится UserAPI.isAdmin(user.getName()) */);
         //TestCaseDTO testCase = TestCaseAPI.getTestCase(testCaseId);
         TestCaseDTO testCase = new TestCaseDTO(
-                1, 1, "Test-case 1 functional",
-                "", "","","","", 1);
+                1, 1, "Тест-кейс 1. Проверка заполнения полей",
+                "20-01-2019", "1. Запустить приложение \n2. Проверить, заполнены ли поля на домашней странице","Пользователь зарегистрирован","Выйти из системы","Логин/пароль тестового пользователя: User/User", 1);
         pageVariables.put("testCase", testCase);
         //UserDTO creator = UserAPI.getUser(testCase.getCreatorId());
         UserDTO creator = new UserDTO("Ann", "Fedosova", "", "AnnFedosova", "");

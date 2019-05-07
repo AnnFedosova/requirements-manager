@@ -142,7 +142,6 @@
                         let refTab = document.getElementById("testCaseSortTable");
                         for (let i = 0; i < refTab.rows.length; i++) {
                             let row = refTab.rows[i];
-                            //alert(row.cells[2].firstChild.nodeValue);
                             testCaseIds[i] = row.cells[2].firstChild.nodeValue;
                         }
                         return testCaseIds;
@@ -156,7 +155,7 @@
 </div>
 
 <br>
-<a id=PrintButton class="btn btn-primary" >
+<a id=PrintButton class="btn btn-primary" onclick="getUrlForPrintButton()" >
     <i title="Report"></i>
     Report
 </a>
