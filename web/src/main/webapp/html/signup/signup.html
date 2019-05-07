@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>
-        Create an account
+        Создать аккаунт
     </title>
     <meta charset='utf-8'>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
@@ -27,13 +27,13 @@
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
             <div class='navbar-header'>
-                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Домой </a>
                 <#if isAdmin>
-                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Админ-панель </a>
             </#if>
         </div>
         <div class='navbar-right'>
-            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Выйти</a>
         </div>
 </div>
 </nav>
@@ -45,7 +45,7 @@
 
             <div class='login'>
                 <div class='page-header'>
-                    <h2 class='text-center'>Create an account</h2>
+                    <h2 class='text-center'>Создать аккаунт</h2>
                 </div>
 
                 <form id="login-form" onsubmit="return checkPasswords();" action="/signup" method="POST">
@@ -87,7 +87,7 @@
                     </div>
                     <div class='form-actions'>
                         <button value="Login" name="button" type="submit" class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i>
-                            Create an account
+                            Создать аккаунт
                         </button>
                     </div>
                 </form>

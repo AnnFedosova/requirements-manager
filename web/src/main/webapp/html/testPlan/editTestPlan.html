@@ -1,7 +1,7 @@
 <HTML>
 <head>
-    <meta charset="utf-8">
-    <title>Edit test-plan ${testPlan.name}</title>
+    <meta charset="Windows-1251">
+    <title>Редактировать тест-план ${testPlan.name}</title>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
@@ -16,13 +16,13 @@
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
             <div class='navbar-header'>
-                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Домой </a>
                 <#if isAdmin>
-                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Админ-панель </a>
             </#if>
         </div>
         <div class='navbar-right'>
-            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Выйти</a>
         </div>
 </div>
 </nav>
@@ -33,7 +33,7 @@
         <div class='col-md-8 col-md-offset-2'>
             <div class='login'>
                 <div class='page-header'>
-                    <h2 class='text-center'>Edit test-plan</h2>
+                    <h2 class='text-center'>Редактировать тест-план</h2>
                 </div>
 
                 <form id="login-form" action="/edit_testPlan" method="POST">
@@ -92,7 +92,7 @@
                     <div class='form-actions'>
                         <button value="Login" name="button" type="submit" class="btn btn-primary btn-lg"><i
                                 class="fa fa-plus"></i>
-                            Save
+                            Сохранить
                         </button>
                     </div>
                 </form>

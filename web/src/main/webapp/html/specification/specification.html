@@ -1,6 +1,6 @@
 <HTML>
 <head>
-    <meta charset="utf-8">
+    <meta charset="Windows-1251">
     <title>${specification.name}</title>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
@@ -46,18 +46,17 @@
 
 <body>
 
-
 <div id="navbar">
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
             <div class='navbar-header'>
-                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Домой </a>
                 <#if isAdmin>
-                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Админ-панель </a>
             </#if>
         </div>
         <div class='navbar-right'>
-            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Выйти</a>
         </div>
 </div>
 </nav>
@@ -68,17 +67,21 @@
         <div class='login'>
             <div class='page-header'>
                 <h2 class='text-left'>${specification.name}</h2>
-                <a class="btn btn-primary" href="/edit_specification?id=${specification.id}"><i title="Edit specification"
-                                                                                    class="fa fa-pencil-square-o"></i> Edit</a>
-                <a class="btn btn-primary" href="/new_requirement_for_spec?specification=${specification.id}"><i title="Create requirement"
-                                                                                              class="fa fa-plus"></i> Create
-                    requirement</a>
-                <a class="btn btn-primary" href="/addReqToSpec?specificationId=${specification.id}"><i title="Add requirement"
-                                                                                                        class="fa fa-plus"></i> Add
-                    requirement</a>
+                <a class="btn btn-primary" href="/edit_specification?id=${specification.id}">
+                    <i title="Edit specification" class="fa fa-pencil-square-o"></i>
+                    Редактировать
+                </a>
+                <a class="btn btn-primary" href="/new_requirement_for_spec?specification=${specification.id}">
+                    <i title="Create requirement" class="fa fa-plus"></i>
+                    Создать требование
+                </a>
+                <a class="btn btn-primary" href="/addReqToSpec?specificationId=${specification.id}">
+                    <i title="Add requirement" class="fa fa-plus"></i>
+                    Добавить требование
+                </a>
 
                 <button class="btn btn-primary" onclick="openDeleteSpecificationDialog()">
-                    Delete specification
+                    Удалить
                 </button>
 
                 <dialog id="DeleteSpecificationDialog">
@@ -123,17 +126,17 @@
 
             </div>
 
-            <h3 class="text-left">Description</h3>
+            <h3 class="text-left">Описание</h3>
             <div style="font-size: medium">
                 ${specification.description}
             </div>
 
-            <h3 class="text-left">Planned Date</h3>
+            <h3 class="text-left">Плановая дата</h3>
             <div style="font-size: medium">
                 ${specification.plannedDate}
             </div>
 
-            <h3 class="text-left">Requirements</h3>
+            <h3 class="text-left">Требования</h3>
             <div style="font-size: medium">
                 <#list requirements>
                 <table id="sort" class="grid" width="100%">
@@ -182,7 +185,7 @@
                 </#list>
             </div>
 
-    <h3 class="text-left">Test-plan</h3>
+    <h3 class="text-left">Тест-план</h3>
     <div style="font-size: medium">
         <#list testPlans>
         <table id="noSort"  class="grid" width="100%">
@@ -208,7 +211,7 @@
         </#list>
     </div>
 
-        <h3 class="text-left">Requirements without test-cases</h3>
+        <h3 class="text-left">Требования без тест-кейсов</h3>
         <div style="font-size: medium">
             <#list noTestRequirements>
             <table width="100%">
@@ -232,12 +235,10 @@
     </#list>
 </div>
 
-
-
     <br>
     <a id=PrintButton class="btn btn-primary" onclick="getUrlForPrintButton()">
         <i title="Report"></i>
-        Report
+        Отчет
     </a>
 
         <br>

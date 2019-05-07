@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="Windows-1251">
     <title>${testCase.name}</title>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
@@ -15,17 +15,16 @@
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
             <div class='navbar-header'>
-                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Домой </a>
                 <#if isAdmin>
-                    <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
-                </#if>
-            </div>
-
-            <div class='navbar-right'>
-                <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
-            </div>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Админ-панель </a>
+            </#if>
         </div>
-    </nav>
+        <div class='navbar-right'>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Выйти</a>
+        </div>
+</div>
+</nav>
 </div>
 
 <div class='container'>
@@ -36,49 +35,49 @@
 
                 <a class="btn btn-primary" href="/edit_project?id=${testCase.id}">
                     <i title="Edit test-case" class="fa fa-pencil-square-o"></i>
-                    Edit test-case
+                    Редактировать тест-кейс
                 </a>
 
                 <br><br>
                 <a class="btn btn-primary" href="/new_testCaseResult?testCaseId=${testCase.id}">
                     <i title="Add result" class="fa fa-plus"></i>
-                    Add result
+                    Добавить результат
                 </a>
 
                 <br><br>
                 <a class="btn btn-primary" href="/new_testCase?testCaseId=${testCase.id}">
                     <i title="Add requirement" class="fa fa-plus"></i>
-                    Add requirement
+                    Добавить требование
                 </a>
 
             </div>
 
-            <h3 class="text-left">Plan </h3>
+            <h3 class="text-left">План</h3>
             <div style="font-size: medium">
                 ${testCase.plan}
             </div>
 
-            <h3 class="text-left">Conditions</h3>
+            <h3 class="text-left">Условия</h3>
             <div style="font-size: medium">
-                Start conditions:
+                Предусловия:
                 ${testCase.startConditions}
                 <br>
-                End conditions:
+                Постусловия:
                 ${testCase.endConditions}
             </div>
 
-            <h3 class="text-left">Test data</h3>
+            <h3 class="text-left">Тестовые данные</h3>
             <div style="font-size: medium">
                 ${testCase.data}
             </div>
 
-            <h3 class="text-left"> Creation date </h3>
+            <h3 class="text-left">Дата создания</h3>
             <div style="font-size: medium">
-                ${testCase.creationDate} by ${creator.getLogin()}
+                ${testCase.creationDate}  ${creator.getLogin()}
             </div>
 
 
-    <h3 class="text-left">Requirements </h3>
+    <h3 class="text-left">Требования</h3>
     <div style="font-size: medium">
         <#list requirements>
         <table width="100%">
@@ -103,7 +102,7 @@
 </div>
 
 
-<h3 class="text-left">Test-case results</h3>
+<h3 class="text-left">Результаты тестирования</h3>
 <div style="font-size: medium">
     <#list testCaseResults>
     <table width="100%">
@@ -131,7 +130,7 @@
 <br>
 <a id=PrintButton class="btn btn-primary" >
     <i title="Report"></i>
-    Report
+    Отчет
 </a>
 
 <br>

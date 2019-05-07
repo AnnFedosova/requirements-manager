@@ -1,7 +1,7 @@
 <HTML>
 <head>
-    <meta charset="utf-8">
-    <title>${projectsTitle}</title>
+    <meta charset="Windows-1251">
+    <title>Проекты</title>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
@@ -14,16 +14,16 @@
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
             <div class='navbar-header'>
-                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home </a>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Домой </a>
                 <#if isAdmin>
-                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
-            </#if>
-        </div>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Админ-панель </a>
+                </#if>
+            </div>
         <div class='navbar-right'>
-            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Выйти</a>
         </div>
-</div>
-</nav>
+        </div>
+    </nav>
 </div>
 
 <div class='container'>
@@ -31,8 +31,9 @@
         <div class='col-md-8 col-md-offset-2'>
             <div class='login'>
                 <h1 class='light'>
-                    Projects
-                    <a class="btn btn-primary" href="/new_project"><i title="Create project" class="fa fa-plus"></i>
+                    Проекты
+                    <a class="btn btn-primary" href="/new_project">
+                        <i title="Создать проект" class="fa fa-plus"></i>
                     </a></h1>
 
                 <#list projects>

@@ -1,6 +1,6 @@
 <HTML>
 <head>
-    <meta charset="utf-8">
+    <meta charset="Windows-1251">
     <title>${project.name}</title>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
@@ -15,17 +15,16 @@
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
             <div class='navbar-header'>
-                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Домой </a>
                 <#if isAdmin>
-                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
-                </#if>
-            </div>
-
-            <div class='navbar-right'>
-                <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
-            </div>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Админ-панель </a>
+            </#if>
         </div>
-    </nav>
+        <div class='navbar-right'>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Выйти</a>
+        </div>
+</div>
+</nav>
 </div>
 
 <div class='container'>
@@ -36,31 +35,37 @@
                 <h2 class='text-left'>${project.name}</h2>
 
                 <a class="btn btn-primary" href="/edit_project?id=${project.id}">
-                    <i title="Edit project" class="fa fa-pencil-square-o"></i>
-                    Edit
+                    <i title="Edit" class="fa fa-pencil-square-o"></i>
+                    Редактировать
                 </a>
 
-                <a class="btn btn-primary" href="/new_requirement?projectid=${project.id}"><i title="Create requirement"
-                                                                                              class="fa fa-plus"></i> Create
-                    requirement</a>
+                <a class="btn btn-primary" href="/new_requirement?projectid=${project.id}">
+                    <i title="Create requirement" class="fa fa-plus"></i>
+                    Создать требование
+                </a>
+
                 <br><br>
-                <a class="btn btn-primary" href="/new_specification?projectid=${project.id}"><i title="Create specification"
-                                                                                              class="fa fa-plus"></i> Create
-                    specification</a>
-                <a class="btn btn-primary" href="/new_release?projectid=${project.id}"><i title="Create release"
-                                                                                              class="fa fa-plus"></i> Create
-                    release</a>
+
+                <a class="btn btn-primary" href="/new_specification?projectid=${project.id}">
+                    <i title="Create specification" class="fa fa-plus"></i>
+                    Создать спецификацию
+                </a>
+
+                <a class="btn btn-primary" href="/new_release?projectid=${project.id}">
+                    <i title="Create release" class="fa fa-plus"></i>
+                    Создать релиз
+                </a>
             </div>
 
             <br>
-            <h3 class="text-left">Description</h3>
+            <h3 class="text-left">Описание</h3>
             <div style="font-size: medium">
                 ${project.description}
             </div>
 
 
             <br>
-            <h3 class="text-left">Specifications</h3>
+            <h3 class="text-left">Спецификации</h3>
             <div style="font-size: medium">
                 <#list specifications>
                 <table width="100%">
@@ -85,7 +90,7 @@
             </div>
 
             <br>
-            <h3 class="text-left">Test-Plans</h3>
+            <h3 class="text-left">Тест-планы</h3>
             <div style="font-size: medium">
                 <#list testPlans>
                 <table width="100%">
@@ -110,7 +115,7 @@
         </div>
 
     <br>
-    <h3 class="text-left">Releases</h3>
+    <h3 class="text-left">Релизы</h3>
         <div style="font-size: medium">
             <#list releases>
             <table width="100%">
@@ -135,7 +140,7 @@
         </div>
 
     <br>
-    <h3 class="text-left">Users</h3>
+    <h3 class="text-left">Пользователи</h3>
     <div style="font-size: medium">
         <#list users>
         <table width="100%">
@@ -162,7 +167,7 @@
 
 
             <br>
-            <h3 class="text-left">Requirements</h3>
+            <h3 class="text-left">Требования</h3>
             <div style="font-size: medium">
                 <#list requirements>
                 <table width="100%">

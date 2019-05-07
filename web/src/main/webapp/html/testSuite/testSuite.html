@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="Windows-1251">
     <title>${testSuite.name}</title>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
@@ -50,13 +50,13 @@
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
             <div class='navbar-header'>
-                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Домой </a>
                 <#if isAdmin>
-                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Админ-панель </a>
             </#if>
         </div>
         <div class='navbar-right'>
-            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Выйти</a>
         </div>
 </div>
 </nav>
@@ -70,42 +70,40 @@
 
                 <a class="btn btn-primary" href="/edit_project?id=${testSuite.id}">
                     <i title="Edit test-plan" class="fa fa-pencil-square-o"></i>
-                    Edit test-suite
+                    Редактировать тестовый набор
                 </a>
 
                 <br><br>
                 <a class="btn btn-primary" href="/new_testCase?testPlanId=${testSuite.id}">
                     <i title="Create test-case" class="fa fa-plus"></i>
-                    Create test-case
+                    Создать тест-кейс
                 </a>
 
                 <a class="btn btn-primary" href="/addTestCaseToReq?testPlanId=${testSuite.id}">
                     <i title="Add test-case" class="fa fa-plus"></i>
-                    Add test-case
+                    Добавить тест-кейс
                 </a>
 
             </div>
 
 
-            <h3 class="text-left">Description</h3>
+            <h3 class="text-left">Описание</h3>
             <div style="font-size: medium">
                 ${testSuite.description}
             </div>
 
-
-
-            <h3 class="text-left">Plan</h3>
+            <h3 class="text-left">План</h3>
             <div style="font-size: medium">
                 ${testSuite.plan}
             </div>
 
-            <h3 class="text-left">Creator</h3>
+            <h3 class="text-left">Автор</h3>
             <div style="font-size: medium">
                 Ann Fedosova
             </div>
 
             <div>
-            <h3 class="text-left">Test-cases</h3>
+            <h3 class="text-left">Тест-кейсы</h3>
             <div style="font-size: medium">
                 <#list testCases>
                 <table id="testCaseSortTable" width="100%">
@@ -157,7 +155,7 @@
 <br>
 <a id=PrintButton class="btn btn-primary" onclick="getUrlForPrintButton()" >
     <i title="Report"></i>
-    Report
+    Отчет
 </a>
 
 <br>

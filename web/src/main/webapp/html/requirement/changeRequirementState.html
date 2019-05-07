@@ -1,7 +1,7 @@
 <HTML>
 <head>
-    <meta charset="utf-8">
-    <title>Change requirement state</title>
+    <meta charset="Windows-1251">
+    <title>Изменение статуса требования</title>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
@@ -16,18 +16,17 @@
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
             <div class='navbar-header'>
-                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Домой </a>
                 <#if isAdmin>
-                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Админ-панель </a>
             </#if>
         </div>
         <div class='navbar-right'>
-            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Выйти</a>
         </div>
 </div>
 </nav>
 </div>
-
 
 
 <div class='container'>
@@ -35,17 +34,17 @@
         <div class='col-md-8 col-md-offset-2'>
             <div class='login'>
                 <div class='page-header'>
-                    <h2 class='text-center'>Change requirement state</h2>
+                    <h2 class='text-center'>Изменение статуса требования</h2>
                 </div>
 
                 <br>
-                <h3 class="text-left"> Title:  ${requirement.name}</h3>
+                <h3 class="text-left"> Название:  ${requirement.name}</h3>
 
                 <form id="login-form" action="/changeRequirementState" method="POST">
                     <input type="hidden" name="requirementId" value="${requirement.id}">
 
                     <br>
-                    <label for="states"><h4>State: &nbsp;</h4></label>
+                    <label for="states"><h4>Статус: &nbsp;</h4></label>
                     <select id="states" name="states" >
                         <#list states as state>
                         <option value="${state.id}">${state.name}</option>
@@ -57,7 +56,7 @@
                     <div class='form-actions'>
                         <button value="Login" name="button" type="submit" class="btn btn-primary btn-lg"><i
                                 class="fa fa-plus"></i>
-                            Save
+                            Сохранить
                         </button>
                     </div>
                 </form>

@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="Windows-1251">
     <title>${testPlan.name}</title>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
@@ -50,16 +50,16 @@
     <nav class='navbar navbar-inverse'>
         <div class='container-fluid'>
             <div class='navbar-header'>
-                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Home</a>
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> Домой </a>
                 <#if isAdmin>
-                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Admin panel </a>
-            </#if>
-        </div>
+                <a class="navbar-brand" href="/admin"><i class="fa fa-lock"></i> Админ-панель </a>
+                </#if>
+            </div>
         <div class='navbar-right'>
-            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
+            <a class="navbar-brand" href="/logout"><i class="fa fa-sign-out"></i>Выйти</a>
         </div>
-</div>
-</nav>
+        </div>
+    </nav>
 </div>
 
 <div class='container'>
@@ -70,54 +70,54 @@
 
                 <a class="btn btn-primary" href="/edit_testPlan?testPlanId=${testPlan.id}">
                     <i title="Edit test-plan" class="fa fa-pencil-square-o"></i>
-                    Edit test-plan
+                    Редактировать тест-план
                 </a>
 
                 <br><br>
                 <a class="btn btn-primary" href="/new_testCase?testPlanId=${testPlan.id}">
                     <i title="Create test-case" class="fa fa-plus"></i>
-                    Create test-case
+                    Создать тест-кейс
                 </a>
 
                 <a class="btn btn-primary" href="/addTestCaseToTestPlan?testPlanId=${testPlan.id}">
                     <i title="Add test-case" class="fa fa-plus"></i>
-                    Add test-case
+                    Добавить тест-кейс
                 </a>
                 <br><br>
                 <a class="btn btn-primary" href="/new_testSuite?testPlanId=${testPlan.id}">
                     <i title="Create test-suite" class="fa fa-plus"></i>
-                    Create test-suite
+                    Создать тестовый набор
                 </a>
 
                 <a class="btn btn-primary" href="/addTestSuiteToTestPlan?testPlanId=${testPlan.id}">
                     <i title="Add test-suite" class="fa fa-plus"></i>
-                    Add test-suite
+                    Добавить тестовый набор
                 </a>
 
             </div>
 
 
-            <h3 class="text-left">Description</h3>
+            <h3 class="text-left">Описание</h3>
             <div style="font-size: medium">
                 ${testPlan.description}
             </div>
 
-            <h3 class="text-left">Date </h3>
+            <h3 class="text-left">Даты</h3>
             <div style="font-size: medium">
                 from ${testPlan.date_from} to ${testPlan.date_to}
             </div>
 
-            <h3 class="text-left">Comment</h3>
+            <h3 class="text-left">Комментарий</h3>
             <div style="font-size: medium">
                 ${testPlan.comment}
             </div>
 
-            <h3 class="text-left">Creator</h3>
+            <h3 class="text-left">Автор</h3>
             <div style="font-size: medium">
                 admin
             </div>
 
-            <h3 class="text-left">Test environment</h3>
+            <h3 class="text-left">Тестовая среда</h3>
             <div style="font-size: medium">
                 <#list testEnvironments>
                 <table id="environmentTable"  class="grid" width="100%">
@@ -149,7 +149,7 @@
     <div>
 
 
-            <h3 class="text-left">Test-cases</h3>
+            <h3 class="text-left">Тест-кейсы</h3>
             <div style="font-size: medium">
                 <#list testCases>
                 <table id="testCaseSortTable" width="100%">
@@ -177,7 +177,7 @@
             </div>
 
 
-            <h3 class="text-left">Test-suites</h3>
+            <h3 class="text-left">Тестовые наборы</h3>
             <div style="font-size: medium">
                 <#list testSuites>
                 <table id="testSuiteSortTable"  width="100%">
@@ -241,7 +241,7 @@
 <br>
 <a id=PrintButton class="btn btn-primary" onclick="getUrlForPrintButton()" >
     <i title="Report"></i>
-    Report
+    Отчет
 </a>
 
 <br>
