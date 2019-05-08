@@ -17,6 +17,14 @@ public class SpecificationDTO {
         this.projectId = projectId;
     }
 
+    public SpecificationDTO(String name, String description, String plannedDate) {
+        this.id = 0;
+        this.name = name;
+        this.description = description;
+        this.plannedDate = plannedDate;
+        this.projectId = 0;
+    }
+
     public long getId() {
         return id;
     }

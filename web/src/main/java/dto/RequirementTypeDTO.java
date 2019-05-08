@@ -9,6 +9,11 @@ public class RequirementTypeDTO implements Serializable {
 
     public RequirementTypeDTO(){}
 
+    public RequirementTypeDTO(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,10 +45,16 @@ public class ReleaseServlet extends HttpServlet {
 
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        ReleaseDTO release = ReleaseAPI.getRelease(id);
-        List<RequirementDTO> requirements = RequirementAPI.getRequirementsByRelease(id);
-
         Principal user = request.getUserPrincipal();
+        //ReleaseDTO release = ReleaseAPI.getRelease(id);
+        ReleaseDTO release = new ReleaseDTO("Релиз 1", "В данный релиз включено большенство требований соответствующей спецификации. Реализованы требования, касающиеся обновления справочной информации.", "20-01-2019");
+        //List<RequirementDTO> requirements = RequirementAPI.getRequirementsByRelease(id);
+        List<RequirementDTO> requirements = new ArrayList<>();
+
+        requirements.add(new RequirementDTO(1, "Требование 1","Необходимо обновить функциональность ПО для корректной работы справочной информации",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
+        requirements.add(new RequirementDTO(1,"Требование 2","Необходимо обновить справочные данные",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
+        requirements.add(new RequirementDTO(1,"Требование 3","Требование к обновлению справочных данных",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
+
         pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
         pageVariables.put("release", release);
         pageVariables.put("requirements", requirements);

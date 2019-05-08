@@ -71,9 +71,12 @@ public class EditSpecificationServlet extends HttpServlet {
 
     private Map<String, Object> createPageVariablesMap(HttpServletRequest httpRequest, String specificationId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        SpecificationDTO specification = SpecificationAPI.getSpecification(Long.parseLong(specificationId));
+        //SpecificationDTO specification = SpecificationAPI.getSpecification(Long.parseLong(specificationId));
+        SpecificationDTO specification = new SpecificationDTO("Спецификация требований 1","Данный документ содержит описание функциональных требований к реализации схем проверок справочных данных.", "20-01-2019");
 
-        pageVariables.put("isAdmin", UserAPI.isAdmin(httpRequest.getUserPrincipal().getName()));
+        //pageVariables.put("isAdmin", UserAPI.isAdmin(httpRequest.getUserPrincipal().getName()));
+        pageVariables.put("isAdmin", true);
+
         pageVariables.put("specification", specification);
         return pageVariables;
     }

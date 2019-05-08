@@ -72,9 +72,12 @@ public class EditReleaseServlet extends HttpServlet {
 
     private Map<String, Object> createPageVariablesMap(HttpServletRequest httpRequest, String releaseId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        ReleaseDTO release = ReleaseAPI.getRelease(Long.parseLong(releaseId));
+        //ReleaseDTO release = ReleaseAPI.getRelease(Long.parseLong(releaseId));
+        ReleaseDTO release = new ReleaseDTO("Релиз 1", "В данный релиз включено большенство требований соответствующей спецификации. Реализованы требования, касающиеся обновления справочной информации.", "20-01-2019");
 
-        pageVariables.put("isAdmin", UserAPI.isAdmin(httpRequest.getUserPrincipal().getName()));
+        //pageVariables.put("isAdmin", UserAPI.isAdmin(httpRequest.getUserPrincipal().getName()));
+        pageVariables.put("isAdmin", true);
+
         pageVariables.put("release", release);
         return pageVariables;
     }

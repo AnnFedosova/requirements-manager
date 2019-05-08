@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>
-        Sign in
-    </title>
+    <meta charset="Windows-1251">
+    <title>Вход</title>
     <meta charset='utf-8'>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
@@ -17,29 +16,29 @@
     <div class='row'>
         <div class='col-md-8 col-md-offset-2'>
             <div class='logo'>
-                <img alt="РќРРЇРЈ РњРР¤Р" class="img-responsive center-block" src="/img/mephi-logo.png"/>
+                <img alt="НИЯУ МИФИ" class="img-responsive center-block" src="/img/mephi-logo.png"/>
             </div>
             <div class='login'>
                 <div class='page-header'>
-                    <h2 class='text-center'>Sign in</h2>
+                    <h2 class='text-center'>Вход</h2>
                 </div>
 
                 <form id="login-form" action="/j_security_check" method="post">
                     <div class='form-group'>
                         <div class='input-group input-group-lg'>
                             <span class='input-group-addon'><i class="fa fa-user"></i></span>
-                            <input type="text" name="j_username" placeholder="Login" class="form-control" required="required"/>
+                            <input type="text" name="j_username" placeholder="Логин" class="form-control" required="required"/>
                         </div>
                     </div>
                     <div class='form-group'>
                         <div class='input-group input-group-lg'>
                             <span class='input-group-addon'><i class="fa fa-lock"></i></span>
-                            <input type="password" name="j_password" placeholder="Password" class="form-control" required="required"/>
+                            <input type="password" name="j_password" placeholder="Пароль" class="form-control" required="required"/>
                         </div>
                     </div>
                     <div class='form-actions'>
                         <button value="Login" name="button" type="submit" class="btn btn-primary btn-lg"><i class="fa fa-sign-in"></i>
-                            Sign in
+                            Войти
                         </button>
                     </div>
                 </form>

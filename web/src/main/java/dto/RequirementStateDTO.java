@@ -8,6 +8,11 @@ public class RequirementStateDTO implements Serializable {
 
     public RequirementStateDTO(){}
 
+    public RequirementStateDTO(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }

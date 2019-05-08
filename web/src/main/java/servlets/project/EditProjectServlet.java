@@ -68,9 +68,13 @@ public class EditProjectServlet extends HttpServlet {
 
     private Map<String, Object> createPageVariablesMap(HttpServletRequest httpRequest, String projectId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        ProjectDTO project = ProjectAPI.getProject(Long.parseLong(projectId));
+        //ProjectDTO project = ProjectAPI.getProject(Long.parseLong(projectId));
+        ProjectDTO project = new ProjectDTO("Проект «Газпром»",
+                "В этом проекте наша компания реализует ПО для работы с ценами на топливо для компании Газпром. ПАО «Газпром» — российская (ранее советская) транснациональная энергетическая корпорация");
 
-        pageVariables.put("isAdmin", UserAPI.isAdmin(httpRequest.getUserPrincipal().getName()));
+        //pageVariables.put("isAdmin", UserAPI.isAdmin(httpRequest.getUserPrincipal().getName()));
+        pageVariables.put("isAdmin", true);
+
         pageVariables.put("project", project);
         return pageVariables;
     }

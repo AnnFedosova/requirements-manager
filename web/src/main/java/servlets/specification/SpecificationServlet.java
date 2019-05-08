@@ -46,8 +46,15 @@ public class SpecificationServlet extends HttpServlet {
 
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        SpecificationDTO specification = SpecificationAPI.getSpecification(id);
-        List<RequirementDTO> requirements = RequirementAPI.getRequirementsBySpecification(id);
+        //SpecificationDTO specification = SpecificationAPI.getSpecification(id);
+        SpecificationDTO specification = new SpecificationDTO("Спецификация требований 1","Данный документ содержит описание функциональных требований к реализации схем проверок справочных данных.", "20-01-2019");
+
+        //List<RequirementDTO> requirements = RequirementAPI.getRequirementsBySpecification(id);
+        List<RequirementDTO> requirements = new ArrayList<>();
+
+        requirements.add(new RequirementDTO(1, "Требование 1","Необходимо обновить функциональность ПО для корректной работы справочной информации",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
+        requirements.add(new RequirementDTO(1,"Требование 2","Необходимо обновить справочные данные",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
+        requirements.add(new RequirementDTO(1,"Требование 3","Требование к обновлению справочных данных",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
 
         TestPlanDTO testPlan = new TestPlanDTO(1, "Test-Plan",
                 "Документ, описывающий весь объем работ по тестированию. Содержит информацию по тест-кейсам, тест-наборам и пр.",
@@ -55,10 +62,13 @@ public class SpecificationServlet extends HttpServlet {
         List<TestPlanDTO> testPlans = new ArrayList<>();
         testPlans.add(testPlan);
 
-        List<RequirementDTO> noTestRequirements = RequirementAPI.getRequirementsBySpecification(id); //todo тут должны быть noTestRequirement, а не все
+        //List<RequirementDTO> noTestRequirements = RequirementAPI.getRequirementsBySpecification(id);
+        List<RequirementDTO> noTestRequirements = new ArrayList<>();
+        noTestRequirements.add(new RequirementDTO(1,"Требование 3","Требование к обновлению справочных данных",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
 
         Principal user = request.getUserPrincipal();
-        pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+        //pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+        pageVariables.put("isAdmin", true);
         pageVariables.put("specification", specification);
         pageVariables.put("requirements", requirements);
         pageVariables.put("noTestRequirements", noTestRequirements);

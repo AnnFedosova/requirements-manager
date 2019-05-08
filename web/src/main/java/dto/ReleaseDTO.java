@@ -17,6 +17,14 @@ public class ReleaseDTO {
         this.projectId = projectId;
     }
 
+    public ReleaseDTO(String name, String description, String releaseDate) {
+        this.id = 0;
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.projectId = 0;
+    }
+
     public long getId() {
         return id;
     }

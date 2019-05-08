@@ -8,6 +8,11 @@ public class RequirementPriorityDTO implements Serializable {
 
     public RequirementPriorityDTO(){}
 
+    public RequirementPriorityDTO(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }
