@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,11 +73,18 @@ public class AddReqToSpecServlet extends HttpServlet {
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long specificationId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         Principal user = request.getUserPrincipal();
-        pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+        //pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+        pageVariables.put("isAdmin", true);
 
-        SpecificationDTO specification = SpecificationAPI.getSpecification(specificationId);
-        List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(specification.getProjectId());
+        //SpecificationDTO specification = SpecificationAPI.getSpecification(specificationId);
+        SpecificationDTO specification = new SpecificationDTO("Спецификация требований 1","Данный документ содержит описание функциональных требований к реализации схем проверок справочных данных.", "20-01-2019");
 
+        //List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(specification.getProjectId());
+        List<RequirementDTO> requirements = new ArrayList<>();
+
+        requirements.add(new RequirementDTO(1, "Требование 1","Необходимо обновить функциональность ПО для корректной работы справочной информации",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
+        requirements.add(new RequirementDTO(1,"Требование 2","Необходимо обновить справочные данные",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
+        requirements.add(new RequirementDTO(1,"Требование 3","Требование к обновлению справочных данных",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
 
         pageVariables.put("specification", specification);
         pageVariables.put("requirements", requirements);

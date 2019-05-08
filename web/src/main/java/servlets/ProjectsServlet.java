@@ -48,7 +48,7 @@ public class ProjectsServlet extends HttpServlet {
         pageVariables.put("isAdmin", true);
 
         //пока сервер не заработает
-        ProjectDTO project1 = new ProjectDTO("Проект «Газпром»",
+        ProjectDTO project1 = new ProjectDTO("Проект для Газпрома",
                 "В этом проекте наша компания реализует ПО для работы с ценами на топливо для компании Газпром. ПАО «Газпром» — российская (ранее советская) транснациональная энергетическая корпорация");
         ProjectDTO project2 = new ProjectDTO("Проект «Роскосмос»",
                 "Реализуется ПО, которое служит для выбора кандидатов на работу в космической отрасли.");

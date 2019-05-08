@@ -47,7 +47,7 @@ public class ProjectServlet extends HttpServlet {
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         //ProjectDTO project = ProjectAPI.getProject(id);
-        ProjectDTO project = new ProjectDTO("Проект «Газпром»",
+        ProjectDTO project = new ProjectDTO("Проект для Газпрома",
                 "В этом проекте наша компания реализует ПО для работы с ценами на топливо для компании Газпром. ПАО «Газпром» — российская (ранее советская) транснациональная энергетическая корпорация");
 
         //List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(id);
