@@ -68,8 +68,8 @@
             <div class='page-header'>
                 <h2 class='text-left'>${testSuite.name}</h2>
 
-                <a class="btn btn-primary" href="/edit_project?id=${testSuite.id}">
-                    <i title="Edit test-plan" class="fa fa-pencil-square-o"></i>
+                <a class="btn btn-primary" href="/edit_testSuite?testSuiteId=${testSuite.id}">
+                    <i title="Edit testSuite" class="fa fa-pencil-square-o"></i>
                     Редактировать тестовый набор
                 </a>
 
@@ -79,9 +79,13 @@
                     Создать тест-кейс
                 </a>
 
-                <a class="btn btn-primary" href="/addTestCaseToReq?testPlanId=${testSuite.id}">
+                <a class="btn btn-primary" href="/addTestCaseToTestSuite?testSuiteId=${testSuite.id}">
                     <i title="Add test-case" class="fa fa-plus"></i>
                     Добавить тест-кейс
+                </a>
+
+                <a class="btn btn-primary" href="/new_testCase">
+                    Удалить
                 </a>
 
             </div>

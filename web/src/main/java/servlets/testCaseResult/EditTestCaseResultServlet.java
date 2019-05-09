@@ -1,8 +1,11 @@
-package servlets.testCase;
+package servlets.testCaseResult;
 
 import api.APIActions;
 import api.TestCaseAPI;
+import api.TestCaseResultAPI;
 import dto.TestCaseDTO;
+import dto.TestCaseResultDTO;
+import dto.UserDTO;
 import templater.PageGenerator;
 
 import javax.servlet.annotation.HttpConstraint;
@@ -14,27 +17,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-@WebServlet(name = "Edit_TestCase", urlPatterns = "/edit_testCase")
+@WebServlet(name = "Edit_TestCaseResult", urlPatterns = "/edit_testCaseResult")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
-public class EditTestCaseServlet extends HttpServlet {
+public class EditTestCaseResultServlet extends HttpServlet {
 
-    public EditTestCaseServlet() {
+    public EditTestCaseResultServlet() {
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
 
-        String testCaseId = request.getParameter("testCaseId");
+        String testCaseResultId = request.getParameter("testCaseResultId");
         Map<String, Object> pageVariables = null;
         try {
-            pageVariables = createPageVariablesMap(request, Long.parseLong(testCaseId));
+            pageVariables = createPageVariablesMap(request, Long.parseLong(testCaseResultId));
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(PageGenerator.getInstance().getPage("testCase/editTestCase.html", pageVariables));
+            response.getWriter().println(PageGenerator.getInstance().getPage("testCaseResult/editTestCaseResult.html", pageVariables));
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println("Error!  " + HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -75,14 +80,21 @@ public class EditTestCaseServlet extends HttpServlet {
         }
     }
 
-    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long testCaseId) throws Exception {
+    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long testCaseResultId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        //TestCaseDTO testCase = TestCaseAPI.getTestCase(testCaseId);
-        TestCaseDTO testCase = new TestCaseDTO(
-                1, 1, "Тест-кейс 1. Проверка заполнения полей",
-                "20-01-2019", "1. Запустить приложение \n2. Проверить, заполнены ли поля на домашней странице","Пользователь зарегистрирован","Выйти из системы","Логин/пароль тестового пользователя: User/User", 1);
-        pageVariables.put("testCase", testCase);
+        //TestCaseResultDTO testCaseResult = TestCaseResultAPI.getTestCaseResult(testCaseResultId);
+        TestCaseResultDTO testCaseResult = new TestCaseResultDTO(
+                1, "10-10-2019",
+                "Тест пройден успешно. Дефектов не обнаружено.",
+                1, 1);
+        pageVariables.put("testCaseResult", testCaseResult);
 
+        //List<UserDTO> users = ProjectAPI.getUsersByProject(id);
+        List<UserDTO> testers = new ArrayList<>();
+        testers.add(new UserDTO("Иван", "Петров", "", "IPetrov","87654321"));
+        testers.add(new UserDTO("Ольга", "Иванова", "", "OIvanova","87654321"));
+
+        pageVariables.put("testers", testers);
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", true /* сервер лежит UserAPI.isAdmin(user.getName()) */);
 

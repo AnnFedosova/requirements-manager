@@ -2,6 +2,7 @@ package api;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import dto.TestEnvironmentComponentTestEnvironmentDTO;
 import dto.TestEnvironmentDTO;
 import dto.TestPlanDTO;
 
@@ -41,5 +42,12 @@ public class TestEnvironmentAPI {
         WebTarget target = client.target(URL + "editTestEnvironment");
         Invocation.Builder builder = target.request();
         return builder.post(Entity.entity(testEnvironment, MediaType.APPLICATION_JSON));
+    }
+
+    public static Response addTestEnvironmentComponentToTestEnvironment(TestEnvironmentComponentTestEnvironmentDTO testEnvironmentComponentTestEnvironment) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL + "addTestEnvironmentComponentToTestEnvironment");
+        Invocation.Builder builder = target.request();
+        return builder.post(Entity.entity(testEnvironmentComponentTestEnvironment, "application/json; charset=UTF-8"));
     }
 }

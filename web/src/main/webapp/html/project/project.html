@@ -55,6 +55,10 @@
                     <i title="Create release" class="fa fa-plus"></i>
                     Создать релиз
                 </a>
+
+                <a class="btn btn-primary" href="/new_testCase">
+                    Удалить
+                </a>
             </div>
 
             <br>
@@ -129,7 +133,7 @@
                                 </div>
                             </td>
                             <td><a class="list-group-item text-center"
-                                   href="/release?id=${release.id}">${release.name}</a>
+                                   href="/release?releaseId=${release.id}">${release.name}</a>
                             </td>
                         </tr>
                         </#items>

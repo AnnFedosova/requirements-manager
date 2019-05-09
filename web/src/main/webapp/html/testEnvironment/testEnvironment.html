@@ -33,23 +33,22 @@
             <div class='page-header'>
                 <h2 class='text-left'>${testEnvironment.name}</h2>
 
-                <a class="btn btn-primary" href="/edit_project?testEnvironmentId=${testEnvironment.id}">
+                <a class="btn btn-primary" href="/addTestEnvironmentComponentToTestEnvironment?testEnvironmentId=${testEnvironment.id}">
                     <i title="Add component" class="fa fa-pencil-square-o"></i>
                     Добавить компонент
                 </a>
 
-                <a class="btn btn-primary" href="/edit_project?testEnvironmentId=${testEnvironment.id}">
+                <a class="btn btn-primary" href="/new_testEnvironmentComponent?testEnvironmentId=${testEnvironment.id}">
                     <i title="Create component" class="fa fa-plus"></i>
                     Создать компонент
                 </a>
 
-                <a class="btn btn-primary" href="/addTestCaseToReq?testEnvironmentId=${testEnvironment.id}">
+                <a class="btn btn-primary" href="/edit_testEnvironment?testEnvironmentId=${testEnvironment.id}">
                     <i title="Edit test environment" class="fa fa-plus"></i>
                     Редактировать
                 </a>
 
                 <a class="btn btn-primary" href="/new_testCase?testEnvironmentId=${testEnvironment.id}">
-                    <i title="Delete test environment" class="fa fa-plus"></i>
                     Удалить
                 </a>
 

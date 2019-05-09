@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="Windows-1251">
-    <title>Добавление тест-кейса</title>
+    <title>Добавление компонента тестовой среды</title>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
@@ -33,22 +33,22 @@
         <div class='col-md-8 col-md-offset-2'>
             <div class='login'>
                 <div class='page-header'>
-                    <h2 class='text-center'>Добавление тест-кейса в <br/> &laquo ${testSuite.name} &raquo </h2>
+                    <h2 class='text-center'>Добавление компонента тестовой среды в <br/> &laquo ${testEnvironment.name} &raquo </h2>
                 </div>
 
-                <form id="login-form" action="/addTestCaseToTestSuite" method="POST">
-                    <input type="hidden" name="testSuiteId" value="${testSuite.id}">
+                <form id="login-form" action="/addTestEnvironmentComponentToTestEnvironment" method="POST">
+                    <input type="hidden" name="testEnvironmentId" value="${testEnvironment.id}">
 
                     <br>
-                    <label for="testCases">
+                    <label for="testEnvironmentComponents">
                         <h4>
-                            Тест-кейс: &nbsp;
+                            Компонент тестовой среды: &nbsp;
                         </h4>
                     </label>
-                    <select id="testCases" name="testCases" >
-                        <#list testCases as testCase>
-                        <option value="${testCase.id}">
-                            ${testCase.name}
+                    <select id="testEnvironmentComponents" name="testEnvironmentComponents" >
+                        <#list testEnvironmentComponents as testEnvironmentComponent>
+                        <option value="${testEnvironmentComponent.id}">
+                            ${testEnvironmentComponent.name}
                         </option>
                         </#list>
                     </select>

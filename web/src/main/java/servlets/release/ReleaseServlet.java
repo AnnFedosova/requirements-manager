@@ -29,11 +29,11 @@ public class ReleaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
-        String id = request.getParameter("id");
+        String releaseId = request.getParameter("releaseId");
 
         Map<String, Object> pageVariables = null;
         try {
-            pageVariables = createPageVariablesMap(request, Long.parseLong(id));
+            pageVariables = createPageVariablesMap(request, Long.parseLong(releaseId));
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().println(PageGenerator.getInstance().getPage("release/release.html", pageVariables));
         } catch (Exception e) {
@@ -43,19 +43,21 @@ public class ReleaseServlet extends HttpServlet {
 
     }
 
-    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long id) throws Exception {
+    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long releaseId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         Principal user = request.getUserPrincipal();
-        //ReleaseDTO release = ReleaseAPI.getRelease(id);
+        //ReleaseDTO release = ReleaseAPI.getRelease(releaseId);
         ReleaseDTO release = new ReleaseDTO("Релиз 1", "В данный релиз включено большенство требований соответствующей спецификации. Реализованы требования, касающиеся обновления справочной информации.", "20-01-2019");
-        //List<RequirementDTO> requirements = RequirementAPI.getRequirementsByRelease(id);
+        //List<RequirementDTO> requirements = RequirementAPI.getRequirementsByRelease(releaseId);
         List<RequirementDTO> requirements = new ArrayList<>();
 
         requirements.add(new RequirementDTO(1, "Требование 1","Необходимо обновить функциональность ПО для корректной работы справочной информации",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
         requirements.add(new RequirementDTO(1,"Требование 2","Необходимо обновить справочные данные",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
         requirements.add(new RequirementDTO(1,"Требование 3","Требование к обновлению справочных данных",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
 
-        pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+        //pageVariables.put("isAdmin", UserAPI.isAdmin(user.getName()));
+        pageVariables.put("isAdmin", true);
+
         pageVariables.put("release", release);
         pageVariables.put("requirements", requirements);
 

@@ -14,6 +14,12 @@ public class TestEnvironmentComponentDTO {
         this.description = description;
     }
 
+    public TestEnvironmentComponentDTO(String name, String description) {
+        this.id = 0;
+        this.name = name;
+        this.description = description;
+    }
+
     public long getId() {
         return id;
     }

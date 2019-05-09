@@ -89,8 +89,8 @@ public class PrintTestSuiteServlet extends HttpServlet {
 
         //TestSuiteDTO testSuite = TestSuiteAPI.getTestSuite(testSuiteId); //ждем, пока сервер заработает
         TestSuiteDTO testSuite = new TestSuiteDTO(
-                1, "Test-suite for print function",
-                "Here are tests for report printing features for the card issuance system.",
+                1, "Набор тестов для функции генерации отчетов",
+                "Совокупность (набор) тестовых вариантов, для тестирования функции генерации отчетов ",
                 "2, 1", 1);
 
         //List<TestCaseDTO> testCases = TestCaseAPI.getTestCasesByTestPlanId(testPlanId);

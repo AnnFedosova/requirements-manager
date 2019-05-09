@@ -51,8 +51,8 @@ public class TestSuiteServlet extends HttpServlet {
         pageVariables.put("isAdmin", true /* когда сервер починится UserAPI.isAdmin(user.getName()) */);
 
         TestSuiteDTO testSuite = new TestSuiteDTO(
-                1, "Test-suite for print function",
-                "Here are tests for report printing features for the card issuance system.",
+                1, "Набор тестов для функции генерации отчетов",
+                "Совокупность (набор) тестовых вариантов, для тестирования функции генерации отчетов ",
                 "2, 1", 1);
         pageVariables.put("testSuite", testSuite);
 

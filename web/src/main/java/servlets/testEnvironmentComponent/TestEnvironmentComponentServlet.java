@@ -51,7 +51,7 @@ public class TestEnvironmentComponentServlet extends HttpServlet {
             pageVariables.put("isAdmin", true /* todo когда сервер починится UserAPI.isAdmin(user.getName()) */);
 
             TestEnvironmentComponentDTO testEnvironmentComponent = new TestEnvironmentComponentDTO(
-                    1, "Test Environment Component 1", "Компонент тесовой среды");
+                    1, "Test Environment Component 1", "Компонент тестовой среды. PostgreSQL — свободная объектно-реляционная система управления базами данных.");
             pageVariables.put("testEnvironmentComponent", testEnvironmentComponent);
 
             return pageVariables;

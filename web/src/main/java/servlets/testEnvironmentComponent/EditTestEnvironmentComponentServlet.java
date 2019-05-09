@@ -1,8 +1,10 @@
-package servlets.testCase;
+package servlets.testEnvironmentComponent;
 
 import api.APIActions;
-import api.TestCaseAPI;
-import dto.TestCaseDTO;
+import api.TestEnvironmentAPI;
+import api.TestEnvironmentComponentAPI;
+import dto.TestEnvironmentComponentDTO;
+import dto.TestEnvironmentDTO;
 import templater.PageGenerator;
 
 import javax.servlet.annotation.HttpConstraint;
@@ -18,23 +20,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@WebServlet(name = "Edit_TestCase", urlPatterns = "/edit_testCase")
+@WebServlet(name = "Edit_TestEnvironmentComponent", urlPatterns = "/edit_testEnvironmentComponent")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin", "user"}))
-public class EditTestCaseServlet extends HttpServlet {
+public class EditTestEnvironmentComponentServlet extends HttpServlet {
 
-    public EditTestCaseServlet() {
+    public EditTestEnvironmentComponentServlet() {
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
 
-        String testCaseId = request.getParameter("testCaseId");
+        String testEnvironmentComponentId = request.getParameter("testEnvironmentComponentId");
         Map<String, Object> pageVariables = null;
         try {
-            pageVariables = createPageVariablesMap(request, Long.parseLong(testCaseId));
+            pageVariables = createPageVariablesMap(request, Long.parseLong(testEnvironmentComponentId));
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(PageGenerator.getInstance().getPage("testCase/editTestCase.html", pageVariables));
+            response.getWriter().println(PageGenerator.getInstance().getPage("testEnvironmentComponent/editTestEnvironmentComponent.html", pageVariables));
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println("Error!  " + HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -46,28 +48,22 @@ public class EditTestCaseServlet extends HttpServlet {
         httpRequest.setCharacterEncoding("UTF-8");
         httpResponse.setContentType("text/html;charset=utf-8");
 
-        String testCaseId = httpRequest.getParameter("testCaseId");
+        String testEnvironmentComponentId = httpRequest.getParameter("testEnvironmentComponentId");
         String name = httpRequest.getParameter("name");
-        String plan = httpRequest.getParameter("plan");
-        String startConditions = httpRequest.getParameter("startConditions");
-        String endConditions = httpRequest.getParameter("endConditions");
-        String data = httpRequest.getParameter("data");
+        String description = httpRequest.getParameter("description");
 
-        if (name == null || testCaseId == null) {
+        if (testEnvironmentComponentId == null ) {
             httpResponse.getWriter().println("Not created");
             httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         try {
-            TestCaseDTO testCase = TestCaseAPI.getTestCase(Long.parseLong(testCaseId));
-            testCase.setName(name);
-            testCase.setPlan(plan);
-            testCase.setStartConditions(startConditions);
-            testCase.setEndConditions(endConditions);
-            testCase.setData(data);
+            TestEnvironmentComponentDTO testEnvironmentComponent = TestEnvironmentComponentAPI.getTestEnvironmentComponent(Long.parseLong(testEnvironmentComponentId));
+            testEnvironmentComponent.setName(name);
+            testEnvironmentComponent.setDescription(description);
 
-            Response response = TestCaseAPI.editTestCase(testCase);
+            Response response = TestEnvironmentComponentAPI.editTestEnvironmentComponent(testEnvironmentComponent);
             APIActions.checkResponseStatus(response, httpResponse);
         } catch (Exception e) {
             httpResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -75,13 +71,13 @@ public class EditTestCaseServlet extends HttpServlet {
         }
     }
 
-    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long testCaseId) throws Exception {
+    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long testEnvironmentComponentId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
-        //TestCaseDTO testCase = TestCaseAPI.getTestCase(testCaseId);
-        TestCaseDTO testCase = new TestCaseDTO(
-                1, 1, "Тест-кейс 1. Проверка заполнения полей",
-                "20-01-2019", "1. Запустить приложение \n2. Проверить, заполнены ли поля на домашней странице","Пользователь зарегистрирован","Выйти из системы","Логин/пароль тестового пользователя: User/User", 1);
-        pageVariables.put("testCase", testCase);
+
+        //TestEnvironmentComponentDTO testEnvironmentComponent = TestEnvironmentComponentAPI.getTestEnvironmentComponent(testEnvironmentComponentId);
+        TestEnvironmentComponentDTO testEnvironmentComponent = new TestEnvironmentComponentDTO(
+                1, "Test Environment Component 1", "Компонент тестовой среды. PostgreSQL — свободная объектно-реляционная система управления базами данных.");
+        pageVariables.put("testEnvironmentComponent", testEnvironmentComponent);
 
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", true /* сервер лежит UserAPI.isAdmin(user.getName()) */);

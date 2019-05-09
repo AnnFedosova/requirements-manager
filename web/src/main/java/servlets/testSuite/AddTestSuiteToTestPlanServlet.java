@@ -77,8 +77,8 @@ public class AddTestSuiteToTestPlanServlet extends HttpServlet {
         //List<TestSuiteDTO> testSuites = TestSuiteAPI.getTestSuitesByProject(TestPlanAPI.getProjectByTestPlanId(testPlanId).getId());
         List<TestSuiteDTO> testSuites = new ArrayList<>();
         TestSuiteDTO testSuite1 = new TestSuiteDTO(
-                1, "Test-suite for print function",
-                "Here are tests for report printing features for the card issuance system.",
+                1, "Набор тестов для функции генерации отчетов",
+                "Совокупность (набор) тестовых вариантов, для тестирования функции генерации отчетов ",
                 "2, 1", 1);
         testSuites.add(testSuite1);
         TestSuiteDTO testSuite2 = new TestSuiteDTO(
