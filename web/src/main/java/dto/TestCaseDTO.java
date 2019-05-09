@@ -72,4 +72,40 @@ public class TestCaseDTO {
     public long getCreatorId() {
         return creatorId;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setRequirementId(long requirementId) {
+        this.requirementId = requirementId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setPlan(String plan) {
+        this.plan = plan;
+    }
+
+    public void setStartConditions(String startConditions) {
+        this.startConditions = startConditions;
+    }
+
+    public void setEndConditions(String endConditions) {
+        this.endConditions = endConditions;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public void setCreatorId(long creatorId) {
+        this.creatorId = creatorId;
+    }
 }

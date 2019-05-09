@@ -37,13 +37,6 @@ public class TestCaseServlet extends HttpServlet {
         }
     }
 
-
-    @Override
-    protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) throws IOException {
-        httpRequest.setCharacterEncoding("UTF-8");
-
-    }
-
     private Map<String, Object> createPageVariablesMap(HttpServletRequest request, long testCaseId) throws Exception {
         Map<String, Object> pageVariables = new HashMap<>();
         //Principal user = request.getUserPrincipal(); todo заменить коментарии, это тестовые данные
@@ -69,6 +62,8 @@ public class TestCaseServlet extends HttpServlet {
         //List<RequirementDTO> requirements = TestCaseAPI.getReqByTestCaseId(testCaseId);
         //List<RequirementDTO> requirements = RequirementAPI.getRequirementsByProject(1);
         List<RequirementDTO> requirements = new ArrayList<>();
+        requirements.add(new RequirementDTO(1, "Требование 1","Необходимо обновить функциональность ПО для корректной работы справочной информации",1,1,1,"21-03-2019","21-03-2019",1, 1, true));
+
         pageVariables.put("requirements", requirements);
 
         return pageVariables;

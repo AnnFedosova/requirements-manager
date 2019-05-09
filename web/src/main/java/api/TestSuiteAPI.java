@@ -2,6 +2,7 @@ package api;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import dto.TestCaseTestSuiteDTO;
 import dto.TestPlanDTO;
 import dto.TestSuiteDTO;
 
@@ -38,10 +39,14 @@ public class TestSuiteAPI {
         return new Gson().fromJson(json, new TypeToken<List<TestSuiteDTO>>(){}.getType());
     }
 
-
     public static List<TestSuiteDTO> getTestSuitesByTestPlanId(long testPlanId) throws Exception {
         String json = JSONHelper.getJson(URL + "getTestSuitesByTestPlanId" + testPlanId);
         return new Gson().fromJson(json, new TypeToken<List<TestSuiteDTO>>(){}.getType());
+    }
+
+    public static TestPlanDTO getTestPlanByTestSuiteId(long testSuiteId) throws Exception {
+        String json = JSONHelper.getJson(URL + "getTestPlanByTestSuiteId" + testSuiteId);
+        return new Gson().fromJson(json, new TypeToken<TestPlanDTO>(){}.getType());
     }
 
     public static Response editTestSuite(TestSuiteDTO testSuite) {
@@ -50,4 +55,13 @@ public class TestSuiteAPI {
         Invocation.Builder builder = target.request();
         return builder.post(Entity.entity(testSuite, MediaType.APPLICATION_JSON));
     }
+
+    public static Response addTestCaseToTestSuite(TestCaseTestSuiteDTO testCaseTestSuite) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL + "addTestCaseToTestSuite");
+        Invocation.Builder builder = target.request();
+        return builder.post(Entity.entity(testCaseTestSuite, "application/json; charset=UTF-8"));
+    }
+
+
 }

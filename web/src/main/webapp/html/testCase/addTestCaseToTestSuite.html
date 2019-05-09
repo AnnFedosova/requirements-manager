@@ -33,10 +33,10 @@
         <div class='col-md-8 col-md-offset-2'>
             <div class='login'>
                 <div class='page-header'>
-                    <h2 class='text-center'>Добавление тест-кейса в <br/> &laquo ${testPlan.name} &raquo </h2>
+                    <h2 class='text-center'>Добавление тест-кейса в <br/> &laquo ${testSuite.name} &raquo </h2>
                 </div>
 
-                <form id="login-form" action="/addTestCaseToTestPlan" method="POST">
+                <form id="login-form" action="/addTestCaseToTestSuite" method="POST">
                     <input type="hidden" name="testPlanId" value="${testPlan.id}">
 
                     <br>

@@ -33,18 +33,16 @@
             <div class='page-header'>
                 <h2 class='text-left'>${testCase.name}</h2>
 
-                <a class="btn btn-primary" href="/edit_project?id=${testCase.id}">
+                <a class="btn btn-primary" href="/edit_testCase?testCaseId=${testCase.id}">
                     <i title="Edit test-case" class="fa fa-pencil-square-o"></i>
                     Редактировать тест-кейс
                 </a>
 
-                <br><br>
                 <a class="btn btn-primary" href="/new_testCaseResult?testCaseId=${testCase.id}">
                     <i title="Add result" class="fa fa-plus"></i>
                     Добавить результат
                 </a>
 
-                <br><br>
                 <a class="btn btn-primary" href="/new_testCase?testCaseId=${testCase.id}">
                     <i title="Add requirement" class="fa fa-plus"></i>
                     Добавить требование
@@ -126,12 +124,6 @@
 </#list>
 </div>
 
-
-<br>
-<a id=PrintButton class="btn btn-primary" >
-    <i title="Report"></i>
-    Отчет
-</a>
 
 <br>
 </div>

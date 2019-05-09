@@ -1,14 +1,15 @@
-<html>
-
+<HTML>
 <head>
     <meta charset="Windows-1251">
-    <title>Добавление тест-кейса</title>
+    <title>Редактирование тестовой среды </title>
     <link rel="stylesheet" media="all" href="/css/mephi-style.css" data-turbolinks-track="true"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png" sizes="32x32"/>
     <link rel="apple-touch-icon" type="image/x-icon" href="/img/apple-icon.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    </head>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
 
 <body>
 <div id="navbar">
@@ -27,33 +28,35 @@
 </nav>
 </div>
 
-
 <div class='container'>
     <div class='row'>
         <div class='col-md-8 col-md-offset-2'>
             <div class='login'>
                 <div class='page-header'>
-                    <h2 class='text-center'>Добавление тест-кейса в <br/> &laquo ${testPlan.name} &raquo </h2>
+                    <h2 class='text-center'>Редактирование тестовой среды <br/> &laquo ${testEnvironment.name} &raquo</h2>
                 </div>
 
-                <form id="login-form" action="/addTestCaseToTestPlan" method="POST">
-                    <input type="hidden" name="testPlanId" value="${testPlan.id}">
+                <form id="login-form" action="/edit_testEnvironment" method="POST">
+                    <input type="hidden" name="testEnvironmentId" value="${testEnvironment.id}">
 
-                    <br>
-                    <label for="testCases">
-                        <h4>
-                            Тест-кейс: &nbsp;
-                        </h4>
-                    </label>
-                    <select id="testCases" name="testCases" >
-                        <#list testCases as testCase>
-                        <option value="${testCase.id}">
-                            ${testCase.name}
-                        </option>
-                        </#list>
-                    </select>
+                    <div class='form-group'>
+                        <div class='input-group input-group-lg'>
+                            <span class='input-group-addon'><i class="fa fa-font"></i></span>
+                            <input type="text" name="name" value="${testEnvironment.name}" class="form-control"
+                                   required="required"/>
+                        </div>
+                    </div>
 
-                    <br>
+                    <div class='form-group'>
+                        <div class='input-group input-group-lg'>
+                            <span class='input-group-addon'><i class="fa fa-align-left"></i></span>
+                            <textarea name="description"  class="form-control"
+                                      style="resize: vertical" rows="5">${testEnvironment.description}</textarea>
+                        </div>
+                    </div>
+
+                   <br>
+
                     <div class='form-actions'>
                         <button value="Login" name="button" type="submit" class="btn btn-primary btn-lg"><i
                                 class="fa fa-plus"></i>
@@ -61,19 +64,16 @@
                         </button>
                     </div>
                 </form>
+
             </div>
 
-            <br>
-            <div>
-                <footer class='text-muted'>
-                    <div class='pull-left'><span>2018</span></div>
-                    <div class='clearfix'></div>
-                </footer>
-            </div>
-
+            <footer class='text-muted'>
+                <div class='pull-left'><span>2018</span></div>
+                <div class='clearfix'></div>
+            </footer>
         </div>
     </div>
-</div>
 
+</div>
 </body>
 </HTML>

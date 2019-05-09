@@ -2,10 +2,7 @@ package api;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import dto.ProjectDTO;
-import dto.TestCaseTestPlanDTO;
-import dto.TestPlanDTO;
-import dto.TestSuiteTestPlanDTO;
+import dto.*;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
@@ -49,6 +46,13 @@ public class TestPlanAPI {
         WebTarget target = client.target(URL + "addTestSuiteToTestPlan");
         Invocation.Builder builder = target.request();
         return builder.post(Entity.entity(testSuiteTestPlanDTO, "application/json; charset=UTF-8"));
+    }
+
+    public static Response addTestEnvironmentToTestPlan(TestEnvironmentTestPlanDTO testEnvironmentTestPlan) {
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target(URL + "addTestEnvironmentToTestPlan");
+        Invocation.Builder builder = target.request();
+        return builder.post(Entity.entity(testEnvironmentTestPlan, "application/json; charset=UTF-8"));
     }
 
     public static Response addTestCaseToTestPlan(TestCaseTestPlanDTO testCaseTestPlanDTO) {

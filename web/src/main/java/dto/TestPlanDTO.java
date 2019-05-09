@@ -23,6 +23,17 @@ public class TestPlanDTO {
         this.creatorId = creatorId;
     }
 
+    public TestPlanDTO(String name, String description, String date_from, String date_to, String comment, String test_environment_id, String creatorId) {
+        this.id = 0;
+        this.name = name;
+        this.description = description;
+        this.date_from = date_from;
+        this.date_to = date_to;
+        this.comment = comment;
+        this.test_environment_id = Long.parseLong(test_environment_id);
+        this.creatorId = Long.parseLong(creatorId);
+    }
+
     public long getId() {
         return id;
     }
