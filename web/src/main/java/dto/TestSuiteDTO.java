@@ -35,7 +35,6 @@ public class TestSuiteDTO {
         this.creatorId = testSuiteForReport.getCreatorId();
     }
 
-
     public long getId() {
         return id;
     }

@@ -17,7 +17,15 @@ public class TestPlanWithInfoForReport {
         this.testSuites = testSuites;
     }
 
-    public TestPlanDTO getTestPlan() {
+    public TestPlanWithInfoForReport(TestPlanForReport testPlan, List<TestCaseForReport> testCases, List<TestSuiteForReport> testSuites) {
+        this.testPlan = testPlan;
+        this.testCases = testCases;
+        this.testSuites = testSuites;
+    }
+
+
+
+    public TestPlanForReport getTestPlan() {
         return testPlan;
     }
 

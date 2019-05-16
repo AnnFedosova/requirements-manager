@@ -12,8 +12,9 @@ public class TestSuiteWithInfoForReport {
 
     public TestSuiteWithInfoForReport(){}
 
-    public TestSuiteWithInfoForReport(TestSuiteDTO testSuite, List<TestCaseForReport> testCases) {
-        this.testSuite = new TestSuiteForReport(testSuite);
+
+    public TestSuiteWithInfoForReport(TestSuiteForReport testSuite, List<TestCaseForReport> testCases) {
+        this.testSuite = testSuite;
         this.testCases = testCases;
     }
 
@@ -27,8 +28,8 @@ public class TestSuiteWithInfoForReport {
         this.testCases = testCasesForReport;
     }
 
-    public TestSuiteDTO getTestSuite() {
-        return new TestSuiteDTO(testSuite);
+    public TestSuiteForReport getTestSuite() {
+        return testSuite;
     }
 
     public void setTestSuite(TestSuiteForReport testSuite) {

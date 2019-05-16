@@ -9,7 +9,7 @@ public class TestPlanForReport extends TestPlanDTO {
     private String test_environment;
     private String creatorLogin;
 
-    TestPlanForReport(TestPlanDTO testPlan){
+    public TestPlanForReport(TestPlanDTO testPlan){
         this.setId(testPlan.getId());
         this.setName(testPlan.getName());
         this.setDescription(testPlan.getDescription());

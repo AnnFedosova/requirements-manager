@@ -48,9 +48,33 @@
                     Добавить требование
                 </a>
 
-                <a class="btn btn-primary" href="/new_testCase">
+                <button class="btn btn-primary" onclick="openDeleteTestCaseDialog()">
                     Удалить
-                </a>
+                </button>
+
+
+                <dialog id="DeleteTestCaseDialog">
+                    <h3 class="text-left"> Удалить тест-кейс </h3>
+                    Вы уверены?
+                    <br/><br/>
+                    <button class="btn btn-primary">
+                        да
+                    </button>
+                    <button class="btn btn-primary" onclick="cancelDeleteTestCase()">отмена</button>
+
+                </dialog>
+
+                <script>
+                    function openDeleteTestCaseDialog() {
+                        (document.getElementById("DeleteTestCaseDialog")).open = true;
+                    }
+
+                    function cancelDeleteTestCase() {
+                        (document.getElementById("DeleteTestCaseDialog")).close();
+                    }
+
+                </script>
+
 
             </div>
 

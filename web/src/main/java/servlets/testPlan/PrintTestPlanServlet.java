@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class PrintTestPlanServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //при нажатии на кнопку отчетов попадаем сюда
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
         String testPlanId = request.getParameter("testPlanId");
 
@@ -53,27 +55,26 @@ public class PrintTestPlanServlet extends HttpServlet {
             // Массив байтов получившегося файла
             byte[] byteArray = reportGenerator.template(
                     new TestPlanWithInfoForReport(
-                            (TestPlanDTO) pageVariables.get("testPlan"),
+                            (TestPlanForReport) pageVariables.get("testPlan"),
 
                             (
-                                    getSortedListOfTestCases((List<TestCaseDTO>) (pageVariables.get("testCases")),
+                                    getSortedListOfTestCases((List<TestCaseForReport>) (pageVariables.get("testCases")),
                                             testCaseIds)
                             )
                                     .stream()
-                                    .map(TestCaseForReport::new)
                                     .collect(Collectors.toList()),
 
                             (
-                                    getSortedListOfTestSuites((List<TestSuiteDTO>) (pageVariables.get("testSuites")),
+                                    getSortedListOfTestSuites((List<TestSuiteForReport>) (pageVariables.get("testSuites")),
                                             testSuiteIds)
                             )
                                     .stream()
-                                    .map(TestSuiteForReport::new)
                                     .collect(Collectors.toList())
                     )
             );
 
-            String testPlanName = ((TestPlanDTO) pageVariables.get("testPlan")).getName();
+            String testPlanName = ((TestPlanForReport) pageVariables.get("testPlan")).getName();
+            testPlanName = URLEncoder.encode(testPlanName,"UTF-8");
             response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
             response.setHeader("Content-disposition", "attachment; filename=\"" + testPlanName + ".docx\"");
             ServletOutputStream servletOutputStream = response.getOutputStream();
@@ -109,37 +110,37 @@ public class PrintTestPlanServlet extends HttpServlet {
                 "20-01-2019", "20-09-2019", "", 1, 1);
 
         //List<TestCaseDTO> testCases = TestCaseAPI.getTestCasesByTestPlanId(testPlanId);
-        List<TestCaseDTO> testCases = new ArrayList<>();
+        List<TestCaseForReport> testCases = new ArrayList<>();
         TestCaseDTO testCase = new TestCaseDTO(
                 1, 1, "Тест-кейс 1. Проверка заполнения полей",
                 "20-01-2019", "1. Запустить приложение \n2. Проверить, заполнены ли поля на домашней странице","Пользователь зарегистрирован","Выйти из системы","Логин/пароль тестового пользователя: User/User", 1);
-        testCases.add(testCase);
+        testCases.add(new TestCaseForReport(testCase));
 
         //List<TestSuiteDTO> testSuites = TestSuiteAPI.getTestSuitesByTestPlanId(testPlanId);
-        List<TestSuiteDTO> testSuites = new ArrayList<>();
+        List<TestSuiteForReport> testSuites = new ArrayList<>();
         TestSuiteDTO testSuite = new TestSuiteDTO(
                 1, "Набор тестов для функции генерации отчетов",
                 "Совокупность (набор) тестовых вариантов, для тестирования функции генерации отчетов ",
                 "2, 1", 1);
-        testSuites.add(testSuite);
+        testSuites.add(new TestSuiteForReport(testSuite));
 
         Principal user = request.getUserPrincipal();
         pageVariables.put("isAdmin", true ); //UserAPI.isAdmin(user.getName()));
-        pageVariables.put("testPlan", testPlan);
+        pageVariables.put("testPlan", new TestPlanForReport(testPlan));
         pageVariables.put("testCases", testCases);
         pageVariables.put("testSuites", testSuites);
 
         return pageVariables;
     }
 
-    public static List<TestCaseDTO> getSortedListOfTestCases(List<TestCaseDTO> testCases, String[] testCaseIds){
+    public static List<TestCaseForReport> getSortedListOfTestCases(List<TestCaseForReport> testCases, String[] testCaseIds){
         if (testCases.size() != testCaseIds.length){
             return testCases;
         }
-        List<TestCaseDTO> SortedListOfTestCases = new ArrayList<>();
+        List<TestCaseForReport> SortedListOfTestCases = new ArrayList<>();
         for (String testCaseId : testCaseIds) {
             int inputTestCaseId = Integer.parseInt(testCaseId);
-            for (TestCaseDTO testCase : testCases) {
+            for (TestCaseForReport testCase : testCases) {
                 if (testCase.getId() == inputTestCaseId) {
                     SortedListOfTestCases.add(testCase);
                 }
@@ -148,14 +149,14 @@ public class PrintTestPlanServlet extends HttpServlet {
         return SortedListOfTestCases;
     }
 
-    public static List<TestSuiteDTO> getSortedListOfTestSuites(List<TestSuiteDTO> testSuites, String[] testSuiteIds){
+    public static List<TestSuiteForReport> getSortedListOfTestSuites(List<TestSuiteForReport> testSuites, String[] testSuiteIds){
         if (testSuites.size() != testSuiteIds.length){
             return testSuites;
         }
-        List<TestSuiteDTO> SortedListOfTestSuites = new ArrayList<>();
+        List<TestSuiteForReport> SortedListOfTestSuites = new ArrayList<>();
         for (String testSuiteId : testSuiteIds) {
             int inputTestSuiteId = Integer.parseInt(testSuiteId);
-            for (TestSuiteDTO testSuite : testSuites) {
+            for (TestSuiteForReport testSuite : testSuites) {
                 if (testSuite.getId() == inputTestSuiteId) {
                     SortedListOfTestSuites.add(testSuite);
                 }
